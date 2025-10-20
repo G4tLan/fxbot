@@ -53,30 +53,46 @@ def run_backtest(options=None):
                 current_date += timedelta(days=1)
                 continue
 
-            # Compute indicators for the day's data
+            # --- Efficient Backtesting Logic ---
+            # 1. Compute indicators for the entire day's data at once to avoid re-computation in a loop.
+            # This is valid because the indicators (SMA, EMA, ADX) are causal and do not "repaint".
+            # The result at each row is identical to what it would be in a live, incremental scenario.
             all_computed = compute_data(data, options=options)
 
-            # Generate a payload for the last candle of the day
-            payload = generate_payload(data, all_computed, options=options)
-            current_date += timedelta(days=1)
+            # 2. Iterate through each candle of the day to generate a payload,
+            #    simulating how the strategy would have performed tick-by-tick.
+            all_payloads = []
+            for i in range(len(data)):
+                # To simulate the state at candle 'i', pass slices of the dataframes.
+                # generate_payload uses the last row of the data it receives.
+                data_slice = data.iloc[:i+1]
+                computed_slice = all_computed.iloc[:i+1]
+                
+                payload = generate_payload(data_slice, computed_slice, options=options)
+                all_payloads.append(json.loads(payload))
 
+            # 3. Save the results for the processed day.
             if results_file_dir:
                 try:
                     # Structure the output to include options and payloads
                     output_data = {
                         "options": options,
-                        "payload": json.loads(payload)
+                        "payloads": all_payloads
                     }
-                    # Save the structured data to a single JSON file
-                    results_filepath = os.path.join(results_file_dir, f'{options["ticker"]}_{current_date.isoformat()}.json')
+                    # Save the structured data to a JSON file for the current date.
+                    # The filename should reflect the date the data is FOR.
+                    filename = f'{options["ticker"]}_{current_date.strftime("%Y-%m-%d")}.json'
+                    results_filepath = os.path.join(results_file_dir, filename)
                     with open(results_filepath, 'w') as f:
                         json.dump(output_data, f, indent=4)
                     logging.info(f"Saved run to {results_filepath}")
                 except Exception as e:
                     logging.error(f"Error saving results file: {e}")
+            current_date += timedelta(days=1)
 
     except Exception as e:
         logging.error(f"An error occurred during the backtest: {e}", exc_info=True)
+    
 
 if __name__ == "__main__":
     # Base options for the backtest
