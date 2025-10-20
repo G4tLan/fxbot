@@ -40,10 +40,9 @@ def run_backtest(options=None):
     try:
         start_date = datetime.strptime(options['start_date'], "%Y-%m-%d").date()
         end_date = datetime.strptime(options['end_date'], "%Y-%m-%d").date()
-        results_filepath = options.get('results_filepath')
+        results_file_dir = options.get('results_file_dir')
 
         current_date = start_date
-        all_payloads = []
         while current_date <= end_date:
             logging.info(f"Processing data for {options['ticker']} on {current_date.isoformat()}")
 
@@ -59,22 +58,22 @@ def run_backtest(options=None):
 
             # Generate a payload for the last candle of the day
             payload = generate_payload(data, all_computed, options=options)
-            all_payloads.append(json.loads(payload))
             current_date += timedelta(days=1)
 
-        if results_filepath:
-            try:
-                # Structure the output to include options and payloads
-                output_data = {
-                    "options": options,
-                    "payloads": all_payloads
-                }
-                # Save the structured data to a single JSON file
-                with open(results_filepath, 'w') as f:
-                    json.dump(output_data, f, indent=4)
-                logging.info(f"Saved run with {len(all_payloads)} payloads to {results_filepath}")
-            except Exception as e:
-                logging.error(f"Error saving results file: {e}")
+            if results_file_dir:
+                try:
+                    # Structure the output to include options and payloads
+                    output_data = {
+                        "options": options,
+                        "payload": json.loads(payload)
+                    }
+                    # Save the structured data to a single JSON file
+                    results_filepath = os.path.join(results_file_dir, f'{options["ticker"]}_{current_date.isoformat()}.json')
+                    with open(results_filepath, 'w') as f:
+                        json.dump(output_data, f, indent=4)
+                    logging.info(f"Saved run to {results_filepath}")
+                except Exception as e:
+                    logging.error(f"Error saving results file: {e}")
 
     except Exception as e:
         logging.error(f"An error occurred during the backtest: {e}", exc_info=True)
@@ -108,7 +107,7 @@ if __name__ == "__main__":
     # --- Setup logging and results file paths inside the run directory ---
     log_file_path = os.path.join(output_dir, f'{run_name}.log')
     results_filepath = os.path.join(output_dir, f'{run_name}.json')
-    options['results_filepath'] = results_filepath
+    options['results_file_dir'] = output_dir
 
     setup_logging(log_file=log_file_path)
 
