@@ -1,0 +1,7 @@
+numpy
+pandas
+pytz
+yfinance
+ta
+mplfinance
+requests
