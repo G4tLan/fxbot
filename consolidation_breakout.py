@@ -155,14 +155,14 @@ def replace_true_subarrays(b, f, agg_func):
 # yfinance helper (fetch_data)
 # ---------------------------
 
-def fetch_data(ticker, interval, specific_date, days=2, tz='Africa/Johannesburg', tz_localize=False):
+def fetch_data(ticker, interval, specific_date, days=1, tz='Africa/Johannesburg', tz_localize=False):
     """
     Download ticker via yfinance for [specific_date, specific_date + days)
     Returns a cleaned DataFrame (OHLCV) with numeric columns and index in tz or naive depending on tz_localize.
     """
     start = pd.to_datetime(specific_date)
     end = start + pd.Timedelta(days=days)
-    data = yf.download(ticker, interval=interval, start=start, end=end, progress=False)
+    data = yf.download(ticker, interval=interval, start=start, end=end, progress=False,auto_adjust=False)
 
     if data.empty:
         return data
@@ -417,5 +417,4 @@ def generate_payload(data, computed_data, options=None):
         }
     }
 
-    payload = json.dumps(payload, indent=4)
     return payload

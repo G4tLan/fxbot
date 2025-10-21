@@ -3,6 +3,8 @@ import os
 import logging
 from datetime import datetime, timedelta
 from consolidation_breakout import fetch_data, compute_data, generate_payload
+from decision_engine import DecisionEngine
+from decision_strategies import ConsolidationBreakoutStrategy
 
 def setup_logging(log_file='backtest.log'):
     """Sets up logging to file and console."""
@@ -38,6 +40,9 @@ def run_backtest(options=None):
         return
     
     try:
+        engine = DecisionEngine()
+        engine.register_strategy("consolidation_breakout", ConsolidationBreakoutStrategy)
+
         start_date = datetime.strptime(options['start_date'], "%Y-%m-%d").date()
         end_date = datetime.strptime(options['end_date'], "%Y-%m-%d").date()
         results_file_dir = options.get('results_file_dir')
@@ -69,7 +74,11 @@ def run_backtest(options=None):
                 computed_slice = all_computed.iloc[:i+1]
                 
                 payload = generate_payload(data_slice, computed_slice, options=options)
-                all_payloads.append(json.loads(payload))
+                decision = engine.run_strategy(payload.get('strategy_type'), payload)
+                
+                # Combine the payload and its corresponding decision into a single record
+                record = json.loads(json.dumps({"payload": payload, "decision": decision}, indent=4))
+                all_payloads.append(record)
 
             # 3. Save the results for the processed day.
             if results_file_dir:
@@ -97,8 +106,8 @@ def run_backtest(options=None):
 if __name__ == "__main__":
     # Base options for the backtest
     options = {
-        "start_date": "2025-10-13",
-        "end_date": "2025-10-17",
+        "start_date": "2025-10-20",
+        "end_date": "2025-10-20",
         "interval": "5m",
         "ticker": "EURUSD=X",
         "save_location_base": "test_results", # Root directory for all results

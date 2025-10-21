@@ -64,12 +64,12 @@ def run_strategy_incremental(options=None):
                 payload = generate_payload(all_data, all_computed, row_index=row_index, options=options)
                 if options['post_url']:
                     try:
-                        response = requests.post(options['post_url'], json=json.loads(payload))
+                        response = requests.post(options['post_url'], json=payload)
                         logging.info(f"Posted payload for {all_data.index[row_index]}, status: {response.status_code}")
                     except Exception as e:
                         logging.error(f"Error posting payload: {e}")
                 else:
-                    logging.info(f"Generated payload (no post_url):\n{payload}")
+                    logging.info(f"Generated payload (no post_url):\n{json.dumps(payload, indent=4)}")
                 
                 last_timestamp = all_data.index[row_index]
 
