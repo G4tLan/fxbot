@@ -21,8 +21,8 @@ class DecisionEngine:
         logging.warning(f"No strategy registered with the name: {name}")
         return None
 
-    def run_strategy(self, name: str, payload: dict) -> dict:
+    def run_strategy(self, name: str, payload: dict, options: dict = None) -> dict:
         strategy_handler = self.get_strategy(name)
         if strategy_handler:
-            decision = strategy_handler.evaluate(payload)
+            decision = strategy_handler.evaluate(payload, options)
             return decision

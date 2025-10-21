@@ -7,16 +7,16 @@ class BaseDecisionStrategy(ABC):
     Ensures that any new strategy implements the 'evaluate' method.
     """
     @abstractmethod
-    def evaluate(self, payload: dict) -> dict:
+    def evaluate(self, payload: dict, options: dict = None) -> dict:
         """
         Evaluates a given payload and returns a decision.
 
         Args:
             payload (dict): The data payload from the analysis script.
+            options (dict, optional): Strategy options, like 'window'. Defaults to None.
 
         Returns:
-            dict: A dictionary containing the decision (e.g., 'BUY', 'SELL', 'HOLD')
-                  and the reasoning behind it.
+            dict: A dictionary containing the action taken and entry details if applicable.
         """
         pass
 
@@ -26,27 +26,66 @@ class ConsolidationBreakoutStrategy(BaseDecisionStrategy):
     
     TODO: Implement the actual decision-making logic here.
     """
-    def evaluate(self, payload: dict) -> dict:
-        # Placeholder logic. This is where you will build your decision tree.
-        logging.info(f"Evaluating payload for strategy: {payload.get('strategy_type')}")
-        
+    def evaluate(self, payload: dict, options: dict = None) -> dict:
+        """
+        Implements the decision logic based on the fx_decision_tree.drawio.xml diagram.
+        """
+        if options is None:
+            options = {}
+
         conditions = payload.get("conditions", {})
         candle = payload.get("candle", {})
+        window = options.get('window', 25) # Default window if not provided
 
-        # Example of a simple rule:
-        # If the trend is bullish and we just broke above the consolidation maxima, consider a BUY.
-        if (conditions.get("trend_status") == "bullish" and 
-            conditions.get("candles_since_consolidation") > 0 and
-            candle.get("close", 0) > conditions.get("consolidation_maxima", float('inf'))):
-            
-            return {"action": "BUY", "reason": "Breakout above consolidation maxima in a bullish trend."}
+        # Node 1: Is trend_status 'consolidating'?
+        if conditions.get("trend_status") == "consolidating":
+            return {"action_taken": "NO_ACTION", "reason": "Market is in consolidation."}
 
-        # Another example rule:
-        # If the trend is bearish and we just broke below the consolidation minima, consider a SELL.
-        if (conditions.get("trend_status") == "bearish" and 
-            conditions.get("candles_since_consolidation") > 0 and
-            candle.get("close", 0) < conditions.get("consolidation_minima", 0)):
-            
-            return {"action": "SELL", "reason": "Breakdown below consolidation minima in a bearish trend."}
+        # Node 2: Is there an EMA crossover?
+        ema_crossover = conditions.get("ema_crossover")
+        if ema_crossover != "none":
+            return {
+                "action_taken": "CLOSE_ENTRY",
+                "reason": f"EMA crossover detected ({ema_crossover}). Signal to close existing positions.",
+                "entry": {
+                    "type": "CLOSE"
+                }
+            }
 
-        return {"action": "HOLD", "reason": "No breakout signal detected."}
+        # Node 3: Are we in the immediate aftermath of a consolidation?
+        # (candles_since_consolidation > 0 ensures we are not *in* consolidation)
+        candles_since = conditions.get("candles_since_consolidation", float('inf'))
+        if not (0 < candles_since < window):
+            return {"action_taken": "NO_ACTION", "reason": f"Not within breakout window ({candles_since} candles since consolidation)."}
+
+        # Node 5 & 6: Bullish breakout check
+        if conditions.get("trend_status") == "bullish":
+            if candle.get("close", 0) > conditions.get("consolidation_maxima", float('inf')):
+                price = candle.get("close")
+                stop_loss = conditions.get("consolidation_minima")
+                return {
+                    "action_taken": "BUY_ENTRY",
+                    "reason": "Bullish breakout above consolidation maxima.",
+                    "entry": {
+                        "entry_price": price,
+                        "type": "BUY",
+                        "stop_loss": stop_loss
+                    }
+                }
+
+        # Node 5 & 7: Bearish breakout check
+        if conditions.get("trend_status") == "bearish":
+            if candle.get("close", 0) < conditions.get("consolidation_minima", 0):
+                price = candle.get("close")
+                stop_loss = conditions.get("consolidation_maxima")
+                return {
+                    "action_taken": "SELL_ENTRY",
+                    "reason": "Bearish breakdown below consolidation minima.",
+                    "entry": {
+                        "entry_price": price,
+                        "type": "SELL",
+                        "stop_loss": stop_loss
+                    }
+                }
+
+        return {"action_taken": "NO_ACTION", "reason": "Conditions for entry not met."}
