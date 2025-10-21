@@ -58,6 +58,12 @@ class ConsolidationBreakoutStrategy(BaseDecisionStrategy):
         if not (0 < candles_since < window):
             return {"action_taken": "NO_ACTION", "reason": f"Not within breakout window ({candles_since} candles since consolidation)."}
 
+        # Node 4: Is the breakout happening shortly after a crossover?
+        candles_since_crossover = conditions.get("candles_since_crossover", float('inf'))
+        crossover_window = 0.25 * window
+        if candles_since_crossover >= crossover_window:
+            return {"action_taken": "NO_ACTION", "reason": f"Breakout is not recent enough to a crossover ({candles_since_crossover} candles ago)."}
+
         # Node 5 & 6: Bullish breakout check
         if conditions.get("trend_status") == "bullish":
             if candle.get("close", 0) > conditions.get("consolidation_maxima", float('inf')):
