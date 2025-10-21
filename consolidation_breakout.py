@@ -1,10 +1,9 @@
 import numpy as np
 import pandas as pd
-import pytz
 import yfinance as yf
 import ta
 import mplfinance as mpf
-import json
+import logging
 
 # ---------------------------
 # flip / run helpers
@@ -380,6 +379,8 @@ def generate_payload(data, computed_data, options=None):
     row_data = data.iloc[-1]
     row_computed = computed_data.iloc[-1]
 
+    logging.info(f"Generating payload for candle at {row_data.name}. ctx_data length: {len(ctx_data)}. row_data: {row_data.to_dict()}")
+
     trend_status = "consolidating"
     crosses = ctx_comp_data[ctx_comp_data['EMA_cross'] != 0]
     if not crosses.empty and not row_computed['Consolidation']:
@@ -388,18 +389,39 @@ def generate_payload(data, computed_data, options=None):
     elif crosses.empty and not row_computed['Consolidation']:
         trend_status = "unknown"
         
-    ema_crossover = "bullish" if row_computed['EMA_cross'] == 1 else "bearish" if row_computed['EMA_cross'] == -1 else "none"
+    ema_crossover = (
+        "bullish" if row_computed['EMA_cross'] == 1
+        else "bearish" if row_computed['EMA_cross'] == -1
+        else "none"
+    )
 
     segments = flip_small_segments(ctx_comp_data['Consolidation'].values, options=options)
     start_idx, end_idx = last_true_indices(segments)
 
-    maxima = ctx_data["High"].max()  if start_idx is None else ctx_data["High"][start_idx: end_idx].max()
-    minima = ctx_data["Low"].min()  if start_idx is None else ctx_data["Low"][start_idx: end_idx].min()
-    
+
+    if start_idx is None or start_idx == end_idx:
+        maxima = ctx_data["High"].max() if not ctx_data.empty else row_data["High"]
+        minima = ctx_data["Low"].min() if not ctx_data.empty else row_data["Low"]
+    else:
+        maxima = ctx_data["High"].iloc[start_idx:end_idx].max()
+        minima = ctx_data["Low"].iloc[start_idx:end_idx].min()
+
+    if crosses.empty:
+        candles_since_crossover = len(ctx_comp_data)
+    else:
+        last_cross_index = ctx_comp_data.index.get_loc(crosses.index[-1])
+        candles_since_crossover = len(ctx_comp_data) - 1 - last_cross_index
+
+    row_datetime = row_data.name
+    if hasattr(row_datetime, "tzinfo") and row_datetime.tzinfo is not None:
+        row_datetime_str = row_datetime.isoformat()
+    else:
+        row_datetime_str = pd.Timestamp(row_datetime, tz="UTC").isoformat()
+
     payload = {
         "strategy_type": "consolidation_breakout",
-        "datetime": str(row_data.name.isoformat()),
-        "interval": options["interval"],
+        "datetime": row_datetime_str,
+        "interval": options.get("interval", "5m"),
         "candle": {
             "high": round(float(row_data["High"]), 5),
             "close": round(float(row_data["Close"]), 5),
@@ -407,11 +429,12 @@ def generate_payload(data, computed_data, options=None):
             "low": round(float(row_data["Low"]), 5),
             "volume": round(float(row_data["Volume"]), 5)
         },
-        "ticker": options["ticker"],
+        "ticker": options.get("ticker", "UNKNOWN"),
         "conditions": {
             "trend_status": trend_status,
             "ema_crossover": ema_crossover,
             "candles_since_consolidation": 0 if row_computed['Consolidation'] else candles_since_last_consolidation(segments),
+            "candles_since_crossover": candles_since_crossover,
             "consolidation_maxima": round(maxima, 5),
             "consolidation_minima": round(minima, 5),
         }
