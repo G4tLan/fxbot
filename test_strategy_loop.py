@@ -74,7 +74,7 @@ def run_backtest(options=None):
                 computed_slice = all_computed.iloc[:i+1]
                 
                 payload = generate_payload(data_slice, computed_slice, options=options)
-                decision = engine.run_strategy(payload.get('strategy_type'), payload)
+                decision = engine.run_strategy(payload.get('strategy_type'), payload, options)
                 
                 # Combine the payload and its corresponding decision into a single record
                 record = json.loads(json.dumps({"payload": payload, "decision": decision}, indent=4))
