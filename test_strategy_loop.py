@@ -134,7 +134,7 @@ def run_backtest(options=None):
                 # Save Trade Summary
                 trades_summary_filepath = os.path.join(results_file_dir, f'{run_name}_trades.json')
                 summary_data = {
-                    "active_trades": trade_engine.get_active_trades(),
+                    "active_trades": trade_engine.get_active_trades(include_pnl=True),
                     "closed_trades": trade_engine.get_closed_trades(),
                     "final_balance": trade_engine.get_account_balance()
                 }

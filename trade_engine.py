@@ -283,18 +283,49 @@ class TradeEngine:
         """Returns the current account balance."""
         return self._account_amount
 
+    def _calculate_unrealised_pnl(self) -> float:
+        """
+        Calculates the total unrealised profit or loss for all active trades
+        based on the latest available candle's close price.
+        """
+        if self._active_trades.empty or self._candle_data.empty:
+            return 0.0
+
+        latest_candle_time = self._candle_data.index.max()
+        current_price = self._candle_data.loc[latest_candle_time]['Close']
+        
+        unrealised_pnl = 0.0
+        for _, trade in self._active_trades.iterrows():
+            price_difference = current_price - trade['entry_price']
+            if trade['type'] == 'BUY':
+                pnl = price_difference * trade['size_units']
+            else:  # SELL
+                pnl = -price_difference * trade['size_units']
+            unrealised_pnl += pnl
+        
+        return unrealised_pnl
+
+    def get_account_equity(self) -> float:
+        """
+        Returns the current account equity (balance + unrealised P/L).
+        This is the true current value of the account.
+        """
+        return self._account_amount + self._calculate_unrealised_pnl()
+
     def get_candle_data(self) -> list[dict]:
         """Returns all processed candle data as a list of dictionaries."""
         # The index is the datetime, so we need to reset it to include it in the dict.
         return self._candle_data.reset_index().to_dict(orient='records')
 
-    def get_active_trades(self, **filters) -> list[dict]:
+    def get_active_trades(self, include_pnl: bool = False, **filters) -> list[dict]:
         """
         Returns a list of active trades as dictionaries, with optional filtering.
 
         Args:
             **filters: Keyword arguments to filter trades by.
                        Example: get_active_trades(ticker="EURUSD=X", type="BUY")
+
+            include_pnl (bool): If True, includes the current unrealised P/L for each trade.
 
         Returns:
             list[dict]: A list of active trades matching the filters.
@@ -306,7 +337,25 @@ class TradeEngine:
                     filtered_trades = filtered_trades[filtered_trades[key] == value]
                 else:
                     logging.warning(f"Invalid filter key '{key}' for get_active_trades. Ignoring.")
-        return filtered_trades.reset_index().to_dict(orient='records')
+        
+        trades_list = filtered_trades.reset_index().to_dict(orient='records')
+
+        if include_pnl and not self._candle_data.empty:
+            latest_candle_time = self._candle_data.index.max()
+            current_price = self._candle_data.loc[latest_candle_time]['Close']
+            
+            for trade in trades_list:
+                price_difference = current_price - trade['entry_price']
+                if trade['type'] == 'BUY':
+                    pnl = price_difference * trade['size_units']
+                else: # SELL
+                    pnl = -price_difference * trade['size_units']
+                trade['unrealised_pnl'] = pnl
+        elif include_pnl:
+            for trade in trades_list:
+                trade['unrealised_pnl'] = 0.0
+
+        return trades_list
 
     def get_closed_trades(self) -> list[dict]:
         """Returns a list of closed trades as dictionaries."""
