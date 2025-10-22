@@ -9,11 +9,13 @@ class TradeEngine:
     closed trades, and an account balance.
     """
 
-    def __init__(self, initial_account_amount: float = 10000.0):
+    def __init__(self, initial_account_amount: float = 10000.0, risk_percentage: float = 0.01, leverage: int = 30):
         """
         Initializes the TradeEngine with an empty candle database,
         empty trade lists, and an initial account balance.
         """
+        self._initial_balance = initial_account_amount
+
         # 1. Database for all candles
         self._candle_data = pd.DataFrame(
             columns=['datetime', 'High', 'Low', 'Close', 'Open', 'Volume']
@@ -24,19 +26,22 @@ class TradeEngine:
         self._active_trades = pd.DataFrame(
             columns=[
                 'entry_id', 'ticker', 'entry_datetime', 'entry_price', 'type',
-                'stop_loss', 'take_profit', 'status'
+                'stop_loss', 'take_profit', 'size_units', 'margin_used', 'status'
             ]
         ).set_index('entry_id')
 
         self._closed_trades = pd.DataFrame(
             columns=[
                 'entry_id', 'ticker', 'entry_datetime', 'entry_price', 'type',
-                'stop_loss', 'take_profit', 'closed_datetime', 'closed_price', 'profit'
+                'stop_loss', 'take_profit', 'size_units', 'margin_used',
+                'closed_datetime', 'closed_price', 'profit'
             ]
         ).set_index('entry_id')
 
         # 3. Account balance
         self._account_amount = initial_account_amount
+        self._risk_percentage = risk_percentage
+        self._leverage = leverage
         logging.info(f"TradeEngine initialized with account balance: {self._account_amount:.2f}")
 
     def add_candle(self, candle_row: pd.Series):
@@ -120,7 +125,7 @@ class TradeEngine:
         for entry_id, close_price, close_datetime, reason in trades_to_close:
             self._exit_trade(entry_id, close_price, close_datetime, reason)
 
-    def execute_trade(self, trade_details: dict) -> str | None: # TODO: Add position sizing
+    def execute_trade(self, trade_details: dict) -> str | None:
         """
         Executes a new trade and adds it to the active trades.
 
@@ -154,19 +159,50 @@ class TradeEngine:
             )
             return None
 
+        # --- Position Sizing and Margin Calculation ---
+        amount_to_risk = self._account_amount * self._risk_percentage
+        stop_loss_pips = abs(trade_details['entry_price'] - trade_details['stop_loss'])
+
+        if stop_loss_pips == 0:
+            logging.warning("Stop loss cannot be zero. Trade not executed.")
+            return None
+
+        # Assuming 1 unit of currency (e.g., for EUR/USD, 1 EUR).
+        # A more complex implementation would use pip value based on the pair.
+        # For simplicity, we treat the price difference directly as the loss per unit.
+        position_size_units = amount_to_risk / stop_loss_pips
+
+        # Calculate margin required for the position
+        notional_value = position_size_units * trade_details['entry_price']
+        margin_required = notional_value / self._leverage
+
+        # Check if there is enough equity for the margin
+        # A more complex model would use Free Margin = Equity - Used Margin
+        if margin_required > self._account_amount:
+            logging.warning(
+                f"Insufficient margin to execute trade. "
+                f"Required: {margin_required:.2f}, Available: {self._account_amount:.2f}"
+            )
+            return None
+
         entry_id = str(uuid.uuid4())
         new_trade = {
             'entry_id': entry_id,
             'ticker': trade_details['ticker'],
-            'entry_datetime': trade_details['datetime'],
+            'entry_datetime': execution_dt,
             'entry_price': trade_details['entry_price'],
             'type': trade_details['type'],
             'stop_loss': trade_details['stop_loss'],
             'take_profit': trade_details['take_profit'] if 'take_profit' in trade_details else None,
+            'size_units': position_size_units,
+            'margin_used': margin_required,
             'status': 'ACTIVE'
         }
         self._active_trades.loc[entry_id] = new_trade
-        logging.info(f"Trade {entry_id} executed: {new_trade['type']} {new_trade['ticker']} @ {new_trade['entry_price']:.5f}")
+        logging.info(
+            f"Trade {entry_id} executed: {new_trade['type']} {new_trade['size_units']:.2f} units of "
+            f"{new_trade['ticker']} @ {new_trade['entry_price']:.5f}. Margin used: {margin_required:.2f}"
+        )
         return entry_id
 
     def _exit_trade(self, entry_id: str, close_price: float, close_datetime: datetime, reason: str = "Manual Close") -> bool:
@@ -188,11 +224,12 @@ class TradeEngine:
 
         trade = self._active_trades.loc[entry_id].copy()
         
-        # Calculate profit/loss
+        # Calculate profit/loss based on position size
+        price_difference = close_price - trade['entry_price']
         if trade['type'] == 'BUY':
-            profit = (close_price - trade['entry_price'])
+            profit = price_difference * trade['size_units']
         else:  # SELL
-            profit = (trade['entry_price'] - close_price)
+            profit = -price_difference * trade['size_units']
 
         # Update account balance
         self._account_amount += profit
