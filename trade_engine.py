@@ -133,11 +133,24 @@ class TradeEngine:
         Returns:
             str | None: The entry_id of the new trade if successful, None otherwise.
         """
+        # Ensure datetime is a proper datetime object before proceeding.
+        execution_dt = trade_details.get('datetime')
+        if isinstance(execution_dt, str):
+            try:
+                execution_dt = datetime.fromisoformat(execution_dt)
+            except (ValueError, TypeError):
+                logging.error(f"Invalid datetime string format in trade_details: {execution_dt}")
+                return None
+
         latest_candle_time = self._candle_data.index.max()
-        if latest_candle_time is None or trade_details['datetime'] != latest_candle_time:
+        if latest_candle_time is None: # Handle case where no candles are added yet
+            logging.warning("No candles available in TradeEngine. Cannot execute trade.")
+            return None
+
+        if execution_dt.timestamp() != latest_candle_time.timestamp():
             logging.warning(
-                f"Trade execution time {trade_details['datetime']} does not match "
-                f"latest candle time {latest_candle_time}. Trade not executed."
+                f"Trade execution time {execution_dt} (timestamp: {execution_dt.timestamp()}) does not match "
+                f"latest candle time {latest_candle_time} (timestamp: {latest_candle_time.timestamp()}). Trade not executed."
             )
             return None
 
@@ -233,9 +246,25 @@ class TradeEngine:
         """Returns the current account balance."""
         return self._account_amount
 
-    def get_active_trades(self) -> list[dict]:
-        """Returns a list of active trades as dictionaries."""
-        return self._active_trades.to_dict(orient='records')
+    def get_active_trades(self, **filters) -> list[dict]:
+        """
+        Returns a list of active trades as dictionaries, with optional filtering.
+
+        Args:
+            **filters: Keyword arguments to filter trades by.
+                       Example: get_active_trades(ticker="EURUSD=X", type="BUY")
+
+        Returns:
+            list[dict]: A list of active trades matching the filters.
+        """
+        filtered_trades = self._active_trades
+        if filters:
+            for key, value in filters.items():
+                if key in filtered_trades.columns:
+                    filtered_trades = filtered_trades[filtered_trades[key] == value]
+                else:
+                    logging.warning(f"Invalid filter key '{key}' for get_active_trades. Ignoring.")
+        return filtered_trades.to_dict(orient='records')
 
     def get_closed_trades(self) -> list[dict]:
         """Returns a list of closed trades as dictionaries."""

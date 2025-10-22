@@ -75,7 +75,9 @@ class ConsolidationBreakoutStrategy(BaseDecisionStrategy):
                     "entry": {
                         "entry_price": price,
                         "type": "BUY",
-                        "stop_loss": stop_loss
+                        "stop_loss": stop_loss,
+                        "ticker": payload.get("ticker", None),
+                        "datetime": payload.get("datetime", None)
                     }
                 }
 
@@ -90,7 +92,9 @@ class ConsolidationBreakoutStrategy(BaseDecisionStrategy):
                     "entry": {
                         "entry_price": price,
                         "type": "SELL",
-                        "stop_loss": stop_loss
+                        "stop_loss": stop_loss,
+                        "ticker": payload.get("ticker", None),
+                        "datetime": payload.get("datetime", None)
                     }
                 }
 

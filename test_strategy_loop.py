@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from consolidation_breakout import fetch_data, compute_data, generate_payload
 from decision_engine import DecisionEngine
 from decision_strategies import ConsolidationBreakoutStrategy
+from trade_engine import TradeEngine
 
 def setup_logging(log_file='backtest.log'):
     """Sets up logging to file and console."""
@@ -42,6 +43,7 @@ def run_backtest(options=None):
     try:
         engine = DecisionEngine()
         engine.register_strategy("consolidation_breakout", ConsolidationBreakoutStrategy)
+        trade_engine = TradeEngine()
 
         start_date = datetime.strptime(options['start_date'], "%Y-%m-%d").date()
         end_date = datetime.strptime(options['end_date'], "%Y-%m-%d").date()
@@ -72,9 +74,23 @@ def run_backtest(options=None):
                 # generate_payload uses the last row of the data it receives.
                 data_slice = data.iloc[:i+1]
                 computed_slice = all_computed.iloc[:i+1]
+                trade_engine.add_candle(data_slice.iloc[-1])
                 
                 payload = generate_payload(data_slice, computed_slice, options=options)
                 decision = engine.run_strategy(payload.get('strategy_type'), payload, options)
+
+                if decision:
+                    if decision.get('action_taken') == 'BUY_ENTRY' or decision.get('action_taken') == 'SELL_ENTRY':
+                        trade_engine.execute_trade(decision.get('entry'))
+                    elif decision.get('action_taken') == 'CLOSE_ENTRY':
+                        # A crossover signals an exit. Close trades against the new trend direction.
+                        ema_crossover = payload.get('conditions', {}).get('ema_crossover')
+                        if ema_crossover == 'bullish': # Bullish crossover, close any open SELL trades
+                            for trade in trade_engine.get_active_trades(type='SELL'):
+                                trade_engine.close_trade(trade['entry_id'], reason="Strategy Exit: Bullish Crossover")
+                        elif ema_crossover == 'bearish': # Bearish crossover, close any open BUY trades
+                            for trade in trade_engine.get_active_trades(type='BUY'):
+                                trade_engine.close_trade(trade['entry_id'], reason="Strategy Exit: Bearish Crossover")
                 
                 # Combine the payload and its corresponding decision into a single record
                 record = json.loads(json.dumps({"payload": payload, "decision": decision}, indent=4))
