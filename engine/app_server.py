@@ -2,7 +2,8 @@ import os
 import json
 import logging
 from datetime import datetime
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, jsonify, request
+from flask_cors import CORS
 import pandas as pd
 
 # --- Configuration ---
@@ -10,6 +11,7 @@ RESULTS_BASE_DIR = os.path.join(os.path.dirname(__file__), 'test_results')
 
 # --- Flask App Setup ---
 app = Flask(__name__)
+CORS(app) # This will enable CORS for all routes and origins
 
 # --- Logging Setup ---
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
