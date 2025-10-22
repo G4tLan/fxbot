@@ -129,6 +129,7 @@ def run_backtest(options=None):
                 # Save Trade Summary
                 trades_summary_filepath = os.path.join(results_file_dir, 'trades.json')
                 summary_data = {
+                    "options": options,
                     "active_trades": trade_engine.get_active_trades(include_pnl=True),
                     "closed_trades": trade_engine.get_closed_trades(),
                     "final_balance": trade_engine.get_account_balance()
@@ -159,7 +160,7 @@ if __name__ == "__main__":
     # Base options for the backtest
     options = {
         "start_date": "2025-10-20",
-        "end_date": "2025-10-22",
+        "end_date": "2025-10-20",
         "interval": "5m",
         "ticker": "EURUSD=X",
         "save_location_base": "test_results", # Root directory for all results

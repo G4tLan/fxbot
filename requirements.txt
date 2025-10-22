@@ -5,3 +5,4 @@ yfinance
 ta
 mplfinance
 requests
+Flask
