@@ -1,12 +1,12 @@
-import { 
-    Candle, 
+import type { 
     ActiveTrade, 
-    ClosedTrade,
-    EquityHistoryEntry,
-    TradeSummaryResponse,
-    DailyPayloadsResponse,
-    FiltersResponse,
-} from './types';
+    Candle, ClosedTrade, 
+    DailyPayloadsResponse, 
+    EquityHistoryEntry, 
+    FiltersResponse, 
+    TradeSummaryResponse 
+} from "../types";
+
 
 export class TradeEngineService {
     private baseUrl: string;
