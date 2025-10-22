@@ -100,26 +100,23 @@ def run_backtest(options=None):
                                 trade_engine.close_trade(trade['entry_id'], reason="Strategy Exit: Bearish Crossover")
                 
                 # Combine the payload and its corresponding decision into a single record
-                record = json.loads(json.dumps({"payload": payload, "decision": decision}, indent=4))
+                record = {"payload": payload, "decision": decision}
                 all_payloads.append(record)
 
-            # 3. Save the results for the processed day.
-            if results_file_dir:
-                try:
-                    # Structure the output to include options and payloads
-                    output_data = {
-                        "options": options,
-                        "payloads": all_payloads
-                    }
-                    # Save the structured data to a JSON file for the current date.
-                    # The filename should reflect the date the data is FOR.
-                    filename = f'{options["ticker"]}_{current_date.strftime("%Y-%m-%d")}.json'
-                    results_filepath = os.path.join(results_file_dir, filename)
-                    with open(results_filepath, 'w') as f:
-                        json.dump(output_data, f, indent=4)
-                    logging.info(f"Saved run to {results_filepath}")
-                except Exception as e:
-                    logging.error(f"Error saving results file: {e}")
+            # Save the payloads for the current day into a date-specific folder
+            if results_file_dir and all_payloads:
+                daily_output_dir = os.path.join(results_file_dir, current_date.strftime("%Y-%m-%d"))
+                os.makedirs(daily_output_dir, exist_ok=True)
+                daily_payload_filepath = os.path.join(daily_output_dir, 'payload.json')
+                
+                output_data = {
+                    "options": options,
+                    "payloads": all_payloads
+                }
+                with open(daily_payload_filepath, 'w') as f:
+                    json.dump(output_data, f, indent=4, default=json_serial)
+                logging.info(f"Successfully saved payloads for {current_date.isoformat()} to {daily_payload_filepath}")
+
             current_date += timedelta(days=1)
 
     except Exception as e:
@@ -129,10 +126,8 @@ def run_backtest(options=None):
         if 'trade_engine' in locals() and results_file_dir:
             logging.info("Saving final backtest results...")
             try:
-                run_name = os.path.basename(results_file_dir)
-
                 # Save Trade Summary
-                trades_summary_filepath = os.path.join(results_file_dir, f'{run_name}_trades.json')
+                trades_summary_filepath = os.path.join(results_file_dir, 'trades.json')
                 summary_data = {
                     "active_trades": trade_engine.get_active_trades(include_pnl=True),
                     "closed_trades": trade_engine.get_closed_trades(),
@@ -143,11 +138,18 @@ def run_backtest(options=None):
                 logging.info(f"Successfully saved trade summary to {trades_summary_filepath}")
 
                 # Save Candle Data
-                candles_filepath = os.path.join(results_file_dir, f'{run_name}_candles.json')
+                candles_filepath = os.path.join(results_file_dir, 'candles.json')
                 candle_data = trade_engine.get_candle_data()
                 with open(candles_filepath, 'w') as f:
                     json.dump(candle_data, f, indent=4, default=json_serial)
                 logging.info(f"Successfully saved candle data to {candles_filepath}")
+
+                # Save Equity History
+                equity_filepath = os.path.join(results_file_dir, 'equity.json')
+                # get_equity_history now returns a list of dicts, which is directly serializable with json_serial
+                with open(equity_filepath, 'w') as f:
+                    json.dump(trade_engine.get_equity_history(), f, indent=4, default=json_serial)
+                logging.info(f"Successfully saved equity history to {equity_filepath}")
                 
             except Exception as e:
                 logging.error(f"Could not save final backtest results: {e}", exc_info=True)
@@ -157,7 +159,7 @@ if __name__ == "__main__":
     # Base options for the backtest
     options = {
         "start_date": "2025-10-20",
-        "end_date": "2025-10-20",
+        "end_date": "2025-10-22",
         "interval": "5m",
         "ticker": "EURUSD=X",
         "save_location_base": "test_results", # Root directory for all results
@@ -180,7 +182,7 @@ if __name__ == "__main__":
     os.makedirs(output_dir, exist_ok=True)
 
     # --- Setup logging and results file paths inside the run directory ---
-    log_file_path = os.path.join(output_dir, f'{run_name}.log')
+    log_file_path = os.path.join(output_dir, f'logs.log')
     results_filepath = os.path.join(output_dir, f'{run_name}.json')
     options['results_file_dir'] = output_dir
 

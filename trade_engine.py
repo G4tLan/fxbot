@@ -42,6 +42,11 @@ class TradeEngine:
         self._account_amount = initial_account_amount
         self._risk_percentage = risk_percentage
         self._leverage = leverage
+
+        # 4. Equity history (list of dicts for detailed tracking)
+        self._equity_history = []
+        self._max_equity_so_far = initial_account_amount
+        self._min_equity_so_far = initial_account_amount
         logging.info(f"TradeEngine initialized with account balance: {self._account_amount:.2f}")
 
     def add_candle(self, candle_row: pd.Series):
@@ -66,6 +71,23 @@ class TradeEngine:
         logging.debug(f"Candle added: {candle_row.name} - Close: {candle_row['Close']:.5f}")
 
         self._check_sl_tp_hits(candle_row)
+
+        # After all operations for the candle are done, record detailed equity history.
+        current_equity = self.get_account_equity()
+        current_unrealised_pnl = self._calculate_unrealised_pnl()
+
+        # Update max/min equity seen so far
+        self._max_equity_so_far = max(self._max_equity_so_far, current_equity)
+        self._min_equity_so_far = min(self._min_equity_so_far, current_equity)
+
+        self._equity_history.append({
+            "datetime": candle_row.name,
+            "equity": current_equity,
+            "current_balance": self._account_amount,
+            "unrealised_pnl": current_unrealised_pnl,
+            "max_equity_so_far": self._max_equity_so_far,
+            "min_equity_so_far": self._min_equity_so_far,
+        })
 
     def _check_sl_tp_hits(self, current_candle: pd.Series):
         """
@@ -311,6 +333,10 @@ class TradeEngine:
         This is the true current value of the account.
         """
         return self._account_amount + self._calculate_unrealised_pnl()
+
+    def get_equity_history(self) -> list[dict]:
+        """Returns the historical equity of the account, indexed by datetime."""
+        return self._equity_history
 
     def get_candle_data(self) -> list[dict]:
         """Returns all processed candle data as a list of dictionaries."""
