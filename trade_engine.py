@@ -283,6 +283,11 @@ class TradeEngine:
         """Returns the current account balance."""
         return self._account_amount
 
+    def get_candle_data(self) -> list[dict]:
+        """Returns all processed candle data as a list of dictionaries."""
+        # The index is the datetime, so we need to reset it to include it in the dict.
+        return self._candle_data.reset_index().to_dict(orient='records')
+
     def get_active_trades(self, **filters) -> list[dict]:
         """
         Returns a list of active trades as dictionaries, with optional filtering.

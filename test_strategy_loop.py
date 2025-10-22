@@ -125,25 +125,32 @@ def run_backtest(options=None):
     except Exception as e:
         logging.error(f"An error occurred during the backtest: {e}", exc_info=True)
     finally:
-        # --- Save Final Trade Summary ---
+        # --- Save Final Trade Summary and Candle Data ---
         if 'trade_engine' in locals() and results_file_dir:
-            logging.info("Saving final trade summary...")
+            logging.info("Saving final backtest results...")
             try:
                 run_name = os.path.basename(results_file_dir)
-                trades_summary_filepath = os.path.join(results_file_dir, f'{run_name}_trades.json')
 
+                # Save Trade Summary
+                trades_summary_filepath = os.path.join(results_file_dir, f'{run_name}_trades.json')
                 summary_data = {
                     "active_trades": trade_engine.get_active_trades(),
                     "closed_trades": trade_engine.get_closed_trades(),
                     "final_balance": trade_engine.get_account_balance()
                 }
-
                 with open(trades_summary_filepath, 'w') as f:
                     json.dump(summary_data, f, indent=4, default=json_serial)
-                
                 logging.info(f"Successfully saved trade summary to {trades_summary_filepath}")
+
+                # Save Candle Data
+                candles_filepath = os.path.join(results_file_dir, f'{run_name}_candles.json')
+                candle_data = trade_engine.get_candle_data()
+                with open(candles_filepath, 'w') as f:
+                    json.dump(candle_data, f, indent=4, default=json_serial)
+                logging.info(f"Successfully saved candle data to {candles_filepath}")
+                
             except Exception as e:
-                logging.error(f"Could not save trade summary: {e}", exc_info=True)
+                logging.error(f"Could not save final backtest results: {e}", exc_info=True)
     
 
 if __name__ == "__main__":
