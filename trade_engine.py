@@ -301,11 +301,11 @@ class TradeEngine:
                     filtered_trades = filtered_trades[filtered_trades[key] == value]
                 else:
                     logging.warning(f"Invalid filter key '{key}' for get_active_trades. Ignoring.")
-        return filtered_trades.to_dict(orient='records')
+        return filtered_trades.reset_index().to_dict(orient='records')
 
     def get_closed_trades(self) -> list[dict]:
         """Returns a list of closed trades as dictionaries."""
-        return self._closed_trades.to_dict(orient='records')
+        return self._closed_trades.reset_index().to_dict(orient='records')
 
     def get_historical_trades(self) -> list[dict]:
         """
