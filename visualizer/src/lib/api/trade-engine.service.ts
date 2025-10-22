@@ -8,7 +8,7 @@ import type {
 } from "../types";
 
 
-export class TradeEngineService {
+class TradeEngineService {
     private baseUrl: string;
 
     /**
@@ -129,3 +129,5 @@ export class TradeEngineService {
         return this.fetchData<DailyPayloadsResponse>('/payloads', { ticker, interval, run_name: runName, date });
     }
 }
+
+export const tradeEngineService = new TradeEngineService();
