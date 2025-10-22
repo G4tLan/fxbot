@@ -1,0 +1,131 @@
+{
+    "active_trades": [
+        {
+            "entry_id": "6a051bee-9bcd-46a8-856c-7eae0bf45888",
+            "ticker": "EURUSD=X",
+            "entry_datetime": "2025-10-22T07:20:00+00:00",
+            "entry_price": 1.1605,
+            "type": "SELL",
+            "stop_loss": 1.16184,
+            "take_profit": null,
+            "size_units": 78313.9154542293,
+            "margin_used": 3029.4432961544367,
+            "status": "ACTIVE",
+            "unrealised_pnl": 126.6448495940331
+        },
+        {
+            "entry_id": "d5cce2c9-c301-43d3-99e8-7692fa9b5a10",
+            "ticker": "EURUSD=X",
+            "entry_datetime": "2025-10-22T07:25:00+00:00",
+            "entry_price": 1.1605,
+            "type": "SELL",
+            "stop_loss": 1.16184,
+            "take_profit": null,
+            "size_units": 78313.9154542293,
+            "margin_used": 3029.4432961544367,
+            "status": "ACTIVE",
+            "unrealised_pnl": 126.6448495940331
+        }
+    ],
+    "closed_trades": [
+        {
+            "entry_id": "6bc075d7-e089-4105-97b1-2a85f5409e79",
+            "ticker": "EURUSD=X",
+            "entry_datetime": "2025-10-20T14:35:00+00:00",
+            "entry_price": 1.16659,
+            "type": "BUY",
+            "stop_loss": 1.16496,
+            "take_profit": null,
+            "size_units": 61349.693251532975,
+            "margin_used": 2385.6646216768618,
+            "closed_datetime": "2025-10-20T17:35:00+00:00",
+            "closed_price": 1.16496,
+            "profit": -100.0
+        },
+        {
+            "entry_id": "e4a9397d-19fa-4452-bd77-0fd35db2e6c3",
+            "ticker": "EURUSD=X",
+            "entry_datetime": "2025-10-20T14:40:00+00:00",
+            "entry_price": 1.16645,
+            "type": "BUY",
+            "stop_loss": 1.16496,
+            "take_profit": null,
+            "size_units": 67114.09395973194,
+            "margin_used": 2609.5078299776437,
+            "closed_datetime": "2025-10-20T17:35:00+00:00",
+            "closed_price": 1.16496,
+            "profit": -100.0
+        },
+        {
+            "entry_id": "31f0eb53-3821-43c3-ab6a-c237e71a7a47",
+            "ticker": "EURUSD=X",
+            "entry_datetime": "2025-10-20T10:05:00+00:00",
+            "entry_price": 1.16618,
+            "type": "SELL",
+            "stop_loss": 1.16713,
+            "take_profit": null,
+            "size_units": 105263.15789473613,
+            "margin_used": 4091.859649122779,
+            "closed_datetime": "2025-10-21T07:50:00+00:00",
+            "closed_price": 1.1634671688079834,
+            "profit": 285.5611781070082
+        },
+        {
+            "entry_id": "73f5a0fa-5111-432a-b322-efca4c14c5cf",
+            "ticker": "EURUSD=X",
+            "entry_datetime": "2025-10-20T10:10:00+00:00",
+            "entry_price": 1.16604,
+            "type": "SELL",
+            "stop_loss": 1.16713,
+            "take_profit": null,
+            "size_units": 91743.11926605206,
+            "margin_used": 3565.8715596329116,
+            "closed_datetime": "2025-10-21T07:50:00+00:00",
+            "closed_price": 1.1634671688079834,
+            "profit": 236.03955890059478
+        },
+        {
+            "entry_id": "586617a5-12a3-42fe-a2ec-dd44a6aa2932",
+            "ticker": "EURUSD=X",
+            "entry_datetime": "2025-10-20T10:15:00+00:00",
+            "entry_price": 1.1655,
+            "type": "SELL",
+            "stop_loss": 1.16713,
+            "take_profit": null,
+            "size_units": 61349.693251532975,
+            "margin_used": 2383.435582822056,
+            "closed_datetime": "2025-10-21T07:50:00+00:00",
+            "closed_price": 1.1634671688079834,
+            "profit": 124.71357006236543
+        },
+        {
+            "entry_id": "ca109f37-4d02-447f-b683-f7859bb616e2",
+            "ticker": "EURUSD=X",
+            "entry_datetime": "2025-10-20T10:20:00+00:00",
+            "entry_price": 1.16564,
+            "type": "SELL",
+            "stop_loss": 1.16713,
+            "take_profit": null,
+            "size_units": 67114.09395973194,
+            "margin_used": 2607.695749440731,
+            "closed_datetime": "2025-10-21T07:50:00+00:00",
+            "closed_price": 1.1634671688079834,
+            "profit": 145.82759677963918
+        },
+        {
+            "entry_id": "e595e6e7-13fd-4ed7-a325-6ae71c9b1abd",
+            "ticker": "EURUSD=X",
+            "entry_datetime": "2025-10-21T14:50:00+00:00",
+            "entry_price": 1.16023,
+            "type": "SELL",
+            "stop_loss": 1.16212,
+            "take_profit": null,
+            "size_units": 56043.0788563487,
+            "margin_used": 2167.4287127167154,
+            "closed_datetime": "2025-10-21T15:25:00+00:00",
+            "closed_price": 1.1619800329208374,
+            "profit": -98.07723298369149
+        }
+    ],
+    "final_balance": 10494.064670865917
+}

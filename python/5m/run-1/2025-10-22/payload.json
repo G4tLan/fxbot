@@ -1,0 +1,4437 @@
+{
+    "options": {
+        "start_date": "2025-10-20",
+        "end_date": "2025-10-22",
+        "interval": "5m",
+        "ticker": "EURUSD=X",
+        "save_location_base": "test_results",
+        "ema_short": 8,
+        "ema_long": 34,
+        "window": 20,
+        "threshold_bb": 0.7,
+        "threshold_adx": 20,
+        "tolerance": 0.4,
+        "loops": 3,
+        "results_file_dir": "test_results/EURUSD=X/5m/run-1"
+    },
+    "payloads": [
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-21T23:00:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16036,
+                    "close": 1.16036,
+                    "open": 1.16036,
+                    "low": 1.16036,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 1,
+                    "consolidation_maxima": 1.16036,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-21T23:05:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16036,
+                    "close": 1.16036,
+                    "open": 1.16036,
+                    "low": 1.16036,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 2,
+                    "consolidation_maxima": 1.16036,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-21T23:10:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.1605,
+                    "close": 1.16036,
+                    "open": 1.16036,
+                    "low": 1.16036,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 3,
+                    "consolidation_maxima": 1.16036,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-21T23:15:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.1605,
+                    "close": 1.16036,
+                    "open": 1.16036,
+                    "low": 1.16036,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 4,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-21T23:20:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16036,
+                    "close": 1.16036,
+                    "open": 1.16036,
+                    "low": 1.16036,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 5,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-21T23:25:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16036,
+                    "close": 1.16036,
+                    "open": 1.16036,
+                    "low": 1.16036,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 6,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-21T23:30:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16036,
+                    "close": 1.16036,
+                    "open": 1.16036,
+                    "low": 1.16036,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 7,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-21T23:35:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16036,
+                    "close": 1.16036,
+                    "open": 1.16036,
+                    "low": 1.16036,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 8,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-21T23:40:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.1605,
+                    "close": 1.1605,
+                    "open": 1.16036,
+                    "low": 1.16036,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 1,
+                    "candles_since_crossover": 9,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (9 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-21T23:45:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16036,
+                    "close": 1.16036,
+                    "open": 1.16036,
+                    "low": 1.16036,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 2,
+                    "candles_since_crossover": 10,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (10 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-21T23:50:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16036,
+                    "close": 1.16036,
+                    "open": 1.16036,
+                    "low": 1.16023,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 3,
+                    "candles_since_crossover": 11,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (11 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-21T23:55:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16036,
+                    "close": 1.16023,
+                    "open": 1.16036,
+                    "low": 1.16023,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 4,
+                    "candles_since_crossover": 12,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (12 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T00:00:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16063,
+                    "close": 1.16063,
+                    "open": 1.16023,
+                    "low": 1.16023,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 5,
+                    "candles_since_crossover": 13,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (13 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T00:05:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16063,
+                    "close": 1.16036,
+                    "open": 1.16063,
+                    "low": 1.16036,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 6,
+                    "candles_since_crossover": 14,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (14 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T00:10:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.1609,
+                    "close": 1.1609,
+                    "open": 1.16063,
+                    "low": 1.1605,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 7,
+                    "candles_since_crossover": 15,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (15 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T00:15:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.1609,
+                    "close": 1.1609,
+                    "open": 1.16077,
+                    "low": 1.16077,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 8,
+                    "candles_since_crossover": 16,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (16 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T00:20:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16104,
+                    "close": 1.16104,
+                    "open": 1.1609,
+                    "low": 1.1609,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 9,
+                    "candles_since_crossover": 17,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (17 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T00:25:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16104,
+                    "close": 1.16104,
+                    "open": 1.16104,
+                    "low": 1.16104,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 10,
+                    "candles_since_crossover": 18,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (18 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T00:30:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16104,
+                    "close": 1.16104,
+                    "open": 1.16104,
+                    "low": 1.1609,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 11,
+                    "candles_since_crossover": 19,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (19 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T00:35:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16104,
+                    "close": 1.1609,
+                    "open": 1.16104,
+                    "low": 1.1609,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 12,
+                    "candles_since_crossover": 20,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (20 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T00:40:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16104,
+                    "close": 1.16104,
+                    "open": 1.1609,
+                    "low": 1.1609,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 13,
+                    "candles_since_crossover": 21,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (21 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T00:45:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16104,
+                    "close": 1.1609,
+                    "open": 1.1609,
+                    "low": 1.1609,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 14,
+                    "candles_since_crossover": 22,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (22 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T00:50:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.1609,
+                    "close": 1.1609,
+                    "open": 1.1609,
+                    "low": 1.1609,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 15,
+                    "candles_since_crossover": 23,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (23 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T00:55:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16104,
+                    "close": 1.16077,
+                    "open": 1.16104,
+                    "low": 1.16077,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 16,
+                    "candles_since_crossover": 24,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (24 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T01:00:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16104,
+                    "close": 1.16104,
+                    "open": 1.1609,
+                    "low": 1.16077,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 17,
+                    "candles_since_crossover": 25,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (25 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T01:05:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16117,
+                    "close": 1.16104,
+                    "open": 1.16104,
+                    "low": 1.16104,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 18,
+                    "candles_since_crossover": 26,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (26 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T01:10:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16104,
+                    "close": 1.16104,
+                    "open": 1.16104,
+                    "low": 1.16104,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 19,
+                    "candles_since_crossover": 27,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (27 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T01:15:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16104,
+                    "close": 1.1609,
+                    "open": 1.16104,
+                    "low": 1.1609,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 20,
+                    "candles_since_crossover": 28,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (20 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T01:20:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16104,
+                    "close": 1.16104,
+                    "open": 1.1609,
+                    "low": 1.1609,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 21,
+                    "candles_since_crossover": 29,
+                    "consolidation_maxima": 1.1605,
+                    "consolidation_minima": 1.16036
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (21 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T01:25:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.1609,
+                    "close": 1.16063,
+                    "open": 1.1609,
+                    "low": 1.16063,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 30,
+                    "consolidation_maxima": 1.16117,
+                    "consolidation_minima": 1.16023
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T01:30:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.1609,
+                    "close": 1.16063,
+                    "open": 1.1609,
+                    "low": 1.16063,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 31,
+                    "consolidation_maxima": 1.1609,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T01:35:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16063,
+                    "close": 1.16063,
+                    "open": 1.16063,
+                    "low": 1.16063,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 32,
+                    "consolidation_maxima": 1.1609,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T01:40:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16077,
+                    "close": 1.16077,
+                    "open": 1.1605,
+                    "low": 1.1605,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 33,
+                    "consolidation_maxima": 1.1609,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T01:45:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.1609,
+                    "close": 1.16077,
+                    "open": 1.16077,
+                    "low": 1.16077,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 34,
+                    "consolidation_maxima": 1.1609,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T01:50:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.1609,
+                    "close": 1.16077,
+                    "open": 1.1609,
+                    "low": 1.16077,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 35,
+                    "consolidation_maxima": 1.1609,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T01:55:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.1609,
+                    "close": 1.1609,
+                    "open": 1.16077,
+                    "low": 1.16077,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 36,
+                    "consolidation_maxima": 1.1609,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T02:00:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.1609,
+                    "close": 1.1609,
+                    "open": 1.1609,
+                    "low": 1.1609,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 37,
+                    "consolidation_maxima": 1.1609,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T02:05:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16104,
+                    "close": 1.16104,
+                    "open": 1.1609,
+                    "low": 1.1609,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 38,
+                    "consolidation_maxima": 1.1609,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T02:10:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16131,
+                    "close": 1.16117,
+                    "open": 1.16117,
+                    "low": 1.16117,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 39,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T02:15:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16131,
+                    "close": 1.16117,
+                    "open": 1.16131,
+                    "low": 1.16117,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 1,
+                    "candles_since_crossover": 40,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (40 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T02:20:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16117,
+                    "close": 1.16117,
+                    "open": 1.16104,
+                    "low": 1.16104,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 2,
+                    "candles_since_crossover": 41,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (41 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T02:25:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16117,
+                    "close": 1.16117,
+                    "open": 1.16117,
+                    "low": 1.16104,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 3,
+                    "candles_since_crossover": 42,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (42 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T02:30:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16117,
+                    "close": 1.16117,
+                    "open": 1.16104,
+                    "low": 1.16104,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 4,
+                    "candles_since_crossover": 43,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (43 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T02:35:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16117,
+                    "close": 1.16117,
+                    "open": 1.16104,
+                    "low": 1.16104,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 5,
+                    "candles_since_crossover": 44,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (44 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T02:40:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16131,
+                    "close": 1.16131,
+                    "open": 1.16117,
+                    "low": 1.16117,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 6,
+                    "candles_since_crossover": 45,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (45 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T02:45:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16144,
+                    "close": 1.16131,
+                    "open": 1.16131,
+                    "low": 1.16131,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 7,
+                    "candles_since_crossover": 46,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (46 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T02:50:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16117,
+                    "close": 1.16117,
+                    "open": 1.16117,
+                    "low": 1.16117,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 8,
+                    "candles_since_crossover": 47,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (47 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T02:55:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16131,
+                    "close": 1.16117,
+                    "open": 1.16131,
+                    "low": 1.16117,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 9,
+                    "candles_since_crossover": 48,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (48 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T03:00:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16117,
+                    "close": 1.16117,
+                    "open": 1.16117,
+                    "low": 1.16117,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 10,
+                    "candles_since_crossover": 49,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (49 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T03:05:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16117,
+                    "close": 1.16104,
+                    "open": 1.16117,
+                    "low": 1.16104,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 11,
+                    "candles_since_crossover": 50,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (50 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T03:10:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16104,
+                    "close": 1.16104,
+                    "open": 1.16104,
+                    "low": 1.16104,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 12,
+                    "candles_since_crossover": 51,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (51 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T03:15:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16104,
+                    "close": 1.1609,
+                    "open": 1.16104,
+                    "low": 1.1609,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 13,
+                    "candles_since_crossover": 52,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (52 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T03:20:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.1609,
+                    "close": 1.1609,
+                    "open": 1.1609,
+                    "low": 1.16077,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 14,
+                    "candles_since_crossover": 53,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (53 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T03:25:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.1609,
+                    "close": 1.1609,
+                    "open": 1.16077,
+                    "low": 1.16077,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 15,
+                    "candles_since_crossover": 54,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (54 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T03:30:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.1609,
+                    "close": 1.1609,
+                    "open": 1.1609,
+                    "low": 1.1609,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 16,
+                    "candles_since_crossover": 55,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (55 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T03:35:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16104,
+                    "close": 1.16104,
+                    "open": 1.16104,
+                    "low": 1.16104,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 17,
+                    "candles_since_crossover": 56,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (56 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T03:40:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16117,
+                    "close": 1.16117,
+                    "open": 1.16104,
+                    "low": 1.16104,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 18,
+                    "candles_since_crossover": 57,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (57 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T03:45:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16117,
+                    "close": 1.16117,
+                    "open": 1.16117,
+                    "low": 1.16117,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 19,
+                    "candles_since_crossover": 58,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (58 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T03:50:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16117,
+                    "close": 1.16104,
+                    "open": 1.16104,
+                    "low": 1.16104,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 20,
+                    "candles_since_crossover": 59,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (20 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T03:55:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16117,
+                    "close": 1.16104,
+                    "open": 1.16104,
+                    "low": 1.16104,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 21,
+                    "candles_since_crossover": 60,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (21 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T04:00:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16117,
+                    "close": 1.16117,
+                    "open": 1.16117,
+                    "low": 1.16117,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 22,
+                    "candles_since_crossover": 61,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (22 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T04:05:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16117,
+                    "close": 1.16117,
+                    "open": 1.16117,
+                    "low": 1.16104,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 23,
+                    "candles_since_crossover": 62,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (23 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T04:10:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16117,
+                    "close": 1.16117,
+                    "open": 1.16104,
+                    "low": 1.1609,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 24,
+                    "candles_since_crossover": 63,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (24 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T04:15:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16117,
+                    "close": 1.16117,
+                    "open": 1.16117,
+                    "low": 1.16117,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 25,
+                    "candles_since_crossover": 64,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (25 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T04:20:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16117,
+                    "close": 1.1609,
+                    "open": 1.16117,
+                    "low": 1.1609,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 26,
+                    "candles_since_crossover": 65,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (26 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T04:25:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16104,
+                    "close": 1.16104,
+                    "open": 1.1609,
+                    "low": 1.1609,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 27,
+                    "candles_since_crossover": 66,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (27 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T04:30:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16104,
+                    "close": 1.16104,
+                    "open": 1.16104,
+                    "low": 1.16104,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 28,
+                    "candles_since_crossover": 67,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (28 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T04:35:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16104,
+                    "close": 1.16104,
+                    "open": 1.16104,
+                    "low": 1.16104,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 29,
+                    "candles_since_crossover": 68,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (29 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T04:40:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16117,
+                    "close": 1.16117,
+                    "open": 1.16104,
+                    "low": 1.16104,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 30,
+                    "candles_since_crossover": 69,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (30 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T04:45:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16117,
+                    "close": 1.16117,
+                    "open": 1.16117,
+                    "low": 1.16117,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 31,
+                    "candles_since_crossover": 70,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (31 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T04:50:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16131,
+                    "close": 1.16117,
+                    "open": 1.16117,
+                    "low": 1.16117,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 32,
+                    "candles_since_crossover": 71,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (32 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T04:55:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16131,
+                    "close": 1.16131,
+                    "open": 1.16117,
+                    "low": 1.16117,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 33,
+                    "candles_since_crossover": 72,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (33 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T05:00:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16158,
+                    "close": 1.16158,
+                    "open": 1.16131,
+                    "low": 1.16131,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 34,
+                    "candles_since_crossover": 73,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (34 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T05:05:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16171,
+                    "close": 1.16158,
+                    "open": 1.16158,
+                    "low": 1.16158,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 35,
+                    "candles_since_crossover": 74,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (35 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T05:10:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16171,
+                    "close": 1.16171,
+                    "open": 1.16158,
+                    "low": 1.16158,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 36,
+                    "candles_since_crossover": 75,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (36 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T05:15:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16171,
+                    "close": 1.16171,
+                    "open": 1.16171,
+                    "low": 1.16171,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 37,
+                    "candles_since_crossover": 76,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (37 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T05:20:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16171,
+                    "close": 1.16171,
+                    "open": 1.16171,
+                    "low": 1.16171,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 38,
+                    "candles_since_crossover": 77,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (38 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T05:25:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16184,
+                    "close": 1.16171,
+                    "open": 1.16171,
+                    "low": 1.16171,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 39,
+                    "candles_since_crossover": 78,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (39 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T05:30:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16184,
+                    "close": 1.16184,
+                    "open": 1.16184,
+                    "low": 1.16184,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 40,
+                    "candles_since_crossover": 79,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (40 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T05:35:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16184,
+                    "close": 1.16184,
+                    "open": 1.16184,
+                    "low": 1.16184,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 41,
+                    "candles_since_crossover": 80,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (41 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T05:40:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16184,
+                    "close": 1.16158,
+                    "open": 1.16184,
+                    "low": 1.16158,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 42,
+                    "candles_since_crossover": 81,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (42 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T05:45:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16171,
+                    "close": 1.16158,
+                    "open": 1.16158,
+                    "low": 1.16158,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 43,
+                    "candles_since_crossover": 82,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (43 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T05:50:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16171,
+                    "close": 1.16171,
+                    "open": 1.16171,
+                    "low": 1.16171,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 44,
+                    "candles_since_crossover": 83,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (44 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T05:55:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16184,
+                    "close": 1.16171,
+                    "open": 1.16171,
+                    "low": 1.16171,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 45,
+                    "candles_since_crossover": 84,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (45 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T06:00:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16117,
+                    "close": 1.16104,
+                    "open": 1.16117,
+                    "low": 1.16104,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 46,
+                    "candles_since_crossover": 85,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (46 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T06:05:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16117,
+                    "close": 1.1609,
+                    "open": 1.16117,
+                    "low": 1.1609,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "unknown",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 47,
+                    "candles_since_crossover": 86,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (47 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T06:10:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16117,
+                    "close": 1.16104,
+                    "open": 1.16104,
+                    "low": 1.16104,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "bearish",
+                    "candles_since_consolidation": 48,
+                    "candles_since_crossover": 0,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "CLOSE_ENTRY",
+                "reason": "EMA crossover detected (bearish). Signal to close existing positions.",
+                "entry": {
+                    "type": "CLOSE"
+                }
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T06:15:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.1609,
+                    "close": 1.1609,
+                    "open": 1.1609,
+                    "low": 1.16077,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 49,
+                    "candles_since_crossover": 1,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (49 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T06:20:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16117,
+                    "close": 1.16117,
+                    "open": 1.1609,
+                    "low": 1.1609,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 50,
+                    "candles_since_crossover": 2,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (50 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T06:25:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16144,
+                    "close": 1.16131,
+                    "open": 1.16117,
+                    "low": 1.16117,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 51,
+                    "candles_since_crossover": 3,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (51 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T06:30:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16144,
+                    "close": 1.16144,
+                    "open": 1.16144,
+                    "low": 1.16117,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 52,
+                    "candles_since_crossover": 4,
+                    "consolidation_maxima": 1.16104,
+                    "consolidation_minima": 1.1605
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (52 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T06:35:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16171,
+                    "close": 1.16158,
+                    "open": 1.16158,
+                    "low": 1.16158,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "bullish",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 0,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16023
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T06:40:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16171,
+                    "close": 1.16158,
+                    "open": 1.16144,
+                    "low": 1.16144,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 1,
+                    "consolidation_maxima": 1.16171,
+                    "consolidation_minima": 1.16158
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T06:45:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16184,
+                    "close": 1.16144,
+                    "open": 1.16158,
+                    "low": 1.16144,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 2,
+                    "consolidation_maxima": 1.16171,
+                    "consolidation_minima": 1.16144
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T06:50:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16171,
+                    "close": 1.16158,
+                    "open": 1.16144,
+                    "low": 1.16144,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 3,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16144
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T06:55:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16144,
+                    "close": 1.16131,
+                    "open": 1.16144,
+                    "low": 1.16117,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 4,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16144
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T07:00:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16144,
+                    "close": 1.16104,
+                    "open": 1.16144,
+                    "low": 1.16104,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 5,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16117
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T07:05:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16104,
+                    "close": 1.16063,
+                    "open": 1.16104,
+                    "low": 1.16063,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "bearish",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 0,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16104
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T07:10:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.1609,
+                    "close": 1.16063,
+                    "open": 1.16063,
+                    "low": 1.16063,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 1,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T07:15:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.1609,
+                    "close": 1.1609,
+                    "open": 1.16063,
+                    "low": 1.1605,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 2,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T07:20:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.1609,
+                    "close": 1.1605,
+                    "open": 1.1609,
+                    "low": 1.1605,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 1,
+                    "candles_since_crossover": 3,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "SELL_ENTRY",
+                "reason": "Bearish breakdown below consolidation minima.",
+                "entry": {
+                    "entry_price": 1.1605,
+                    "type": "SELL",
+                    "stop_loss": 1.16184,
+                    "ticker": "EURUSD=X",
+                    "datetime": "2025-10-22T07:20:00+00:00"
+                }
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T07:25:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16063,
+                    "close": 1.1605,
+                    "open": 1.16036,
+                    "low": 1.16036,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 2,
+                    "candles_since_crossover": 4,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "SELL_ENTRY",
+                "reason": "Bearish breakdown below consolidation minima.",
+                "entry": {
+                    "entry_price": 1.1605,
+                    "type": "SELL",
+                    "stop_loss": 1.16184,
+                    "ticker": "EURUSD=X",
+                    "datetime": "2025-10-22T07:25:00+00:00"
+                }
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T07:30:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16063,
+                    "close": 1.1605,
+                    "open": 1.1605,
+                    "low": 1.1605,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 3,
+                    "candles_since_crossover": 5,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (5 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T07:35:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16077,
+                    "close": 1.16077,
+                    "open": 1.16063,
+                    "low": 1.1605,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 6,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16023
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T07:40:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16077,
+                    "close": 1.16077,
+                    "open": 1.16063,
+                    "low": 1.16063,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 1,
+                    "candles_since_crossover": 7,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16023
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (7 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T07:45:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16077,
+                    "close": 1.16077,
+                    "open": 1.16077,
+                    "low": 1.16077,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 6,
+                    "candles_since_crossover": 8,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (8 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T07:50:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16077,
+                    "close": 1.16063,
+                    "open": 1.16077,
+                    "low": 1.16063,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 7,
+                    "candles_since_crossover": 9,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (9 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T07:55:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16063,
+                    "close": 1.16036,
+                    "open": 1.16063,
+                    "low": 1.16036,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 8,
+                    "candles_since_crossover": 10,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (10 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T08:00:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16023,
+                    "close": 1.15982,
+                    "open": 1.16023,
+                    "low": 1.15982,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 9,
+                    "candles_since_crossover": 11,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (11 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T08:05:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15996,
+                    "close": 1.15982,
+                    "open": 1.15982,
+                    "low": 1.15982,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 10,
+                    "candles_since_crossover": 12,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (12 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T08:10:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15982,
+                    "close": 1.15955,
+                    "open": 1.15982,
+                    "low": 1.15955,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 11,
+                    "candles_since_crossover": 13,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (13 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T08:15:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15955,
+                    "close": 1.15955,
+                    "open": 1.15955,
+                    "low": 1.15942,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 12,
+                    "candles_since_crossover": 14,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (14 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T08:20:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16009,
+                    "close": 1.16009,
+                    "open": 1.15955,
+                    "low": 1.15955,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 13,
+                    "candles_since_crossover": 15,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (15 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T08:25:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16023,
+                    "close": 1.15996,
+                    "open": 1.16009,
+                    "low": 1.15996,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 14,
+                    "candles_since_crossover": 16,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (16 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T08:30:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15996,
+                    "close": 1.15969,
+                    "open": 1.15996,
+                    "low": 1.15955,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 15,
+                    "candles_since_crossover": 17,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (17 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T08:35:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15969,
+                    "close": 1.15969,
+                    "open": 1.15955,
+                    "low": 1.15955,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 16,
+                    "candles_since_crossover": 18,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (18 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T08:40:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15982,
+                    "close": 1.15955,
+                    "open": 1.15982,
+                    "low": 1.15955,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 17,
+                    "candles_since_crossover": 19,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (19 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T08:45:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15969,
+                    "close": 1.15969,
+                    "open": 1.15969,
+                    "low": 1.15969,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 18,
+                    "candles_since_crossover": 20,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (20 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T08:50:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16023,
+                    "close": 1.16023,
+                    "open": 1.15982,
+                    "low": 1.15982,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 19,
+                    "candles_since_crossover": 21,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (21 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T08:55:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16036,
+                    "close": 1.16009,
+                    "open": 1.16036,
+                    "low": 1.16009,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 20,
+                    "candles_since_crossover": 22,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (20 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T09:00:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16023,
+                    "close": 1.16023,
+                    "open": 1.16009,
+                    "low": 1.16009,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 21,
+                    "candles_since_crossover": 23,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (21 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T09:05:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.1605,
+                    "close": 1.16036,
+                    "open": 1.1605,
+                    "low": 1.16036,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 22,
+                    "candles_since_crossover": 24,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (22 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T09:10:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16036,
+                    "close": 1.16023,
+                    "open": 1.16023,
+                    "low": 1.16023,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 23,
+                    "candles_since_crossover": 25,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (23 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T09:15:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16009,
+                    "close": 1.15996,
+                    "open": 1.16009,
+                    "low": 1.15982,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 24,
+                    "candles_since_crossover": 26,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (24 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T09:20:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15996,
+                    "close": 1.15969,
+                    "open": 1.15996,
+                    "low": 1.15969,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 25,
+                    "candles_since_crossover": 27,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (25 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T09:25:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15996,
+                    "close": 1.15996,
+                    "open": 1.15982,
+                    "low": 1.15982,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 26,
+                    "candles_since_crossover": 28,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (26 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T09:30:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16009,
+                    "close": 1.15996,
+                    "open": 1.15996,
+                    "low": 1.15996,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 27,
+                    "candles_since_crossover": 29,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (27 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T09:35:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16009,
+                    "close": 1.15982,
+                    "open": 1.15996,
+                    "low": 1.15982,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 28,
+                    "candles_since_crossover": 30,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.16063
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (28 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T09:40:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.16009,
+                    "close": 1.15996,
+                    "open": 1.15996,
+                    "low": 1.15996,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 31,
+                    "consolidation_maxima": 1.16184,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T09:45:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15996,
+                    "close": 1.15996,
+                    "open": 1.15996,
+                    "low": 1.15996,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 32,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15996
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T09:50:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15996,
+                    "close": 1.15982,
+                    "open": 1.15996,
+                    "low": 1.15982,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 33,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15996
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T09:55:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15982,
+                    "close": 1.15982,
+                    "open": 1.15969,
+                    "low": 1.15969,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 34,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15982
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T10:00:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15996,
+                    "close": 1.15982,
+                    "open": 1.15969,
+                    "low": 1.15969,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 35,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15969
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T10:05:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15969,
+                    "close": 1.15955,
+                    "open": 1.15969,
+                    "low": 1.15955,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 36,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15969
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T10:10:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15955,
+                    "close": 1.15942,
+                    "open": 1.15955,
+                    "low": 1.15942,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 37,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15955
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T10:15:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15955,
+                    "close": 1.15942,
+                    "open": 1.15942,
+                    "low": 1.15942,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "consolidating",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 0,
+                    "candles_since_crossover": 38,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Market is in consolidation."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T10:20:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15942,
+                    "close": 1.15915,
+                    "open": 1.15942,
+                    "low": 1.15902,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 1,
+                    "candles_since_crossover": 39,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (39 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T10:25:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15915,
+                    "close": 1.15888,
+                    "open": 1.15915,
+                    "low": 1.15888,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 2,
+                    "candles_since_crossover": 40,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (40 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T10:30:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15902,
+                    "close": 1.15888,
+                    "open": 1.15902,
+                    "low": 1.15888,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 3,
+                    "candles_since_crossover": 41,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (41 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T10:35:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15888,
+                    "close": 1.15888,
+                    "open": 1.15888,
+                    "low": 1.15861,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 4,
+                    "candles_since_crossover": 42,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (42 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T10:40:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15888,
+                    "close": 1.15888,
+                    "open": 1.15888,
+                    "low": 1.15875,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 5,
+                    "candles_since_crossover": 43,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (43 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T10:45:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15915,
+                    "close": 1.15902,
+                    "open": 1.15902,
+                    "low": 1.15902,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 6,
+                    "candles_since_crossover": 44,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (44 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T10:50:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15915,
+                    "close": 1.15888,
+                    "open": 1.15915,
+                    "low": 1.15888,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 7,
+                    "candles_since_crossover": 45,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (45 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T10:55:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15902,
+                    "close": 1.15888,
+                    "open": 1.15902,
+                    "low": 1.15888,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 8,
+                    "candles_since_crossover": 46,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (46 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T11:00:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15902,
+                    "close": 1.15902,
+                    "open": 1.15902,
+                    "low": 1.15902,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 9,
+                    "candles_since_crossover": 47,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (47 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T11:05:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15915,
+                    "close": 1.15902,
+                    "open": 1.15915,
+                    "low": 1.15902,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 10,
+                    "candles_since_crossover": 48,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (48 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T11:10:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15915,
+                    "close": 1.15902,
+                    "open": 1.15915,
+                    "low": 1.15888,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 11,
+                    "candles_since_crossover": 49,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (49 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T11:15:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15915,
+                    "close": 1.15902,
+                    "open": 1.15902,
+                    "low": 1.15902,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 12,
+                    "candles_since_crossover": 50,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (50 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T11:20:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15915,
+                    "close": 1.15888,
+                    "open": 1.15915,
+                    "low": 1.15888,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 13,
+                    "candles_since_crossover": 51,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (51 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T11:25:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15902,
+                    "close": 1.15875,
+                    "open": 1.15902,
+                    "low": 1.15875,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 14,
+                    "candles_since_crossover": 52,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (52 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T11:30:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15902,
+                    "close": 1.15875,
+                    "open": 1.15888,
+                    "low": 1.15875,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 15,
+                    "candles_since_crossover": 53,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (53 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T11:35:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15915,
+                    "close": 1.15875,
+                    "open": 1.15902,
+                    "low": 1.15875,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 16,
+                    "candles_since_crossover": 54,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (54 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T11:40:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15875,
+                    "close": 1.15875,
+                    "open": 1.15861,
+                    "low": 1.15861,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 17,
+                    "candles_since_crossover": 55,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (55 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T11:45:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15875,
+                    "close": 1.15875,
+                    "open": 1.15861,
+                    "low": 1.15861,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 18,
+                    "candles_since_crossover": 56,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (56 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T11:50:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15902,
+                    "close": 1.15902,
+                    "open": 1.15888,
+                    "low": 1.15888,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 19,
+                    "candles_since_crossover": 57,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Breakout is not recent enough to a crossover (57 candles ago)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T11:55:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15888,
+                    "close": 1.15861,
+                    "open": 1.15888,
+                    "low": 1.15861,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 20,
+                    "candles_since_crossover": 58,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (20 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T12:00:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15915,
+                    "close": 1.15915,
+                    "open": 1.15915,
+                    "low": 1.15915,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 21,
+                    "candles_since_crossover": 59,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (21 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T12:05:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15929,
+                    "close": 1.15902,
+                    "open": 1.15929,
+                    "low": 1.15902,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 22,
+                    "candles_since_crossover": 60,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (22 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T12:10:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15929,
+                    "close": 1.15929,
+                    "open": 1.15915,
+                    "low": 1.15915,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 23,
+                    "candles_since_crossover": 61,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (23 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T12:15:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15929,
+                    "close": 1.15888,
+                    "open": 1.15929,
+                    "low": 1.15888,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 24,
+                    "candles_since_crossover": 62,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (24 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T12:20:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15902,
+                    "close": 1.15861,
+                    "open": 1.15902,
+                    "low": 1.15861,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 25,
+                    "candles_since_crossover": 63,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (25 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T12:25:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15902,
+                    "close": 1.15902,
+                    "open": 1.15875,
+                    "low": 1.15875,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 26,
+                    "candles_since_crossover": 64,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (26 candles since consolidation)."
+            }
+        },
+        {
+            "payload": {
+                "strategy_type": "consolidation_breakout",
+                "datetime": "2025-10-22T12:30:00+00:00",
+                "interval": "5m",
+                "candle": {
+                    "high": 1.15888,
+                    "close": 1.15888,
+                    "open": 1.15888,
+                    "low": 1.15888,
+                    "volume": 0.0
+                },
+                "ticker": "EURUSD=X",
+                "conditions": {
+                    "trend_status": "bearish",
+                    "ema_crossover": "none",
+                    "candles_since_consolidation": 27,
+                    "candles_since_crossover": 65,
+                    "consolidation_maxima": 1.16009,
+                    "consolidation_minima": 1.15942
+                }
+            },
+            "decision": {
+                "action_taken": "NO_ACTION",
+                "reason": "Not within breakout window (27 candles since consolidation)."
+            }
+        }
+    ]
+}
