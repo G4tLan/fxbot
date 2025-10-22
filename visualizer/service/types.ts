@@ -47,3 +47,88 @@ export interface EquityHistoryEntry {
     max_equity_so_far: number;
     min_equity_so_far: number;
 }
+
+export interface TradeEngineOptions {
+    start_date: string;
+    end_date: string;
+    interval: string;
+    ticker: string;
+    save_location_base: string;
+    ema_short: number;
+    ema_long: number;
+    window: number;
+    threshold_bb: number;
+    threshold_adx: number;
+    tolerance: number;
+    loops: number;
+    results_file_dir: string;
+}
+
+export interface TradeSummaryResponse {
+    options: TradeEngineOptions;
+    active_trades: ActiveTrade[];
+    closed_trades: ClosedTrade[];
+    final_balance: number;
+}
+
+export interface DailyPayloadCandle {
+    high: number;
+    close: number;
+    open: number;
+    low: number;
+    volume: number;
+}
+
+export interface DailyPayloadConditions {
+    trend_status: string;
+    ema_crossover: string;
+    candles_since_consolidation: number;
+    candles_since_crossover: number;
+    consolidation_maxima: number;
+    consolidation_minima: number;
+}
+
+export interface DailyPayloadEntry {
+    payload: {
+        strategy_type: string;
+        datetime: string;
+        interval: string;
+        candle: DailyPayloadCandle;
+        ticker: string;
+        conditions: DailyPayloadConditions;
+    };
+    decision: {
+        action_taken: string;
+        reason: string;
+        entry?: { // Optional, only present for BUY/SELL_ENTRY
+            entry_price: number;
+            type: TradeType;
+            stop_loss: number;
+            ticker: string;
+            datetime: string;
+        };
+    };
+}
+
+export interface DailyPayloadsResponse {
+    options: TradeEngineOptions;
+    payloads: DailyPayloadEntry[];
+}
+
+export interface RunFilter {
+    run_name: string;
+    backtest_start_date?: string; // Optional, as it might not always be present
+    dates: string[]; // YYYY-MM-DD format
+}
+
+export interface IntervalFilter {
+    interval: string;
+    runs: RunFilter[];
+}
+
+export interface TickerFilter {
+    ticker: string;
+    intervals: IntervalFilter[];
+}
+
+export type FiltersResponse = TickerFilter[];

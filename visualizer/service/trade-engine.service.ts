@@ -1,18 +1,21 @@
-// This file implements the consumption of a hypothetical REST API for the TradeEngine.
-// All data models are defined in types.ts.
-// The API endpoints and response structures are inferred from the Python TradeEngine class,
-// as the API_DOCUMENTATION.md was not provided.
-
-import { Candle, ActiveTrade, ClosedTrade, EquityHistoryEntry } from './types';
+import { 
+    Candle, 
+    ActiveTrade, 
+    ClosedTrade,
+    EquityHistoryEntry,
+    TradeSummaryResponse,
+    DailyPayloadsResponse,
+    FiltersResponse,
+} from './types';
 
 export class TradeEngineService {
     private baseUrl: string;
 
     /**
      * Initializes the TradeEngineService.
-     * @param baseUrl The base URL for the TradeEngine API. Defaults to 'http://localhost:8000/api/trade-engine'.
+     * @param baseUrl The base URL for the TradeEngine API. Defaults to 'http://127.0.0.1:5000'.
      */
-    constructor(baseUrl: string = 'http://localhost:8000/api/trade-engine') {
+    constructor(baseUrl: string = 'http://127.0.0.1:5000') {
         this.baseUrl = baseUrl;
     }
 
@@ -21,10 +24,15 @@ export class TradeEngineService {
      * @param endpoint The API endpoint relative to the base URL.
      * @returns A Promise resolving to the fetched data of type T.
      * @throws An error if the network request fails or the response status is not OK.
+     * @param params Optional query parameters to append to the URL.
      */
-    private async fetchData<T>(endpoint: string): Promise<T> {
+    private async fetchData<T>(endpoint: string, params?: Record<string, any>): Promise<T> {
+        let url = `${this.baseUrl}${endpoint}`;
+        if (params) {
+            url += `?${new URLSearchParams(params).toString()}`;
+        }
         try {
-            const response = await fetch(`${this.baseUrl}${endpoint}`);
+            const response = await fetch(url);
             if (!response.ok) {
                 const errorText = await response.text();
                 throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
@@ -37,75 +45,87 @@ export class TradeEngineService {
     }
 
     /**
-     * Fetches the current account balance.
-     * Corresponds to Python's `TradeEngine.get_account_balance()`.
-     * @returns Promise<number> The current account balance.
+     * Fetches a structured list of all available backtest runs.
+     * Corresponds to Python API endpoint `GET /filters`.
+     * @returns Promise<FiltersResponse> A hierarchical view of available backtests.
      */
-    async getAccountBalance(): Promise<number> {
-        return this.fetchData<number>('/balance');
+    async getFilters(): Promise<FiltersResponse> {
+        return this.fetchData<FiltersResponse>('/filters');
     }
 
     /**
-     * Fetches the current account equity (balance + unrealised P/L).
-     * Corresponds to Python's `TradeEngine.get_account_equity()`.
-     * @returns Promise<number> The current account equity.
-     */
-    async getAccountEquity(): Promise<number> {
-        return this.fetchData<number>('/equity');
-    }
-
-    /**
-     * Fetches the historical equity of the account.
-     * Corresponds to Python's `TradeEngine.get_equity_history()`.
+     * Fetches the historical equity data for a specific backtest run.
+     * Corresponds to Python API endpoint `GET /equity`.
+     * @param ticker The currency pair or stock symbol (e.g., `EURUSD=X`).
+     * @param interval The candle interval (e.g., `5m`).
+     * @param runName The name of the run (e.g., `run-1`).
      * @returns Promise<EquityHistoryEntry[]> A list of historical equity entries.
      */
-    async getEquityHistory(): Promise<EquityHistoryEntry[]> {
-        return this.fetchData<EquityHistoryEntry[]>('/equity-history');
+    async getEquity(ticker: string, interval: string, runName: string): Promise<EquityHistoryEntry[]> {
+        return this.fetchData<EquityHistoryEntry[]>('/equity', { ticker, interval, run_name: runName });
     }
 
     /**
      * Fetches all processed candle data.
-     * Corresponds to Python's `TradeEngine.get_candle_data()`.
+     * Corresponds to Python API endpoint `GET /candles`.
+     * @param ticker The currency pair or stock symbol (e.g., `EURUSD=X`).
+     * @param interval The candle interval (e.g., `5m`).
+     * @param runName The name of the run (e.g., `run-1`).
      * @returns Promise<Candle[]> A list of candle data.
      */
-    async getCandleData(): Promise<Candle[]> {
-        return this.fetchData<Candle[]>('/candles');
+    async getCandleData(ticker: string, interval: string, runName: string): Promise<Candle[]> {
+        return this.fetchData<Candle[]>('/candles', { ticker, interval, run_name: runName });
+    }
+
+    /**
+     * Fetches the summary of all active and closed trades, along with the final account balance
+     * for a specific backtest run.
+     * Corresponds to Python API endpoint `GET /trades`.
+     * @param ticker The currency pair or stock symbol (e.g., `EURUSD=X`).
+     * @param interval The candle interval (e.g., `5m`).
+     * @param runName The name of the run (e.g., `run-1`).
+     * @returns Promise<TradeSummaryResponse> The trade summary data.
+     */
+    async getTradeSummary(ticker: string, interval: string, runName: string): Promise<TradeSummaryResponse> {
+        return this.fetchData<TradeSummaryResponse>('/trades', { ticker, interval, run_name: runName });
     }
 
     /**
      * Fetches a list of active trades.
-     * Corresponds to Python's `TradeEngine.get_active_trades()`.
-     * @param includePnl If true, requests the API to include the current unrealised P/L for each trade.
-     * @param filters Optional key-value pairs to filter trades (e.g., { ticker: "EURUSD=X", type: "BUY" }).
+     * Extracts active trades from the `TradeSummaryResponse` fetched from the `/trades` endpoint.
+     * @param ticker The currency pair or stock symbol (e.g., `EURUSD=X`).
+     * @param interval The candle interval (e.g., `5m`).
+     * @param runName The name of the run (e.g., `run-1`).
      * @returns Promise<ActiveTrade[]> A list of active trades.
      */
-    async getActiveTrades(includePnl: boolean = false, filters?: Record<string, any>): Promise<ActiveTrade[]> {
-        let queryString = `?include_pnl=${includePnl}`;
-        if (filters) {
-            for (const key in filters) {
-                if (Object.prototype.hasOwnProperty.call(filters, key)) {
-                    queryString += `&${key}=${encodeURIComponent(filters[key])}`;
-                }
-            }
-        }
-        return this.fetchData<ActiveTrade[]>(`/trades/active${queryString}`);
+    async getActiveTrades(ticker: string, interval: string, runName: string): Promise<ActiveTrade[]> {
+        const summary = await this.getTradeSummary(ticker, interval, runName);
+        return summary.active_trades;
     }
 
     /**
      * Fetches a list of closed trades.
-     * Corresponds to Python's `TradeEngine.get_closed_trades()`.
+     * Extracts closed trades from the `TradeSummaryResponse` fetched from the `/trades` endpoint.
+     * @param ticker The currency pair or stock symbol (e.g., `EURUSD=X`).
+     * @param interval The candle interval (e.g., `5m`).
+     * @param runName The name of the run (e.g., `run-1`).
      * @returns Promise<ClosedTrade[]> A list of closed trades.
      */
-    async getClosedTrades(): Promise<ClosedTrade[]> {
-        return this.fetchData<ClosedTrade[]>('/trades/closed');
+    async getClosedTrades(ticker: string, interval: string, runName: string): Promise<ClosedTrade[]> {
+        const summary = await this.getTradeSummary(ticker, interval, runName);
+        return summary.closed_trades;
     }
 
     /**
-     * Fetches a list of historical trades.
-     * In the Python implementation, this currently returns the same data as `get_closed_trades()`.
-     * @returns Promise<ClosedTrade[]> A list of historical trades.
+     * Fetches the detailed payloads generated for a single day within a specific backtest run.
+     * Corresponds to Python API endpoint `GET /payloads`.
+     * @param ticker The currency pair or stock symbol (e.g., `EURUSD=X`).
+     * @param interval The candle interval (e.g., `5m`).
+     * @param runName The name of the run (e.g., `run-1`).
+     * @param date The specific date for the payloads in `YYYY-MM-DD` format (e.g., `2025-10-20`).
+     * @returns Promise<DailyPayloadsResponse> The daily payloads data.
      */
-    async getHistoricalTrades(): Promise<ClosedTrade[]> {
-        return this.fetchData<ClosedTrade[]>('/trades/historical');
+    async getDailyPayloads(ticker: string, interval: string, runName: string, date: string): Promise<DailyPayloadsResponse> {
+        return this.fetchData<DailyPayloadsResponse>('/payloads', { ticker, interval, run_name: runName, date });
     }
 }
