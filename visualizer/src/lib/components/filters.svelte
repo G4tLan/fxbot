@@ -20,36 +20,66 @@
   $: selectedDate.set(selectedDateValue);
 </script>
 
-{#if filters.length}
-  <label>Ticker:
+<div class="filters">
+  <div class="filter">
+    <span>Ticker: </span>
     <select bind:value={selectedTickerValue}>
       {#each filters as f}
         <option value={f.ticker}>{f.ticker}</option>
       {/each}
     </select>
-  </label>
+  </div>
 
-  <label>Interval:
+  <div class="filter">
+    <span>Interval: </span>
     <select bind:value={selectedIntervalValue}>
       {#each filters.find(f => f.ticker === selectedTickerValue)?.intervals ?? [] as i}
         <option value={i.interval}>{i.interval}</option>
       {/each}
     </select>
-  </label>
+  </div>
 
-  <label>Run:
+  <div class="filter">
+    <span>Run: </span>
     <select bind:value={selectedRunValue}>
       {#each filters.find(f => f.ticker === selectedTickerValue)?.intervals.find(i => i.interval === selectedIntervalValue)?.runs ?? [] as r}
         <option value={r.run_name}>{r.run_name}</option>
       {/each}
     </select>
-  </label>
+  </div>
 
-  <label>Date:
+  <div class="filter">
+    <span>Date: </span>
     <select bind:value={selectedDateValue}>
       {#each filters.find(f => f.ticker === selectedTickerValue)?.intervals.find(i => i.interval === selectedIntervalValue)?.runs.find(r => r.run_name === selectedRunValue)?.dates ?? [] as d}
         <option value={d}>{d}</option>
       {/each}
     </select>
-  </label>
-{/if}
+  </div>
+</div>
+
+<style>
+  .filters {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .filter {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 200px;
+  }
+
+  .filter span {
+    font-weight: bold;
+  }
+
+  .filter select {
+    padding: 0.5rem;
+    border: 1px solid black;
+    border-radius: 15px;
+    color: black;
+  }
+</style>
