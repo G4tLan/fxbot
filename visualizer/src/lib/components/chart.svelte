@@ -1,36 +1,60 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
+	import { onMount, } from 'svelte';
 	import * as LC from 'lightweight-charts';
 	import { tradeEngineService } from '$lib/api/trade-engine.service';
 	import { selectedTicker, selectedInterval, selectedRun } from '$lib/stores';
+	import { toZonedTime, format } from 'date-fns-tz';
 
 	let chartContainer: HTMLElement;
 	let chart: any = null;
 	let candleSeries: any = null;
-
-	// ResizeObserver for responsive sizing
-	let resizeObserver: ResizeObserver | null = null;
-
 	// Guard for out-of-order async requests
 	let _latestRequestId = 0;
 
 	onMount(() => {
-		const initialWidth = Math.max(1, Math.round(chartContainer.getBoundingClientRect().width));
-
 		chart = LC.createChart(chartContainer, {
-			width: initialWidth,
-			height: 500,
+			localization: {
+				dateFormat: 'yyyy-MM-dd HH:mm',
+				locale: 'en'
+			},
+			handleScale: {
+				axisPressedMouseMove: {
+					time: true,
+					price: true
+				}
+			},
 			layout: {
 				background: { type: LC.ColorType.Solid, color: '#000000' },
-				textColor: 'rgba(255, 255, 255, 0.9)'
+				textColor: 'rgba(255, 255, 255, 0.95)',
 			},
 			grid: {
 				vertLines: { color: 'rgba(197, 203, 206, 0.5)' },
-				horzLines: { color: 'rgba(197, 203, 206, 0.5)' }
+				horzLines: { color: 'rgba(197, 203, 206, 0.5)' },
 			},
 			crosshair: { mode: 1 },
 			rightPriceScale: { borderColor: 'rgba(197, 203, 206, 0.8)' },
-			timeScale: { borderColor: 'rgba(197, 203, 206, 0.8)' }
+			timeScale: {
+				borderColor: 'rgba(197, 203, 206, 0.8)',
+				timeVisible: true,
+				secondsVisible: false,
+				ticksVisible: true,
+				tickMarkFormatter: (time: any, _tickType: any, locale: string) => {
+					const date = new Date(time * 1000);
+					switch (_tickType) {
+						case LC.TickMarkType.DayOfMonth:
+						case LC.TickMarkType.Month:
+							return date.toLocaleDateString(locale, { month: 'short', year: 'numeric' });
+
+						case LC.TickMarkType.Year:
+							return date.toLocaleDateString(locale, { year: 'numeric' });
+
+						case LC.TickMarkType.Time:
+						default:
+							// show hours and minutes for intraday ticks
+							return date.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' });
+					}
+				},
+			}
 		});
 
 		const seriesOptions = {
@@ -44,25 +68,7 @@
 
 		candleSeries = chart.addSeries(LC.CandlestickSeries, seriesOptions);
 
-		if (window.ResizeObserver) {
-			resizeObserver = new ResizeObserver((entries) => {
-				for (const entry of entries) {
-					const w = Math.max(1, Math.round(entry.contentRect.width));
-					chart.applyOptions({ width: w });
-				}
-			});
-			resizeObserver.observe(chartContainer);
-		} else {
-			const handleResize = () => chart.applyOptions({ width: Math.max(1, Math.round(chartContainer.getBoundingClientRect().width)) });
-			window.addEventListener('resize', handleResize);
-			onDestroy(() => window.removeEventListener('resize', handleResize));
-		}
-
 		return () => {
-			if (resizeObserver) {
-				resizeObserver.disconnect();
-				resizeObserver = null;
-			}
 			if (chart) {
 				chart.remove();
 				chart = null;
@@ -78,16 +84,21 @@
 				const data = await tradeEngineService.getCandleData($selectedTicker, $selectedInterval, $selectedRun);
 				if (requestId !== _latestRequestId) return; // stale
 
-				const mapped = data.map((d) => ({
-					time: Math.floor(new Date(d.datetime).getTime() / 1000) as any,
-					open: d.Open,
-					high: d.High,
-					low: d.Low,
-					close: d.Close
-				}));
+				// round timestamps to a 5-minute grid (300s) so the time scale aligns to 5m intervals
+				const INTERVAL_SEC = 5 * 60;
+				const mapped = data.map((d) => {
+					const dt = toZonedTime(new Date(d.datetime), 'UTC')
+					return {
+						time: (Math.floor(dt.getTime() / 1000 / INTERVAL_SEC) * INTERVAL_SEC) as LC.UTCTimestamp,
+						open: d.Open,
+						high: d.High,
+						low: d.Low,
+						close: d.Close
+					};
+				});
 
 				candleSeries.setData(mapped);
-				try { chart?.timeScale()?.fitContent(); } catch (e) {}
+				chart?.timeScale()?.fitContent();
 			} catch (err) {
 				console.error('Error loading candle data', err);
 			}
@@ -95,4 +106,4 @@
 	}
 </script>
 
-<div bind:this={chartContainer} class="w-full h-[500px]"></div>
+<div bind:this={chartContainer} class="w-full h-full"></div>
