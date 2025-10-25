@@ -1,3 +1,17 @@
+node_modules
+.svelte-kit
+dist
+build
+.vite
+*.log
+coverage
+.env
+.env.*
+/*.local
+public/build
+/.turbo
+/.parcel-cache
+*.lock
 # Package Managers
 package-lock.json
 pnpm-lock.yaml

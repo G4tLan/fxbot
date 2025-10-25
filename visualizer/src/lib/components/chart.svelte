@@ -3,7 +3,8 @@
 	import * as LC from 'lightweight-charts';
 	import { tradeEngineService } from '$lib/api/trade-engine.service';
 	import { selectedTicker, selectedInterval, selectedRun } from '$lib/stores';
-	import { toZonedTime, format } from 'date-fns-tz';
+	import { toZonedTime} from 'date-fns-tz';
+	import { RectanglePrimitive } from '$lib/indicators/image-watermaark';
 
 	let chartContainer: HTMLElement;
 	let chart: any = null;
@@ -14,14 +15,16 @@
 	onMount(() => {
 		chart = LC.createChart(chartContainer, {
 			localization: {
-				dateFormat: 'yyyy-MM-dd HH:mm',
-				locale: 'en'
+				dateFormat: 'yyyy-MM-dd',
+				locale: 'en',
+				priceFormatter: (p: number) => p.toFixed(5),
+
 			},
 			handleScale: {
 				axisPressedMouseMove: {
 					time: true,
 					price: true
-				}
+				},
 			},
 			layout: {
 				background: { type: LC.ColorType.Solid, color: '#000000' },
@@ -31,17 +34,39 @@
 				vertLines: { color: 'rgba(197, 203, 206, 0.5)' },
 				horzLines: { color: 'rgba(197, 203, 206, 0.5)' },
 			},
-			crosshair: { mode: 1 },
-			rightPriceScale: { borderColor: 'rgba(197, 203, 206, 0.8)' },
+			crosshair: { 
+				mode: LC.CrosshairMode.Normal,
+				vertLine: {
+					width: 4 as any,
+					color: '#C3BCDB44',
+					style: LC.LineStyle.Solid,
+					labelBackgroundColor: '#9B7DFF',
+				},
+
+				horzLine: {
+					color: '#9B7DFF',
+					labelBackgroundColor: '#9B7DFF',
+				}, 
+			},
+			rightPriceScale: { 
+				borderColor: 'rgba(197, 203, 206, 1.0)',
+    scaleMargins: {
+        top: 0.1,
+        bottom: 0.2,
+    },
+	mode: LC.PriceScaleMode.Logarithmic
+			},
 			timeScale: {
-				borderColor: 'rgba(197, 203, 206, 0.8)',
+				borderColor: 'rgba(197, 203, 206, 1.0)',
 				timeVisible: true,
 				secondsVisible: false,
 				ticksVisible: true,
 				tickMarkFormatter: (time: any, _tickType: any, locale: string) => {
 					const date = new Date(time * 1000);
+					console.log(time, )
 					switch (_tickType) {
 						case LC.TickMarkType.DayOfMonth:
+							return date.toLocaleDateString(locale, { month: 'short', day: 'numeric' });
 						case LC.TickMarkType.Month:
 							return date.toLocaleDateString(locale, { month: 'short', year: 'numeric' });
 
@@ -67,14 +92,45 @@
 		};
 
 		candleSeries = chart.addSeries(LC.CandlestickSeries, seriesOptions);
+		const rectangle = new RectanglePrimitive(candleSeries, {
+			time1: 1760983200 as any,
+			price1: 1.160,
+			time2: 1761127200 as any,
+			price2: 1.161,
+		}, {
+			color: 'rgba(255, 0, 0, 0.3)',
+			borderWidth: 2,
+		});
+
+		candleSeries.attachPrimitive(rectangle);
+
 
 		return () => {
+			try {
+				tradeIndicator?.remove();
+			} catch (e) {
+				// ignore
+			}
 			if (chart) {
 				chart.remove();
 				chart = null;
 			}
 		};
 	});
+
+let tradeIndicator: any = null;
+
+// Reactive updates: fetch and set trade summary when selections change
+$: if (tradeIndicator && $selectedTicker && $selectedInterval && $selectedRun) {
+    (async () => {
+        try {
+            const summary = await tradeEngineService.getTradeSummary($selectedTicker, $selectedInterval, $selectedRun);
+            tradeIndicator.update(summary);
+        } catch (err) {
+            console.error('Error loading trade summary', err);
+        }
+    })();
+}
 
 	// Reactive updates: fetch and set candle data when selections change
 	$: if (candleSeries && $selectedTicker && $selectedInterval && $selectedRun) {
