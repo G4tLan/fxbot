@@ -1,13 +1,15 @@
 <script lang="ts">
   import Filters from '$lib/components/filters.svelte';
   import Chart from '$lib/components/chart.svelte';
-  import Payloads from '$lib/components/payloads.svelte';
+  import Trades from '$lib/components/trades.svelte';
 </script>
 
 <div class="dashboard">
   <section class="filters"><Filters /></section>
-  <section class="chart"><Chart /></section>
-  <section class="details"><Payloads /></section>
+  <div class="flex flex-row flex-1">
+    <section class="chart"><Chart /></section>
+    <section class="details"><Trades /></section>
+  </div>
 </div>
 
 <style>
@@ -37,6 +39,6 @@
   }
 
   .details {
-    flex: 0 0 15%;
+    flex: 0 0 20%;
   }
 </style>

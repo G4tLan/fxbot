@@ -1,3 +1,8 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
+
+:root {
+  --background-color: #1a202c;
+  --text-color: #edf2f7;
+}
