@@ -8,7 +8,7 @@
     selectedRun,
     selectedTicker,
   } from '$lib/stores';
-  import { toZonedTime } from 'date-fns-tz';
+  import { timeZoneCorrection } from '$lib/utils';
   import * as LC from 'lightweight-charts';
   import { onMount } from 'svelte';
 
@@ -69,7 +69,6 @@
         ticksVisible: true,
         tickMarkFormatter: (time: any, _tickType: any, locale: string) => {
           const date = new Date(time * 1000);
-          console.log(time);
           switch (_tickType) {
             case LC.TickMarkType.DayOfMonth:
               return date.toLocaleDateString(locale, { month: 'short', day: 'numeric' });
@@ -126,9 +125,8 @@
           // round timestamps to a 5-minute grid (300s) so the time scale aligns to 5m intervals
           const INTERVAL_SEC = 5 * 60;
           const mapped = data.map((d) => {
-            const dt = toZonedTime(new Date(d.datetime), 'UTC');
             return {
-              time: (Math.floor(dt.getTime() / 1000 / INTERVAL_SEC) *
+              time: (Math.floor(timeZoneCorrection(d.datetime) / INTERVAL_SEC) *
                 INTERVAL_SEC) as LC.UTCTimestamp,
               open: d.Open,
               high: d.High,
@@ -149,22 +147,21 @@
   $effect(() => {
     if ($selectedActiveTrade) {
       tradePrimitive.setPoints({
-        entryTime: Math.floor(
-          new Date($selectedActiveTrade.entry_datetime).getTime() / 1000
-        ) as LC.Time,
+        entryTime: Math.floor(timeZoneCorrection($selectedActiveTrade.entry_datetime)) as LC.Time,
         entryPrice: $selectedActiveTrade.entry_price,
         stopLoss: $selectedActiveTrade.stop_loss,
         takeProfit: $selectedActiveTrade.take_profit,
+        inProfit: !!$selectedActiveTrade.unrealised_pnl && $selectedActiveTrade.unrealised_pnl > 0,
       });
     } else if ($selectedClosedTrade) {
       tradePrimitive.setPoints({
-        entryTime: Math.floor(
-          new Date($selectedClosedTrade.entry_datetime).getTime() / 1000
-        ) as LC.Time,
+        entryTime: Math.floor(timeZoneCorrection($selectedClosedTrade.entry_datetime)) as LC.Time,
         entryPrice: $selectedClosedTrade.entry_price,
         stopLoss: $selectedClosedTrade.stop_loss,
         takeProfit: $selectedClosedTrade.take_profit,
         closePrice: $selectedClosedTrade.closed_price,
+        inProfit: !!$selectedClosedTrade.profit && $selectedClosedTrade.profit > 0,
+        closeTime: Math.floor(timeZoneCorrection($selectedClosedTrade.closed_datetime)) as LC.Time,
       });
     } else {
       tradePrimitive.setPoints(null);

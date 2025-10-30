@@ -20,7 +20,9 @@ export interface TradePrimitiveOptions {
 export interface TradePoints {
   entryTime: Time;
   entryPrice: number;
+  inProfit: boolean;
   closePrice?: number | null;
+  closeTime?: Time | null;
   latestTime?: Time | null;
   latestPrice?: number | null;
   stopLoss?: number | null;
@@ -42,25 +44,28 @@ class TradePaneRenderer implements IPrimitivePaneRenderer {
 
       ctx.save();
       ctx.globalAlpha = 1;
-      if (pos.yStopLoss !== undefined) {
+      if (!!pos.yStopLoss) {
         ctx.fillStyle = options?.lossColor ?? 'rgba(255, 0, 0, 0.5)';
         const height = pos.yStopLoss - pos.y;
         ctx.fillRect(pos.x, pos.y, pos.width, height);
       }
 
-      ctx.fillStyle = options?.profitColor ?? 'rgba(0, 255, 0, 0.5)';
-      const height = pos.yTakeProfit ? pos.yTakeProfit - pos.y : pos.height;
-      ctx.fillRect(pos.x, pos.y, pos.width, height);
+      if (pos.inProfit || !!pos.yTakeProfit) {
+        ctx.fillStyle = options?.profitColor ?? 'rgba(0, 255, 0, 0.5)';
+        const height = pos.yTakeProfit ? pos.yTakeProfit - pos.y : pos.height;
+        ctx.fillRect(pos.x, pos.y, pos.width, height);
+      }
 
       // Draw trade line
-      ctx.strokeStyle = options?.tradeLineColor ?? 'black';
+      ctx.strokeStyle = options?.tradeLineColor ?? 'grey';
       ctx.lineCap = 'round';
       ctx.lineWidth = options?.tradeLineWidth ?? 2;
+      ctx.setLineDash([5, 5]);
       ctx.beginPath();
       ctx.moveTo(pos.x, pos.y);
-      console.log('Drawing trade line to:', pos);
-      ctx.lineTo(pos.x + pos.width, pos.yClose ?? pos.y + pos.height);
+      ctx.lineTo(pos.closeTime ?? pos.x + pos.width, pos.yClose ?? pos.y + pos.height);
       ctx.stroke();
+      ctx.setLineDash([]);
       ctx.restore();
     });
   }
@@ -96,6 +101,7 @@ class TradePaneView implements IPrimitivePaneView {
 
     const x1 = timeScale.timeToCoordinate(points.entryTime);
     const x2 = timeScale.timeToCoordinate(lastTime);
+    const closeTime = points.closeTime ? timeScale.timeToCoordinate(points.closeTime) : null;
     const y1 = series.priceToCoordinate(points.entryPrice);
     const y2 = series.priceToCoordinate(lastClose);
     const yStopLoss = points.stopLoss ? series.priceToCoordinate(points.stopLoss) : null;
@@ -109,7 +115,17 @@ class TradePaneView implements IPrimitivePaneView {
     const width = Math.abs(x2 - x1);
     const height = y2 - y1;
 
-    return { x, y, width, height, yStopLoss, yTakeProfit, yClose };
+    return {
+      x,
+      y,
+      width,
+      closeTime,
+      height,
+      yStopLoss,
+      yTakeProfit,
+      yClose,
+      inProfit: points.inProfit,
+    };
   }
 }
 
