@@ -112,7 +112,7 @@ class TradePaneView implements IPrimitivePaneView {
 
     const x = x1;
     const y = y1;
-    const width = Math.abs(x2 - x1);
+    const width = closeTime ? Math.abs(closeTime - x1) : Math.abs(x2 - x1);
     const height = y2 - y1;
 
     return {

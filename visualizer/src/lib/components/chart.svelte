@@ -19,8 +19,26 @@
   // Guard for out-of-order async requests
   let _latestRequestId = 0;
 
+  // Track window dimensions
+  let windowWidth = $state(0);
+  let windowHeight = $state(0);
+
+  // Handle window resize
+  $effect(() => {
+    if (typeof window !== 'undefined' && chart && chartContainer) {
+      const container = chartContainer.getBoundingClientRect();
+      chart.applyOptions({
+        width: container.width,
+        height: container.height,
+      });
+    }
+  });
+
   onMount(() => {
+    const container = chartContainer.getBoundingClientRect();
     chart = LC.createChart(chartContainer, {
+      width: container.width,
+      height: container.height,
       localization: {
         dateFormat: 'yyyy-MM-dd',
         locale: 'en',
@@ -169,4 +187,6 @@
   });
 </script>
 
-<div bind:this={chartContainer} class="h-full w-full"></div>
+<svelte:window bind:innerWidth={windowWidth} bind:innerHeight={windowHeight} />
+
+<div bind:this={chartContainer} class="h-full min-h-[400px] w-full"></div>

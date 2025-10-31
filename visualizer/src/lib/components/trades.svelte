@@ -64,8 +64,8 @@
     </label>
   </div>
 
-  <div class="panels w-full flex-1 rounded-lg p-3">
-    <section id="panel-active" class="panel">
+  <div class="panels flex h-[calc(100vh-12rem)] w-full flex-col rounded-lg">
+    <section id="panel-active" class="panel h-full">
       {#if (trades.active_trades ?? []).length === 0}
         <p class="text-sm text-gray-500">No active trades.</p>
       {:else}
@@ -95,13 +95,17 @@
                   </div>
                 </div>
 
-                <div class="font-bold text-slate-900">
+                <div class="text-right font-bold text-slate-900">
                   Equity: {t.unrealised_pnl?.toFixed(2)}
                 </div>
               </div>
               <div class="flex flex-col text-xs text-gray-500">
-                <div>Entry: <span class="font-medium text-slate-700">{t.entry_price}</span></div>
-                <div>SL: <span class="font-medium text-slate-700">{t.stop_loss}</span></div>
+                <div>
+                  Entry: <span class="font-medium text-slate-700">{t.entry_price?.toFixed(5)}</span>
+                </div>
+                <div>
+                  SL: <span class="font-medium text-slate-700">{t.stop_loss?.toFixed(5)}</span>
+                </div>
                 <div>
                   Opened: <span class="font-medium text-slate-700"
                     >{timeZoneCorrectionString(t.entry_datetime)}</span
@@ -114,11 +118,11 @@
       {/if}
     </section>
 
-    <section id="panel-closed" class="panel">
+    <section id="panel-closed" class="panel h-full">
       {#if (trades.closed_trades ?? []).length === 0}
         <p class="text-sm text-gray-500">No closed trades.</p>
       {:else}
-        <div class="list flex flex-col gap-3 overflow-y-auto" role="list">
+        <div class="list flex h-full flex-col gap-3 overflow-y-auto" role="list">
           {#each trades.closed_trades ?? [] as t (t.entry_id)}
             <button
               type="button"
@@ -143,16 +147,22 @@
                     {t.type}
                   </div>
 
-                  <div class="min-w-[140px] text-right">
-                    <div class="font-bold text-slate-900">
-                      P&L: {t.profit}
-                    </div>
+                  <div class="text-right font-bold text-slate-900">
+                    P&L: {t.profit.toFixed(2)}
                   </div>
                 </div>
 
                 <div class="row flex justify-between text-xs text-gray-500">
-                  <div>Entry: <span class="font-medium text-slate-700">{t.entry_price}</span></div>
-                  <div>Exit: <span class="font-medium text-slate-700">{t.closed_price}</span></div>
+                  <div>
+                    Entry: <span class="font-medium text-slate-700"
+                      >{t.entry_price?.toFixed(5)}</span
+                    >
+                  </div>
+                  <div>
+                    Exit: <span class="font-medium text-slate-700"
+                      >{t.closed_price?.toFixed(5)}</span
+                    >
+                  </div>
                 </div>
 
                 <div class="flex flex-col text-xs text-gray-500">
