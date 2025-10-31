@@ -153,6 +153,37 @@ def get_payloads():
     
     return jsonify(data)
 
+@app.route('/indicators', methods=['GET'])
+def get_indicators():
+    """
+    Fetches indicators data based on query parameters.
+    Expected params: ticker, interval, run_name.
+    """
+    ticker = request.args.get('ticker')
+    interval = request.args.get('interval')
+    run_name = request.args.get('run_name')
+    key = request.args.get('key')  # Optional key parameter
+
+    if not all([ticker, interval, run_name]):
+        return jsonify({"error": "Missing required parameters: ticker, interval, run_name"}), 400
+
+    filepath = _get_result_filepath(ticker, interval, run_name, 'indicators.json')
+    data = _load_json_file(filepath)
+
+    if data is None:
+        return jsonify({"error": "Indicators data not found for the specified run."}), 404
+
+    if key:
+        # Make key lookup case-insensitive
+        key_lower = key.lower()
+        matched_key = next((k for k in data if k.lower() == key_lower), None)
+        if matched_key:
+            return jsonify({matched_key: data[matched_key]})
+        else:
+            return jsonify({"error": f"Indicator key '{key}' not found."}), 404
+
+    return jsonify(data)
+
 # --- Run the Flask app ---
 if __name__ == '__main__':
     # Ensure the results directory exists for the server to start

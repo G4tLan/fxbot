@@ -15,7 +15,7 @@ def setup_logging(log_file='backtest.log'):
         format='%(asctime)s - %(levelname)s - %(message)s',
         handlers=[
             logging.FileHandler(log_file, mode='a'),
-            logging.StreamHandler()
+            # logging.StreamHandler()
         ]
     )
 
@@ -37,6 +37,26 @@ def json_serial(obj):
     raise TypeError (f"Type {type(obj)} not serializable")
 
 
+def make_serializable(val):
+    """Convert pandas/numpy types and datetimes to plain Python types for JSON."""
+    # datetimes / timestamps
+    if isinstance(val, (datetime, pd.Timestamp)):
+        return val.isoformat()
+    # pandas/numpy NA
+    try:
+        if pd.isna(val):
+            return None
+    except Exception:
+        pass
+    # numpy / pandas scalar -> Python scalar
+    try:
+        if hasattr(val, 'item'):
+            return val.item()
+    except Exception:
+        pass
+    return val
+
+
 def run_backtest(options=None):
     """
     Iterate through a date range, fetch data for each day,
@@ -56,6 +76,9 @@ def run_backtest(options=None):
         end_date = datetime.strptime(options['end_date'], "%Y-%m-%d").date()
         results_file_dir = options.get('results_file_dir')
 
+        # Accumulator for all indicators across all days
+        all_indicators_data = {}
+
         current_date = start_date
         while current_date <= end_date:
             logging.info(f"Processing data for {options['ticker']} on {current_date.isoformat()}")
@@ -72,6 +95,26 @@ def run_backtest(options=None):
             # This is valid because the indicators (SMA, EMA, ADX) are causal and do not "repaint".
             # The result at each row is identical to what it would be in a live, incremental scenario.
             all_computed = compute_data(data, options=options)
+
+            # Accumulate indicators data for this day
+            try:
+                if not all_computed.empty:
+                    # Build indicators data with datetime for each value
+                    for col in all_computed.columns:
+                        # Initialize the list for this indicator if not exists
+                        if col not in all_indicators_data:
+                            all_indicators_data[col] = []
+                        # Append all values for this day to the accumulator
+                        all_indicators_data[col].extend([
+                            {
+                                "datetime": make_serializable(all_computed.index[i]),
+                                "value": make_serializable(all_computed.iloc[i][col])
+                            }
+                            for i in range(len(all_computed))
+                        ])
+                    logging.info(f"Accumulated indicators for {current_date.isoformat()}")
+            except Exception as e:
+                logging.error(f"Failed to accumulate indicators for {current_date.isoformat()}: {e}", exc_info=True)
 
             # 2. Iterate through each candle of the day to generate a payload,
             #    simulating how the strategy would have performed tick-by-tick.
@@ -151,6 +194,13 @@ def run_backtest(options=None):
                 with open(equity_filepath, 'w') as f:
                     json.dump(trade_engine.get_equity_history(), f, indent=4, default=json_serial)
                 logging.info(f"Successfully saved equity history to {equity_filepath}")
+
+                # Save Combined Indicators Data
+                if 'all_indicators_data' in locals() and all_indicators_data:
+                    indicators_filepath = os.path.join(results_file_dir, 'indicators.json')
+                    with open(indicators_filepath, 'w') as f:
+                        json.dump(all_indicators_data, f, indent=4, default=json_serial)
+                    logging.info(f"Successfully saved combined indicators to {indicators_filepath}")
                 
             except Exception as e:
                 logging.error(f"Could not save final backtest results: {e}", exc_info=True)
@@ -159,8 +209,8 @@ def run_backtest(options=None):
 if __name__ == "__main__":
     # Base options for the backtest
     options = {
-        "start_date": "2025-10-20",
-        "end_date": "2025-10-20",
+        "start_date": "2025-10-31",
+        "end_date": "2025-10-31",
         "interval": "5m",
         "ticker": "EURUSD=X",
         "save_location_base": "test_results", # Root directory for all results
