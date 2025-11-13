@@ -5,7 +5,7 @@
 # starts the Python backend server, and then starts the Node.js frontend server.
 
 # --- Configuration ---
-PYTHON_VENV_PATH=".venv" # Relative path to the Python virtual environment directory
+PYTHON_VENV_PATH="engine/.venv" # Relative path to the Python virtual environment directory
 PYTHON_SERVER_SCRIPT="engine/app_server.py"
 PYTHON_LOG_FILE="python_server.log"
 FRONTEND_DIR="visualizer"

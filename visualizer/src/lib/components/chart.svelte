@@ -8,6 +8,7 @@
     selectedRun,
     selectedTicker,
   } from '$lib/stores';
+  import { indicatorsStore, type IndicatorsStore } from '$lib/stores/indicators';
   import { timeZoneCorrection } from '$lib/utils';
   import * as LC from 'lightweight-charts';
   import { onMount } from 'svelte';
@@ -16,10 +17,12 @@
   let chart: any = null;
   let candleSeries: any = null;
   let tradePrimitive: TradePrimitive;
-  // Guard for out-of-order async requests
-  let _latestRequestId = 0;
 
-  // Track window dimensions
+  // Reactive indicators state
+  let indicatorsState = $state<IndicatorsStore>({ data: null, loading: false, error: null });
+
+  // Guard for out-of-order async requests
+  let _latestRequestId = 0; // Track window dimensions
   let windowWidth = $state(0);
   let windowHeight = $state(0);
 
@@ -185,8 +188,53 @@
       tradePrimitive.setPoints(null);
     }
   });
+
+  $effect(() => {
+    const unsubscribe = indicatorsStore.subscribe((value) => {
+      indicatorsState = value;
+    });
+    if (candleSeries && $selectedTicker && $selectedInterval && $selectedRun) {
+      indicatorsStore.fetchIndicators($selectedTicker, $selectedInterval, $selectedRun);
+    }
+
+    return unsubscribe;
+  });
 </script>
 
 <svelte:window bind:innerWidth={windowWidth} bind:innerHeight={windowHeight} />
 
-<div bind:this={chartContainer} class="h-full min-h-[400px] w-full"></div>
+<div class="relative h-full min-h-[400px] w-full">
+  <div bind:this={chartContainer} class="h-full w-full"></div>
+
+  <!-- Indicators Status Overlay -->
+  {#snippet indicatorsStatus()}
+    <div
+      class="absolute top-2 right-2 rounded-lg bg-white/90 p-2 text-xs shadow-sm backdrop-blur-sm"
+    >
+      <div class="flex items-center gap-2">
+        {#if indicatorsState.loading}
+          <div class="h-2 w-2 animate-pulse rounded-full bg-blue-500"></div>
+          <span>Loading indicators...</span>
+        {:else if indicatorsState.error}
+          <div class="h-2 w-2 rounded-full bg-red-500"></div>
+          <span class="text-red-600">Error: {indicatorsState.error}</span>
+        {:else if indicatorsState.data}
+          <div class="h-2 w-2 rounded-full bg-green-500"></div>
+          <span>{Object.keys(indicatorsState.data).length} indicators loaded</span>
+        {:else}
+          <div class="h-2 w-2 rounded-full bg-gray-400"></div>
+          <span>No indicators</span>
+        {/if}
+      </div>
+
+      <!-- Show available indicators when loaded -->
+      {#if indicatorsState.data && Object.keys(indicatorsState.data).length > 0}
+        <div class="mt-1 text-xs text-gray-600">
+          {Object.keys(indicatorsState.data).join(', ')}
+        </div>
+      {/if}
+    </div>
+  {/snippet}
+
+  {@render indicatorsStatus()}
+</div>
