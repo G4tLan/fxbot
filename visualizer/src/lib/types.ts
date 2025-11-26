@@ -136,7 +136,12 @@ export type FiltersResponse = TickerFilter[];
 
 export interface IndicatorEntry {
   datetime: string;
-  value: number;
+  value: number | boolean;
+}
+
+export interface TimeRange {
+  startDate: string;
+  endDate: string;
 }
 
 export type IndicatorsResponse = Record<string, IndicatorEntry[]>;

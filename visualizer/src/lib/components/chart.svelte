@@ -191,6 +191,7 @@
 
   $effect(() => {
     const unsubscribe = indicatorsStore.subscribe((value) => {
+      console.log('Consolidation Ranges:', value.processedData);
       indicatorsState = value;
     });
     if (candleSeries && $selectedTicker && $selectedInterval && $selectedRun) {

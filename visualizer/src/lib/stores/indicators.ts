@@ -1,11 +1,12 @@
 import { selectedInterval, selectedRun, selectedTicker } from '$lib/stores';
 import { derived, writable } from 'svelte/store';
 import { tradeEngineService } from '../api/trade-engine.service';
-import type { IndicatorsResponse } from '../types';
+import type { IndicatorEntry, IndicatorsResponse, TimeRange } from '../types';
 
 // Indicators store with loading state and error handling
 export interface IndicatorsStore {
   data: IndicatorsResponse | null;
+  processedData?: Record<string, any>;
   loading: boolean;
   error: string | null;
 }
@@ -49,6 +50,7 @@ function createIndicatorsStore() {
         if (fetchId === currentFetchId) {
           set({
             data: indicators,
+            processedData: { Consolidation: extractTimeRanges(indicators['Consolidation']) },
             loading: false,
             error: null,
           });
@@ -133,6 +135,52 @@ export const getIndicator = (indicatorKey: string) => {
     );
 
     return key ? $indicators.data[key] : null;
+  });
+};
+
+/**
+ * Helper function to extract time ranges where an indicator value is true (boolean)
+ * or non-zero (number). It groups consecutive true/non-zero values into ranges.
+ */
+export function extractTimeRanges(indicatorData: IndicatorEntry[]): TimeRange[] {
+  const ranges: TimeRange[] = [];
+  let startDate: string | null = null;
+
+  for (let i = 0; i < indicatorData.length; i++) {
+    const current = indicatorData[i];
+    // Check if value is "true" (boolean true or non-zero number)
+    const isTrue =
+      current.value === true || (typeof current.value === 'number' && current.value !== 0);
+
+    if (isTrue) {
+      if (startDate === null) {
+        startDate = current.datetime;
+      }
+    } else {
+      if (startDate !== null) {
+        // End of a range. The previous point was the last "true" point.
+        ranges.push({ startDate, endDate: indicatorData[i - 1].datetime });
+        startDate = null;
+      }
+    }
+  }
+
+  // Handle case where the range extends to the end of the data
+  if (startDate !== null) {
+    ranges.push({ startDate, endDate: indicatorData[indicatorData.length - 1].datetime });
+  }
+
+  return ranges;
+}
+
+/**
+ * Helper function to get time ranges for a specific boolean/flag indicator
+ * @param indicatorKey The key of the indicator to retrieve
+ */
+export const getIndicatorTimeRanges = (indicatorKey: string) => {
+  return derived(getIndicator(indicatorKey), ($indicatorData) => {
+    if (!$indicatorData) return [];
+    return extractTimeRanges($indicatorData);
   });
 };
 
