@@ -90,7 +90,6 @@ class TradePaneView implements IPrimitivePaneView {
 
   _calculatePlacement(): Placement | null {
     if (!this.source._chart || !this.source._points || !this.source._series) return null;
-
     const points = this.source._points;
     const timeScale = this.source._chart.timeScale();
     const data = this.source._series.data();

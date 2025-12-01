@@ -1,5 +1,6 @@
 <script lang="ts">
   import { tradeEngineService } from '$lib/api/trade-engine.service';
+  import { ConsolidationPrimitive } from '$lib/indicators/consolidation-primitive';
   import { TradePrimitive } from '$lib/indicators/trade-primitive';
   import {
     selectedActiveTrade,
@@ -17,9 +18,11 @@
   let chart: any = null;
   let candleSeries: any = null;
   let tradePrimitive: TradePrimitive;
+  let consolidationPrimitive: ConsolidationPrimitive;
 
   // Reactive indicators state
   let indicatorsState = $state<IndicatorsStore>({ data: null, loading: false, error: null });
+  let candleData = $state<any[]>([]);
 
   // Guard for out-of-order async requests
   let _latestRequestId = 0; // Track window dimensions
@@ -118,8 +121,12 @@
 
     candleSeries = chart.addSeries(LC.CandlestickSeries, seriesOptions);
     tradePrimitive = new TradePrimitive(candleSeries);
+    consolidationPrimitive = new ConsolidationPrimitive(candleSeries, {
+      color: 'rgba(255, 165, 0, 0.3)', // Orange-ish for consolidation
+    });
 
     candleSeries.attachPrimitive(tradePrimitive);
+    candleSeries.attachPrimitive(consolidationPrimitive);
 
     return () => {
       if (chart) {
@@ -156,6 +163,7 @@
             };
           });
 
+          candleData = mapped;
           candleSeries.setData(mapped);
           chart?.timeScale()?.fitContent();
         } catch (err) {
@@ -191,7 +199,12 @@
 
   $effect(() => {
     const unsubscribe = indicatorsStore.subscribe((value) => {
-      console.log('Consolidation Ranges:', value.processedData);
+      if (value.processedData && value.processedData['Consolidation']) {
+        console.log('Consolidation Ranges:', value.processedData['Consolidation']);
+        if (consolidationPrimitive && candleData.length > 0) {
+          consolidationPrimitive.setData(value.processedData['Consolidation'], candleData);
+        }
+      }
       indicatorsState = value;
     });
     if (candleSeries && $selectedTicker && $selectedInterval && $selectedRun) {
