@@ -10,13 +10,15 @@
     selectedTicker,
   } from '$lib/stores';
   import { indicatorsStore, type IndicatorsStore } from '$lib/stores/indicators';
-  import { timeZoneCorrection } from '$lib/utils';
+  import { INTERVAL_SEC, timeZoneCorrection } from '$lib/utils';
   import * as LC from 'lightweight-charts';
   import { onMount } from 'svelte';
 
   let chartContainer: HTMLElement;
-  let chart: any = null;
-  let candleSeries: any = null;
+  let chart: LC.IChartApi | null = null;
+  let candleSeries: LC.ISeriesApi<'Candlestick'> | null = null;
+  let emaLongSeries: LC.ISeriesApi<'Line'> | null = null;
+  let emaShortSeries: LC.ISeriesApi<'Line'> | null = null;
   let tradePrimitive: TradePrimitive;
   let consolidationPrimitive: ConsolidationPrimitive;
 
@@ -120,9 +122,23 @@
     };
 
     candleSeries = chart.addSeries(LC.CandlestickSeries, seriesOptions);
+    emaLongSeries = chart.addSeries(LC.LineSeries, {
+      color: 'blue',
+      lineWidth: 1,
+      crosshairMarkerVisible: false,
+      lastValueVisible: false,
+      priceLineVisible: false,
+    });
+    emaShortSeries = chart.addSeries(LC.LineSeries, {
+      color: 'red',
+      lineWidth: 1,
+      crosshairMarkerVisible: false,
+      lastValueVisible: false,
+      priceLineVisible: false,
+    });
     tradePrimitive = new TradePrimitive(candleSeries);
     consolidationPrimitive = new ConsolidationPrimitive(candleSeries, {
-      color: 'rgba(255, 165, 0, 0.3)', // Orange-ish for consolidation
+      color: 'rgba(255, 165, 0, 0.3)',
     });
 
     candleSeries.attachPrimitive(tradePrimitive);
@@ -150,8 +166,6 @@
           );
           if (requestId !== _latestRequestId) return; // stale
 
-          // round timestamps to a 5-minute grid (300s) so the time scale aligns to 5m intervals
-          const INTERVAL_SEC = 5 * 60;
           const mapped = data.map((d) => {
             return {
               time: (Math.floor(timeZoneCorrection(d.datetime) / INTERVAL_SEC) *
@@ -199,11 +213,17 @@
 
   $effect(() => {
     const unsubscribe = indicatorsStore.subscribe((value) => {
-      if (value.processedData && value.processedData['Consolidation']) {
-        console.log('Consolidation Ranges:', value.processedData['Consolidation']);
+      if (value.processedData && value.processedData['consolidation']) {
         if (consolidationPrimitive && candleData.length > 0) {
-          consolidationPrimitive.setData(value.processedData['Consolidation'], candleData);
+          consolidationPrimitive.setData(value.processedData['consolidation'], candleData);
         }
+      }
+
+      if (emaLongSeries && value.processedData && value.processedData['ema_long']) {
+        emaLongSeries.setData(value.processedData['ema_long']);
+      }
+      if (emaShortSeries && value.processedData && value.processedData['ema_short']) {
+        emaShortSeries.setData(value.processedData['ema_short']);
       }
       indicatorsState = value;
     });

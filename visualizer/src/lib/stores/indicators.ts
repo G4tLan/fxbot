@@ -1,4 +1,6 @@
 import { selectedInterval, selectedRun, selectedTicker } from '$lib/stores';
+import { INTERVAL_SEC, timeZoneCorrection } from '$lib/utils';
+import * as LC from 'lightweight-charts';
 import { derived, writable } from 'svelte/store';
 import { tradeEngineService } from '../api/trade-engine.service';
 import type { IndicatorEntry, IndicatorsResponse, TimeRange } from '../types';
@@ -25,6 +27,11 @@ function createIndicatorsStore() {
   let currentFetchPromise: Promise<void> | null = null;
   let currentFetchId = 0;
 
+  const convertTimestampToLC = (datetime: string): LC.UTCTimestamp => {
+    return (Math.floor(timeZoneCorrection(datetime) / INTERVAL_SEC) *
+      INTERVAL_SEC) as LC.UTCTimestamp;
+  };
+
   const fetchIndicators = async (
     ticker: string,
     interval: string,
@@ -50,7 +57,21 @@ function createIndicatorsStore() {
         if (fetchId === currentFetchId) {
           set({
             data: indicators,
-            processedData: { Consolidation: extractTimeRanges(indicators['Consolidation']) },
+            processedData: {
+              consolidation: extractTimeRanges(indicators['Consolidation']),
+              ema_short: indicators['EMA_short']
+                ?.filter((e) => e.value)
+                .map((e) => ({
+                  time: convertTimestampToLC(e.datetime),
+                  value: e.value,
+                })),
+              ema_long: indicators['EMA_long']
+                ?.filter((e) => e.value)
+                .map((e) => ({
+                  time: convertTimestampToLC(e.datetime),
+                  value: e.value,
+                })),
+            },
             loading: false,
             error: null,
           });

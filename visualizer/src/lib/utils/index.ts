@@ -1,5 +1,7 @@
 import { toZonedTime } from 'date-fns-tz';
 
+// round timestamps to a 5-minute grid (300s) so the time scale aligns to 5m intervals
+export const INTERVAL_SEC = 5 * 60;
 export function timeZoneCorrection(
   stringDate: string,
   timezone: string = Intl.DateTimeFormat().resolvedOptions().timeZone
