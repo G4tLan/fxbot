@@ -12,3 +12,4 @@ test_results/
 .env.*
 .env
 db.sqlite3
+db.*

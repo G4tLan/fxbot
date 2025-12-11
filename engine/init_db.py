@@ -18,6 +18,8 @@ def init_db():
         Ticker, Orderbook, DailyBalance, MonteCarloSession, OptimizationSession, NotificationApiKeys,
         User, Task
     ])
+    if not db.is_closed():
+        db.close()
     print("Database initialized.")
 
 if __name__ == "__main__":

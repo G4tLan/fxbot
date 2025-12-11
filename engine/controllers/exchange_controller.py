@@ -78,5 +78,7 @@ async def get_supported_symbols(request: ExchangeSupportedSymbolsRequestJson, cu
         return {"symbols": ["BTC-USDT", "ETH-USDT", "SOL-USDT"]}
     elif request.exchange_name.lower() == "sandbox":
         return {"symbols": ["BTC-USDT", "ETH-USDT"]}
+    elif request.exchange_name.lower() == "yahoo":
+        return {"symbols": ["EURUSD=X", "GBPUSD=X", "JPY=X", "AAPL", "MSFT", "SPY"]}
     else:
         return {"symbols": []}

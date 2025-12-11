@@ -5,23 +5,27 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 from engine.exchanges.binance import Binance
+from engine.exchanges.yahoo import Yahoo
 from engine.models.core import Candle
 from engine.config import db
 import time
 
-def run_import(exchange_name: str, symbol: str, start_date: str):
+def run_import(exchange_name: str, symbol: str, start_date: str, timeframe: str = '1h'):
     """
     Import candles from an exchange.
     
     :param exchange_name: Name of the exchange (e.g., 'Binance')
     :param symbol: Symbol to fetch (e.g., 'BTC-USDT')
     :param start_date: Start date in 'YYYY-MM-DD' format
+    :param timeframe: Timeframe to fetch (e.g., '1m', '1h', '1d')
     """
-    print(f"Starting import for {symbol} from {exchange_name} since {start_date}...")
+    print(f"Starting import for {symbol} from {exchange_name} since {start_date} ({timeframe})...")
     
     # 1. Resolve Driver
     if exchange_name.lower() == 'binance':
         driver = Binance()
+    elif exchange_name.lower() == 'yahoo':
+        driver = Yahoo()
     else:
         raise ValueError(f"Exchange {exchange_name} not supported.")
 
@@ -31,9 +35,7 @@ def run_import(exchange_name: str, symbol: str, start_date: str):
     except ValueError:
         raise ValueError("Invalid date format. Use YYYY-MM-DD.")
 
-    # 3. Fetch Data (using 1h timeframe for simplicity in this phase)
-    # In a real app, timeframe would be a parameter
-    timeframe = '1h' 
+    # 3. Fetch Data
     candles_data = driver.fetch_ohlcv(symbol, timeframe, start_ts)
     
     print(f"Fetched {len(candles_data)} candles.")

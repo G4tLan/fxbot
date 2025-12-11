@@ -4,8 +4,9 @@ import os
 # Add parent dir to path so 'engine' package can be resolved
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from engine.config import db
 from engine.controllers import (
     import_controller, 
     backtest_controller, 
@@ -19,6 +20,18 @@ from engine.controllers import (
 from engine.init_db import init_db
 
 app = FastAPI(title="FXBot Engine API", version="1.0.0")
+
+# Database Connection Management Middleware
+@app.middleware("http")
+async def db_session_middleware(request: Request, call_next):
+    if db.is_closed():
+        db.connect()
+    try:
+        response = await call_next(request)
+    finally:
+        if not db.is_closed():
+            db.close()
+    return response
 
 # CORS
 app.add_middleware(

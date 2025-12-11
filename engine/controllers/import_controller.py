@@ -14,18 +14,19 @@ class ImportRequest(BaseModel):
     exchange: str
     symbol: str
     start_date: str
+    timeframe: Optional[str] = '1h'
 
 class ImportResponse(BaseModel):
     message: str
     status: str
     task_id: str
 
-def import_task(task_id: str, exchange: str, symbol: str, start_date: str):
+def import_task(task_id: str, exchange: str, symbol: str, start_date: str, timeframe: str):
     try:
         # Update status to processing
         Task.update(status="processing", updated_at=int(time.time())).where(Task.id == task_id).execute()
         
-        run_import(exchange, symbol, start_date)
+        run_import(exchange, symbol, start_date, timeframe)
         
         # Update status to completed
         Task.update(
@@ -59,7 +60,7 @@ async def trigger_import(request: ImportRequest, background_tasks: BackgroundTas
         updated_at=int(time.time())
     )
     
-    background_tasks.add_task(import_task, task_id, request.exchange, request.symbol, request.start_date)
+    background_tasks.add_task(import_task, task_id, request.exchange, request.symbol, request.start_date, request.timeframe)
     
     return {
         "message": f"Import started for {request.symbol} from {request.exchange}", 
