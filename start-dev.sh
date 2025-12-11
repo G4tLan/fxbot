@@ -6,7 +6,7 @@
 
 # --- Configuration ---
 PYTHON_VENV_PATH="engine/.venv" # Relative path to the Python virtual environment directory
-PYTHON_SERVER_SCRIPT="engine/app_server.py"
+# PYTHON_SERVER_SCRIPT="engine/app_server.py" # Deprecated, using uvicorn engine.main:app
 PYTHON_LOG_FILE="python_server.log"
 FRONTEND_DIR="visualizer"
 
@@ -40,8 +40,8 @@ source "$PYTHON_VENV_PATH/bin/activate"
 echo "Python virtual environment activated."
 
 # 2. Start the Python server in the background.
-echo "Starting Python server, logging to '$PYTHON_LOG_FILE'..."
-eval "$PYTHON_VENV_PATH/bin/python" "$PYTHON_SERVER_SCRIPT" > "$PYTHON_LOG_FILE" 2>&1 &
+echo "Starting Python server (Uvicorn), logging to '$PYTHON_LOG_FILE'..."
+eval "$PYTHON_VENV_PATH/bin/uvicorn" engine.main:app --reload --host 0.0.0.0 --port 8000 > "$PYTHON_LOG_FILE" 2>&1 &
 PYTHON_PID=$!
 
 sleep 2 # Give the server a moment to start.
