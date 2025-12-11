@@ -87,8 +87,17 @@ def run_backtest(exchange_name: str, symbol: str, timeframe: str, start_date: st
     # 4. Results
     strategy.terminate()
     final_balance = store.balance['Sandbox']
+    pnl = ((final_balance - 10000) / 10000) * 100
+    
     print(f"Backtest Complete.")
     print(f"Initial Balance: 10000")
     print(f"Final Balance: {final_balance:.2f}")
-    print(f"PnL: {((final_balance - 10000) / 10000) * 100:.2f}%")
+    print(f"PnL: {pnl:.2f}%")
+    
+    return {
+        "initial_balance": 10000,
+        "final_balance": float(final_balance),
+        "pnl_percent": float(pnl),
+        "trades": [] # We could populate this from store.trades
+    }
 
