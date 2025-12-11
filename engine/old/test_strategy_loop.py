@@ -2,10 +2,10 @@ import json
 import os
 import logging
 from datetime import datetime, timedelta
-from consolidation_breakout import fetch_data, compute_data, generate_payload
+from old.consolidation_breakout import fetch_data, compute_data, generate_payload
 import pandas as pd
-from decision_engine import DecisionEngine
-from decision_strategies import ConsolidationBreakoutStrategy
+from old.decision_engine import DecisionEngine
+from old.decision_strategies import ConsolidationBreakoutStrategy
 from trade_engine import TradeEngine
 
 def setup_logging(log_file='backtest.log'):

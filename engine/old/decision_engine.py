@@ -1,5 +1,5 @@
 import logging
-from decision_strategies import BaseDecisionStrategy
+from old.decision_strategies import BaseDecisionStrategy
 
 class DecisionEngine:
     """

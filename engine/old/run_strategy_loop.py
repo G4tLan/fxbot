@@ -3,7 +3,7 @@ import requests
 import json
 import logging
 from datetime import datetime
-from consolidation_breakout import fetch_data, compute_data, generate_payload
+from old.consolidation_breakout import fetch_data, compute_data, generate_payload
 
 def setup_logging(log_file='strategy_loop.log'):
     """Sets up logging to file and console."""
