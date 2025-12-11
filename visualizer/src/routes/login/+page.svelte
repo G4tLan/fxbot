@@ -1,6 +1,7 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { api } from '$lib/api/client';
+  import type { Token } from '$lib/api/types-helper';
   import { auth } from '$lib/stores/auth.store';
   import { toastStore } from '$lib/stores/toast.store';
 
@@ -17,10 +18,7 @@
       formData.append('username', username);
       formData.append('password', password);
 
-      const response = await api.post<{ access_token: string; token_type: string }>(
-        '/api/v1/auth/login',
-        formData
-      );
+      const response = await api.post<Token>('/api/v1/auth/login', formData);
 
       auth.login(response.access_token, { username });
       toastStore.success('Logged in successfully');

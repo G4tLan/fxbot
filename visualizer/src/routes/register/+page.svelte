@@ -1,7 +1,7 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { api } from '$lib/api/client';
-  import type { RegisterRequest } from '$lib/api/types-helper';
+  import type { MessageResponse, RegisterRequest } from '$lib/api/types-helper';
   import { toastStore } from '$lib/stores/toast.store';
 
   let username = $state('');
@@ -20,7 +20,7 @@
         email: email || undefined,
       };
 
-      await api.post('/api/v1/auth/register', payload);
+      await api.post<MessageResponse>('/api/v1/auth/register', payload);
 
       toastStore.success('Registration successful! Please login.');
       goto('/login');

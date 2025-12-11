@@ -1,10 +1,10 @@
-import { exchangeService, type ExchangeApiKey } from '$lib/api/exchange.service';
-import type { StoreExchangeApiKeyRequest } from '$lib/api/types-helper';
+import { exchangeService } from '$lib/api/exchange.service';
+import type { ExchangeApiKeyResponse, StoreExchangeApiKeyRequest } from '$lib/api/types-helper';
 import { writable } from 'svelte/store';
 import { toastStore } from './toast.store';
 
 interface ExchangeState {
-  apiKeys: ExchangeApiKey[];
+  apiKeys: ExchangeApiKeyResponse[];
   loading: boolean;
   supportedSymbols: Record<string, string[]>; // Cache by exchange name
 }
@@ -68,15 +68,15 @@ function createExchangeStore() {
       // Check cache first (optional, but good for performance)
       // For now, we'll just fetch fresh
       try {
-        const symbols = await exchangeService.getSupportedSymbols(exchangeName);
+        const response = await exchangeService.getSupportedSymbols(exchangeName);
         update((s) => ({
           ...s,
           supportedSymbols: {
             ...s.supportedSymbols,
-            [exchangeName]: symbols,
+            [exchangeName]: response.symbols,
           },
         }));
-        return symbols;
+        return response.symbols;
       } catch (error) {
         console.error(`Failed to load symbols for ${exchangeName}`, error);
         return [];

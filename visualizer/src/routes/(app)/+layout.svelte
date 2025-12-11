@@ -37,6 +37,12 @@
               Dashboard
             </a>
             <a
+              href="/import"
+              class={$page.url.pathname.startsWith('/import') ? 'text-white' : 'hover:text-white'}
+            >
+              Import
+            </a>
+            <a
               href="/settings/exchanges"
               class={$page.url.pathname.startsWith('/settings') ? 'text-white' : 'hover:text-white'}
             >

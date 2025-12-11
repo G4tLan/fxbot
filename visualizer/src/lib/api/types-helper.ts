@@ -19,3 +19,13 @@ export type ExchangeSupportedSymbolsRequest =
 // Common Responses / Errors
 export type HTTPValidationError = components['schemas']['HTTPValidationError'];
 export type ValidationError = components['schemas']['ValidationError'];
+
+export type Task = components['schemas']['TaskResponse'];
+export type ImportResponse = components['schemas']['ImportResponse'];
+export type BacktestResponse = components['schemas']['BacktestResponse'];
+export type ConfigUpdateResponse = components['schemas']['ConfigUpdateResponse'];
+export type ExchangeApiKeyResponse = components['schemas']['ExchangeApiKeyResponse'];
+export type MessageResponse = components['schemas']['MessageResponse'];
+export type StatusResponse = components['schemas']['StatusResponse'];
+export type SupportedSymbolsResponse = components['schemas']['SupportedSymbolsResponse'];
+export type TradeTokenResponse = components['schemas']['TradeTokenResponse'];
