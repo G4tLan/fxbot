@@ -98,6 +98,13 @@ class DailyBalance(BaseModel):
     asset = CharField()
     balance = DecimalField(max_digits=20, decimal_places=8)
 
+class User(BaseModel):
+    username = CharField(unique=True)
+    password_hash = CharField()
+    email = CharField(null=True)
+    created_at = BigIntegerField()
+
+
 class MonteCarloSession(BaseModel):
     id = CharField(primary_key=True)
     status = CharField()

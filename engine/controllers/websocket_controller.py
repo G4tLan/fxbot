@@ -1,5 +1,8 @@
-from fastapi import APIRouter, WebSocket, WebSocketDisconnect
+from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Query, status
 from typing import List
+from jose import jwt, JWTError
+from engine.controllers.auth_controller import SECRET_KEY, ALGORITHM
+from engine.models.core import User
 
 router = APIRouter()
 
@@ -20,8 +23,25 @@ class ConnectionManager:
 
 manager = ConnectionManager()
 
+async def get_user_from_token(token: str):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        username: str = payload.get("sub")
+        if username is None:
+            return None
+    except JWTError:
+        return None
+    
+    user = User.get_or_none(User.username == username)
+    return user
+
 @router.websocket("/ws")
-async def websocket_endpoint(websocket: WebSocket):
+async def websocket_endpoint(websocket: WebSocket, token: str = Query(...)):
+    user = await get_user_from_token(token)
+    if not user:
+        await websocket.close(code=status.WS_1008_POLICY_VIOLATION)
+        return
+
     await manager.connect(websocket)
     try:
         while True:

@@ -1,7 +1,9 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
 from engine.modes.backtest_mode import run_backtest
 from engine.strategies.simple_strategy import SimpleStrategy
+from engine.controllers.auth_controller import get_current_user
+from engine.models.core import User
 
 router = APIRouter()
 
@@ -18,7 +20,7 @@ STRATEGIES = {
 }
 
 @router.post("/backtest")
-async def trigger_backtest(request: BacktestRequest):
+async def trigger_backtest(request: BacktestRequest, current_user: User = Depends(get_current_user)):
     """
     Run a backtest synchronously and return results.
     """

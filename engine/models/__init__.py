@@ -12,6 +12,7 @@ from engine.models.core import (
     DailyBalance,
     MonteCarloSession,
     OptimizationSession,
-    NotificationApiKeys
+    NotificationApiKeys,
+    User
 )
 from engine.models.base import BaseModel

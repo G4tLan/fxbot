@@ -7,14 +7,16 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from engine.config import db
 from engine.models import (
     Candle, ClosedTrade, Order, Trade, BacktestSession, Log, Option, ExchangeApiKeys,
-    Ticker, Orderbook, DailyBalance, MonteCarloSession, OptimizationSession, NotificationApiKeys
+    Ticker, Orderbook, DailyBalance, MonteCarloSession, OptimizationSession, NotificationApiKeys,
+    User
 )
 
 def init_db():
-    db.connect()
+    db.connect(reuse_if_open=True)
     db.create_tables([
         Candle, ClosedTrade, Order, Trade, BacktestSession, Log, Option, ExchangeApiKeys,
-        Ticker, Orderbook, DailyBalance, MonteCarloSession, OptimizationSession, NotificationApiKeys
+        Ticker, Orderbook, DailyBalance, MonteCarloSession, OptimizationSession, NotificationApiKeys,
+        User
     ])
     print("Database initialized.")
 

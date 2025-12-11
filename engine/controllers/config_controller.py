@@ -1,7 +1,9 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
 from typing import Dict, Any
 from engine.config import config
+from engine.controllers.auth_controller import get_current_user
+from engine.models.core import User
 
 router = APIRouter()
 
@@ -9,11 +11,11 @@ class ConfigRequestJson(BaseModel):
     updates: Dict[str, Any]
 
 @router.post("/config/get")
-async def get_config():
+async def get_config(current_user: User = Depends(get_current_user)):
     return config
 
 @router.post("/config/update")
-async def update_config(request: ConfigRequestJson):
+async def update_config(request: ConfigRequestJson, current_user: User = Depends(get_current_user)):
     try:
         # Deep update or simple top-level update?
         # For simplicity, we'll do a top-level update for now

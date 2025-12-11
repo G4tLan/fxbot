@@ -1,6 +1,8 @@
-from fastapi import APIRouter, BackgroundTasks, HTTPException
+from fastapi import APIRouter, BackgroundTasks, HTTPException, Depends
 from pydantic import BaseModel
 from engine.modes.import_candles_mode import run_import
+from engine.controllers.auth_controller import get_current_user
+from engine.models.core import User
 
 router = APIRouter()
 
@@ -16,7 +18,7 @@ def import_task(exchange: str, symbol: str, start_date: str):
         print(f"Import failed: {e}")
 
 @router.post("/import")
-async def trigger_import(request: ImportRequest, background_tasks: BackgroundTasks):
+async def trigger_import(request: ImportRequest, background_tasks: BackgroundTasks, current_user: User = Depends(get_current_user)):
     """
     Trigger a background task to import candles.
     """

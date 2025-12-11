@@ -72,7 +72,7 @@
     *   `BacktestController`: Endpoint to receive a config (routes, dates), run the `BacktestMode`, and return the JSON results.
     *   `StrategyController`: Endpoints to list, create, and retrieve strategy code (`/strategy/make`, `/strategy/all`, `/strategy/get`).
 
-## Phase 6: Real-time Communication & Dashboard Integration (Pending)
+## Phase 6: Real-time Communication & Dashboard Integration (Completed ✅)
 *Goal: Enable real-time feedback and rich interaction for the frontend dashboard.*
 
 1.  **WebSockets**:
@@ -87,13 +87,13 @@
     *   Create endpoints (`/config/get`, `/config/update`) to allow the dashboard to read and modify system settings dynamically.
 
 ## Phase 7: Authentication & Security (Pending)
-*Goal: Secure the engine and manage sensitive credentials.*
+*Goal: Secure the engine and manage sensitive credentials using Username/Password.*
 
 1.  **Auth Controller**:
     *   Implement `engine/controllers/auth_controller.py`.
-    *   Add JWT-based authentication for all sensitive endpoints.
-    *   Implement `/auth/login` and `/auth/engine-trade-token`.
-    *   Add system lifecycle endpoints: `/auth/shutdown` and `/auth/terminate-all` to manage the engine process.
+    *   **User Management**: Implement `/auth/register` and `/auth/login` for username/password authentication.
+    *   **JWT**: Issue JWT tokens upon successful login for securing other endpoints.
+    *   Implement system lifecycle endpoints: `/auth/shutdown` and `/auth/terminate-all` to manage the engine process.
 2.  **Exchange Controller**:
     *   Implement `engine/controllers/exchange_controller.py`.
     *   Securely store and retrieve API keys (`/exchange/api-keys`).
