@@ -3,15 +3,31 @@ from fastapi.testclient import TestClient
 from unittest.mock import patch, MagicMock
 import sys
 import os
+import time
 
 # Add parent dir to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 from engine.main import app
+from engine.init_db import init_db
 
 class TestPhase5(unittest.TestCase):
     def setUp(self):
+        init_db()
         self.client = TestClient(app)
+        self.username = f"user_p5_{int(time.time())}"
+        self.password = "password123"
+        self.headers = self._get_auth_headers()
+
+    def _get_auth_headers(self):
+        # Register
+        self.client.post("/api/v1/auth/register", json={"username": self.username, "password": self.password})
+        # Login
+        response = self.client.post("/api/v1/auth/login", data={"username": self.username, "password": self.password})
+        if response.status_code == 200:
+            token = response.json()["access_token"]
+            return {"Authorization": f"Bearer {token}"}
+        return {}
 
     def test_root(self):
         response = self.client.get("/")
@@ -26,7 +42,7 @@ class TestPhase5(unittest.TestCase):
             "symbol": "BTC-USDT",
             "start_date": "2023-01-01"
         }
-        response = self.client.post("/api/v1/import", json=payload)
+        response = self.client.post("/api/v1/import", json=payload, headers=self.headers)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()['status'], 'queued')
         
@@ -52,7 +68,7 @@ class TestPhase5(unittest.TestCase):
             "strategy_name": "SimpleStrategy"
         }
         
-        response = self.client.post("/api/v1/backtest", json=payload)
+        response = self.client.post("/api/v1/backtest", json=payload, headers=self.headers)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()['results']['pnl_percent'], 5.0)
         

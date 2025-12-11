@@ -20,7 +20,22 @@ class DeleteExchangeApiKeyRequestJson(BaseModel):
 class ExchangeSupportedSymbolsRequestJson(BaseModel):
     exchange_name: str
 
-@router.get("/exchange/api-keys")
+class ExchangeApiKeyResponse(BaseModel):
+    id: int
+    exchange_name: str
+    name: str
+    api_key: str
+    api_secret: str
+    additional_fields: Optional[str] = None
+
+class StatusResponse(BaseModel):
+    status: str
+    message: str
+
+class SupportedSymbolsResponse(BaseModel):
+    symbols: List[str]
+
+@router.get("/exchange/api-keys", response_model=List[ExchangeApiKeyResponse])
 async def get_api_keys(current_user: User = Depends(get_current_user)):
     keys = []
     for key in ExchangeApiKeys.select():
@@ -30,7 +45,7 @@ async def get_api_keys(current_user: User = Depends(get_current_user)):
         keys.append(k)
     return keys
 
-@router.post("/exchange/api-keys/store")
+@router.post("/exchange/api-keys/store", response_model=StatusResponse)
 async def store_api_key(request: StoreExchangeApiKeyRequestJson, current_user: User = Depends(get_current_user)):
     try:
         ExchangeApiKeys.create(
@@ -44,7 +59,7 @@ async def store_api_key(request: StoreExchangeApiKeyRequestJson, current_user: U
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.post("/exchange/api-keys/delete")
+@router.post("/exchange/api-keys/delete", response_model=StatusResponse)
 async def delete_api_key(request: DeleteExchangeApiKeyRequestJson, current_user: User = Depends(get_current_user)):
     try:
         query = ExchangeApiKeys.delete().where(ExchangeApiKeys.id == request.id)
@@ -55,7 +70,7 @@ async def delete_api_key(request: DeleteExchangeApiKeyRequestJson, current_user:
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.post("/exchange/supported-symbols")
+@router.post("/exchange/supported-symbols", response_model=SupportedSymbolsResponse)
 async def get_supported_symbols(request: ExchangeSupportedSymbolsRequestJson, current_user: User = Depends(get_current_user)):
     # In a real implementation, this would call the exchange adapter
     # For now, we return a mock list based on the exchange name

@@ -10,11 +10,15 @@ router = APIRouter()
 class ConfigRequestJson(BaseModel):
     updates: Dict[str, Any]
 
-@router.post("/config/get")
+class ConfigUpdateResponse(BaseModel):
+    status: str
+    config: Dict[str, Any]
+
+@router.post("/config/get", response_model=Dict[str, Any])
 async def get_config(current_user: User = Depends(get_current_user)):
     return config
 
-@router.post("/config/update")
+@router.post("/config/update", response_model=ConfigUpdateResponse)
 async def update_config(request: ConfigRequestJson, current_user: User = Depends(get_current_user)):
     try:
         # Deep update or simple top-level update?

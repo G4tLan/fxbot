@@ -29,6 +29,12 @@ class Token(BaseModel):
     access_token: str
     token_type: str
 
+class MessageResponse(BaseModel):
+    message: str
+
+class TradeTokenResponse(BaseModel):
+    token: str
+
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
 
@@ -64,7 +70,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
         raise credentials_exception
     return user
 
-@router.post("/auth/register")
+@router.post("/auth/register", response_model=MessageResponse)
 async def register(request: RegisterRequest):
     # Check if user exists
     if User.select().where(User.username == request.username).exists():
@@ -95,15 +101,15 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
     )
     return {"access_token": access_token, "token_type": "bearer"}
 
-@router.post("/auth/shutdown")
+@router.post("/auth/shutdown", response_model=MessageResponse)
 async def shutdown(current_user: User = Depends(get_current_user)):
     os.kill(os.getpid(), signal.SIGINT)
     return {"message": "Shutting down..."}
 
-@router.post("/auth/terminate-all")
+@router.post("/auth/terminate-all", response_model=MessageResponse)
 async def terminate_all(current_user: User = Depends(get_current_user)):
     return {"message": "All background tasks terminated"}
 
-@router.post("/auth/engine-trade-token")
+@router.post("/auth/engine-trade-token", response_model=TradeTokenResponse)
 async def engine_trade_token(current_user: User = Depends(get_current_user)):
     return {"token": "mock-engine-trade-token"}

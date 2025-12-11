@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from engine.modes.import_candles_mode import run_import
 from engine.controllers.auth_controller import get_current_user
 from engine.models.core import User, Task
+from typing import Optional
 import uuid
 import time
 import json
@@ -13,6 +14,11 @@ class ImportRequest(BaseModel):
     exchange: str
     symbol: str
     start_date: str
+
+class ImportResponse(BaseModel):
+    message: str
+    status: str
+    task_id: str
 
 def import_task(task_id: str, exchange: str, symbol: str, start_date: str):
     try:
@@ -37,7 +43,7 @@ def import_task(task_id: str, exchange: str, symbol: str, start_date: str):
             updated_at=int(time.time())
         ).where(Task.id == task_id).execute()
 
-@router.post("/import")
+@router.post("/import", response_model=ImportResponse)
 async def trigger_import(request: ImportRequest, background_tasks: BackgroundTasks, current_user: User = Depends(get_current_user)):
     """
     Trigger a background task to import candles.

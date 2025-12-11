@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Depends, BackgroundTasks
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, Dict, Any, Union
 from engine.modes.backtest_mode import run_backtest
 from engine.strategies.simple_strategy import SimpleStrategy
 from engine.controllers.auth_controller import get_current_user
@@ -19,6 +19,12 @@ class BacktestRequest(BaseModel):
     end_date: str
     strategy_name: str
     run_in_background: Optional[bool] = False
+
+class BacktestResponse(BaseModel):
+    status: str
+    results: Optional[Dict[str, Any]] = None
+    message: Optional[str] = None
+    task_id: Optional[str] = None
 
 STRATEGIES = {
     "SimpleStrategy": SimpleStrategy
@@ -54,7 +60,7 @@ def backtest_task(task_id: str, request: BacktestRequest, strategy_class):
             updated_at=int(time.time())
         ).where(Task.id == task_id).execute()
 
-@router.post("/backtest")
+@router.post("/backtest", response_model=BacktestResponse)
 async def trigger_backtest(request: BacktestRequest, background_tasks: BackgroundTasks, current_user: User = Depends(get_current_user)):
     """
     Run a backtest. Can be synchronous or asynchronous based on run_in_background flag.
