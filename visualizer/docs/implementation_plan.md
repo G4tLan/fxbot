@@ -71,7 +71,8 @@ This plan outlines the development phases to integrate the new Control Plane API
 
 - [ ] **Types:** Export `LoginRequest`, `RegisterRequest`, `Token` in `types-helper.ts`.
 - [ ] **Service:** Create `src/lib/api/auth.service.ts`.
-  - Implement `login(credentials)`, `register(data)`.
+  - Implement `login(credentials)`. **Note:** Must use `application/x-www-form-urlencoded` body (not JSON) to match backend `OAuth2PasswordRequestForm`.
+  - Implement `register(data)`.
   - Implement `logout()`.
   - Helper to attach `Authorization: Bearer` header to requests.
 
@@ -103,7 +104,7 @@ This plan outlines the development phases to integrate the new Control Plane API
 - [ ] **Service:** Create `src/lib/api/exchange.service.ts`.
   - `getApiKeys()`
   - `storeApiKey(data)`
-  - `deleteApiKey(id)`
+  - `deleteApiKey(id)` (Note: POST to `/exchange/api-keys/delete`)
   - `getSupportedSymbols(exchange)`
 
 ### 2. State Management
@@ -178,7 +179,7 @@ This plan outlines the development phases to integrate the new Control Plane API
 
 - [ ] **Types:** Export `ConfigRequestJson`, `LspConfigResponse` in `types-helper.ts`.
 - [ ] **Service:** Create `src/lib/api/config.service.ts`.
-  - `getConfig()`
+  - `getConfig()` (Note: POST to `/config/get`)
   - `updateConfig(updates)`
   - `getLspConfig()`
 
@@ -222,6 +223,9 @@ This plan outlines the development phases to integrate the new Control Plane API
   - `shutdown()`
   - `terminateAll()` (Panic Button)
   - `generateEngineToken()`
+- [ ] **WebSocket Service:** Create `src/lib/api/websocket.service.ts`.
+  - Connect to `/ws` endpoint (Note: Pass token via query param `?token=...`).
+  - Handle real-time events (status updates, trade notifications, backtest progress).
 
 ### 2. UI Components
 
@@ -253,3 +257,20 @@ This plan outlines the development phases to integrate the new Control Plane API
 
 - [ ] **Docker:** Create `Dockerfile` for the frontend (Nginx serving static build).
 - [ ] **CI:** Setup GitHub Actions (or similar) to run `npm test` and `npm run build`.
+
+---
+
+## Phase 9: Live Trading Monitor (Future)
+
+**Goal:** Real-time visualization of live trading execution.
+
+### 1. Domain & API
+
+- [ ] **Service:** Extend `websocket.service.ts` to handle live trading specific events (tick data, order fills).
+
+### 2. UI Components
+
+- [ ] **Page:** `src/routes/live/+page.svelte`.
+  - Real-time Equity Curve.
+  - Active Positions Table.
+  - Live Log Stream.
