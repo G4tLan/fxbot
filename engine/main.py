@@ -13,7 +13,8 @@ from engine.controllers import (
     lsp_controller, 
     config_controller,
     auth_controller,
-    exchange_controller
+    exchange_controller,
+    task_controller
 )
 from engine.init_db import init_db
 
@@ -35,6 +36,7 @@ app.include_router(lsp_controller.router, prefix="/api/v1", tags=["LSP"])
 app.include_router(config_controller.router, prefix="/api/v1", tags=["Config"])
 app.include_router(auth_controller.router, prefix="/api/v1", tags=["Auth"])
 app.include_router(exchange_controller.router, prefix="/api/v1", tags=["Exchange"])
+app.include_router(task_controller.router, prefix="/api/v1", tags=["Tasks"])
 app.include_router(websocket_controller.router, tags=["WebSocket"])
 
 @app.on_event("startup")

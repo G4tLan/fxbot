@@ -1,9 +1,13 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, BackgroundTasks
 from pydantic import BaseModel
+from typing import Optional
 from engine.modes.backtest_mode import run_backtest
 from engine.strategies.simple_strategy import SimpleStrategy
 from engine.controllers.auth_controller import get_current_user
-from engine.models.core import User
+from engine.models.core import User, Task
+import uuid
+import time
+import json
 
 router = APIRouter()
 
@@ -14,21 +18,17 @@ class BacktestRequest(BaseModel):
     start_date: str
     end_date: str
     strategy_name: str
+    run_in_background: Optional[bool] = False
 
 STRATEGIES = {
     "SimpleStrategy": SimpleStrategy
 }
 
-@router.post("/backtest")
-async def trigger_backtest(request: BacktestRequest, current_user: User = Depends(get_current_user)):
-    """
-    Run a backtest synchronously and return results.
-    """
-    strategy_class = STRATEGIES.get(request.strategy_name)
-    if not strategy_class:
-        raise HTTPException(status_code=404, detail=f"Strategy {request.strategy_name} not found.")
-
+def backtest_task(task_id: str, request: BacktestRequest, strategy_class):
     try:
+        # Update status to processing
+        Task.update(status="processing", updated_at=int(time.time())).where(Task.id == task_id).execute()
+        
         results = run_backtest(
             request.exchange,
             request.symbol,
@@ -37,6 +37,62 @@ async def trigger_backtest(request: BacktestRequest, current_user: User = Depend
             request.end_date,
             strategy_class
         )
-        return {"status": "success", "results": results}
+        
+        # Update status to completed
+        Task.update(
+            status="completed", 
+            result=json.dumps(results),
+            updated_at=int(time.time())
+        ).where(Task.id == task_id).execute()
+        
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        print(f"Backtest failed: {e}")
+        # Update status to failed
+        Task.update(
+            status="failed", 
+            error=str(e),
+            updated_at=int(time.time())
+        ).where(Task.id == task_id).execute()
+
+@router.post("/backtest")
+async def trigger_backtest(request: BacktestRequest, background_tasks: BackgroundTasks, current_user: User = Depends(get_current_user)):
+    """
+    Run a backtest. Can be synchronous or asynchronous based on run_in_background flag.
+    """
+    strategy_class = STRATEGIES.get(request.strategy_name)
+    if not strategy_class:
+        raise HTTPException(status_code=404, detail=f"Strategy {request.strategy_name} not found.")
+
+    if request.run_in_background:
+        task_id = str(uuid.uuid4())
+        
+        # Create Task record
+        Task.create(
+            id=task_id,
+            type="backtest",
+            status="queued",
+            created_at=int(time.time()),
+            updated_at=int(time.time())
+        )
+        
+        background_tasks.add_task(backtest_task, task_id, request, strategy_class)
+        
+        return {
+            "message": "Backtest started in background", 
+            "status": "queued",
+            "task_id": task_id
+        }
+    else:
+        # Synchronous execution (legacy behavior)
+        try:
+            results = run_backtest(
+                request.exchange,
+                request.symbol,
+                request.timeframe,
+                request.start_date,
+                request.end_date,
+                strategy_class
+            )
+            return {"status": "success", "results": results}
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))

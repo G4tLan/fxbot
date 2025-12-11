@@ -8,7 +8,7 @@ from engine.config import db
 from engine.models import (
     Candle, ClosedTrade, Order, Trade, BacktestSession, Log, Option, ExchangeApiKeys,
     Ticker, Orderbook, DailyBalance, MonteCarloSession, OptimizationSession, NotificationApiKeys,
-    User
+    User, Task
 )
 
 def init_db():
@@ -16,7 +16,7 @@ def init_db():
     db.create_tables([
         Candle, ClosedTrade, Order, Trade, BacktestSession, Log, Option, ExchangeApiKeys,
         Ticker, Orderbook, DailyBalance, MonteCarloSession, OptimizationSession, NotificationApiKeys,
-        User
+        User, Task
     ])
     print("Database initialized.")
 

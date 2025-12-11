@@ -49,17 +49,17 @@ This plan outlines the development phases to integrate the new Control Plane API
 
 ### 1. Core Services
 
-- [ ] **HTTP Client:** Create a wrapper around `fetch` (or use `axios`) to handle:
+- [x] **HTTP Client:** Create a wrapper around `fetch` (or use `axios`) to handle:
   - Base URL configuration.
   - Global Error Handling (e.g., auto-logout on 401).
   - Request/Response Interceptors.
-- [ ] **Notification System:**
+- [x] **Notification System:**
   - **Store:** `toast.store.ts` (add/remove toasts).
   - **Component:** `ToastContainer.svelte` & `Toast.svelte` (to display alerts).
 
 ### 2. Routing Security
 
-- [ ] **Route Guards:** Implement a client-side check (in `+layout.svelte` or hooks) to redirect unauthenticated users to `/login`.
+- [x] **Route Guards:** Implement a client-side check (in `+layout.svelte` or hooks) to redirect unauthenticated users to `/login`.
 
 ---
 
@@ -69,8 +69,8 @@ This plan outlines the development phases to integrate the new Control Plane API
 
 ### 1. Domain & API
 
-- [ ] **Types:** Export `LoginRequest`, `RegisterRequest`, `Token` in `types-helper.ts`.
-- [ ] **Service:** Create `src/lib/api/auth.service.ts`.
+- [x] **Types:** Export `LoginRequest`, `RegisterRequest`, `Token` in `types-helper.ts`.
+- [x] **Service:** Create `src/lib/api/auth.service.ts`. (Implemented in `client.ts` and `auth.store.ts`)
   - Implement `login(credentials)`. **Note:** Must use `application/x-www-form-urlencoded` body (not JSON) to match backend `OAuth2PasswordRequestForm`.
   - Implement `register(data)`.
   - Implement `logout()`.
@@ -78,19 +78,19 @@ This plan outlines the development phases to integrate the new Control Plane API
 
 ### 2. State Management
 
-- [ ] **Store:** Create `src/lib/stores/auth.store.ts`.
+- [x] **Store:** Create `src/lib/stores/auth.store.ts`.
   - Store `token` and `isAuthenticated` status.
   - Persist token in `localStorage`.
 
 ### 3. UI Components
 
-- [ ] **Components:**
-  - `src/lib/components/auth/login-form.svelte`
-  - `src/lib/components/auth/register-form.svelte`
-- [ ] **Pages:**
+- [x] **Components:**
+  - `src/lib/components/auth/login-form.svelte` (Implemented in page)
+  - `src/lib/components/auth/register-form.svelte` (Implemented in page)
+- [x] **Pages:**
   - `src/routes/login/+page.svelte`
   - `src/routes/register/+page.svelte`
-- [ ] **Layout:** Update `src/routes/+layout.svelte` to show Login/Logout buttons based on state.
+- [x] **Layout:** Update `src/routes/+layout.svelte` to show Login/Logout buttons based on state.
 
 ---
 
@@ -100,8 +100,8 @@ This plan outlines the development phases to integrate the new Control Plane API
 
 ### 1. Domain & API
 
-- [ ] **Types:** Export `StoreExchangeApiKeyRequest`, `DeleteExchangeApiKeyRequest` in `types-helper.ts`.
-- [ ] **Service:** Create `src/lib/api/exchange.service.ts`.
+- [x] **Types:** Export `StoreExchangeApiKeyRequest`, `DeleteExchangeApiKeyRequest` in `types-helper.ts`.
+- [x] **Service:** Create `src/lib/api/exchange.service.ts`.
   - `getApiKeys()`
   - `storeApiKey(data)`
   - `deleteApiKey(id)` (Note: POST to `/exchange/api-keys/delete`)
@@ -109,39 +109,43 @@ This plan outlines the development phases to integrate the new Control Plane API
 
 ### 2. State Management
 
-- [ ] **Store:** Create `src/lib/stores/exchange.store.ts`.
+- [x] **Store:** Create `src/lib/stores/exchange.store.ts`.
   - `apiKeys`: List of stored keys.
   - `supportedSymbols`: Cache for symbols.
 
 ### 3. UI Components
 
-- [ ] **Components:**
+- [x] **Components:**
   - `src/lib/components/exchange/api-key-list.svelte`
   - `src/lib/components/exchange/add-key-modal.svelte`
-- [ ] **Pages:**
+- [x] **Pages:**
   - `src/routes/settings/exchanges/+page.svelte`
 
 ---
 
 ## Phase 3: Data Import Workflow
 
-**Goal:** Trigger background tasks to import candle data.
+**Goal:** Trigger background tasks to import candle data and track progress.
 
 ### 1. Domain & API
 
-- [ ] **Types:** Export `ImportRequest` in `types-helper.ts`.
-- [ ] **Service:** Create `src/lib/api/import.service.ts`.
-  - `triggerImport(data)`
+- [ ] **Types:** Export `ImportRequest`, `Task` in `types-helper.ts`.
+- [ ] **Service:** Create `src/lib/api/import.service.ts` (or `task.service.ts`).
+  - `triggerImport(data)` -> Returns `{ task_id, status }`.
+  - `getTask(taskId)` -> Returns `Task` object with status (queued, processing, completed, failed) and result.
 
 ### 2. State Management
 
-- [ ] **Store:** Create `src/lib/stores/import.store.ts`.
-  - Track status of import requests (if API supports polling/status, otherwise just success/error notification).
+- [ ] **Store:** Create `src/lib/stores/import.store.ts` (or `task.store.ts`).
+  - `activeTasks`: Map of `taskId` to `Task` status.
+  - Action `pollTask(taskId)`: Periodically (10s) calls `getTask` until status is completed/failed.
+  - Update UI with progress/completion.
 
 ### 3. UI Components
 
 - [ ] **Components:**
   - `src/lib/components/import/import-form.svelte` (Select Exchange, Symbol, Date Range).
+  - `src/lib/components/common/task-status.svelte` (Reusable component to show spinner/check/error for a task).
 - [ ] **Pages:**
   - `src/routes/import/+page.svelte`
 
@@ -149,13 +153,14 @@ This plan outlines the development phases to integrate the new Control Plane API
 
 ## Phase 4: Backtest Execution
 
-**Goal:** Configure and trigger backtests.
+**Goal:** Configure and trigger backtests (synchronous or asynchronous).
 
 ### 1. Domain & API
 
 - [ ] **Types:** Export `BacktestRequest` in `types-helper.ts`.
 - [ ] **Service:** Create `src/lib/api/backtest.service.ts`.
-  - `triggerBacktest(data)`
+  - `triggerBacktest(data)` -> Returns results (sync) or `{ task_id }` (async).
+  - Use `task.service.ts` for polling if running in background.
 
 ### 2. State Management
 

@@ -13,6 +13,7 @@ from engine.models.core import (
     MonteCarloSession,
     OptimizationSession,
     NotificationApiKeys,
-    User
+    User,
+    Task
 )
 from engine.models.base import BaseModel

@@ -122,3 +122,12 @@ class NotificationApiKeys(BaseModel):
     driver = CharField()
     fields = TextField() # JSON
 
+class Task(BaseModel):
+    id = CharField(primary_key=True)
+    type = CharField() # import/backtest
+    status = CharField() # queued/processing/completed/failed
+    result = TextField(null=True) # JSON
+    error = TextField(null=True)
+    created_at = BigIntegerField()
+    updated_at = BigIntegerField()
+

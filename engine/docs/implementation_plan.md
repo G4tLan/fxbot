@@ -86,7 +86,7 @@
     *   Implement `engine/controllers/config_controller.py`.
     *   Create endpoints (`/config/get`, `/config/update`) to allow the dashboard to read and modify system settings dynamically.
 
-## Phase 7: Authentication & Security (Pending)
+## Phase 7: Authentication & Security (Completed ✅)
 *Goal: Secure the engine and manage sensitive credentials using Username/Password.*
 
 1.  **Auth Controller**:
@@ -99,7 +99,22 @@
     *   Securely store and retrieve API keys (`/exchange/api-keys`).
     *   Provide endpoints for supported symbols (`/exchange/supported-symbols`).
 
-## Phase 8: Advanced Simulation & Optimization (Pending)
+## Phase 8: Task Management & Asynchronous Operations (Completed ✅)
+*Goal: Track the status of long-running background operations (Imports, Backtests) via polling.*
+
+1.  **Task Model**:
+    *   Update `engine/models/core.py` to include a `Task` model.
+    *   Fields: `id` (UUID), `type` (import/backtest), `status` (queued/processing/completed/failed), `result` (JSON), `error` (text), `created_at`, `updated_at`.
+2.  **Task Controller**:
+    *   Implement `engine/controllers/task_controller.py`.
+    *   Endpoint: `GET /tasks/{task_id}` to retrieve the current status and result of a task.
+    *   Endpoint: `GET /tasks` to list recent tasks.
+3.  **Integration**:
+    *   Update `ImportController` to create a `Task` record, spawn the background job with the `task_id`, and return the `task_id` to the client immediately.
+    *   Update `BacktestController` to optionally run asynchronously and return a `task_id`.
+    *   Update background functions (`import_task`, `run_backtest`) to update the `Task` status and result in the database upon completion or failure.
+
+## Phase 9: Advanced Simulation & Optimization (Pending)
 *Goal: Tools for strategy tuning and stress testing.*
 
 1.  **Optimization Mode**:
@@ -112,7 +127,7 @@
     *   Implement `MonteCarloController` (`/monte-carlo`) to trigger stress tests.
     *   Randomize trade sequences or market data to validate strategy robustness.
 
-## Phase 9: Live Trading Execution (Pending)
+## Phase 10: Live Trading Execution (Pending)
 *Goal: Execute strategies in real-time markets.*
 
 1.  **Live Controller**:
@@ -125,7 +140,7 @@
 3.  **Paper Trading**:
     *   Implement logic to simulate execution using real-time data feeds without placing actual orders on the exchange.
 
-## Phase 10: System Management & Utilities (Pending)
+## Phase 11: System Management & Utilities (Pending)
 *Goal: Operational tools and external integrations.*
 
 1.  **Notification Controller**:
