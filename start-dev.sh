@@ -6,7 +6,6 @@
 
 # --- Configuration ---
 PYTHON_VENV_PATH="engine/.venv" # Relative path to the Python virtual environment directory
-# PYTHON_SERVER_SCRIPT="engine/app_server.py" # Deprecated, using uvicorn engine.main:app
 PYTHON_LOG_FILE="python_server.log"
 FRONTEND_DIR="visualizer"
 
@@ -15,7 +14,7 @@ FRONTEND_DIR="visualizer"
 cleanup() {
     echo "" # Newline for cleaner exit message
     echo "Shutting down servers..."
-    if ps -p $PYTHON_PID > /dev/null 2>&1; then
+    if [ -n "$PYTHON_PID" ] && ps -p $PYTHON_PID > /dev/null 2>&1; then
         echo "Stopping Python backend server (PID: $PYTHON_PID)..."
         kill $PYTHON_PID
     fi
@@ -41,7 +40,7 @@ echo "Python virtual environment activated."
 
 # 2. Start the Python server in the background.
 echo "Starting Python server (Uvicorn), logging to '$PYTHON_LOG_FILE'..."
-eval "$PYTHON_VENV_PATH/bin/uvicorn" engine.main:app --reload --host 0.0.0.0 --port 8000 > "$PYTHON_LOG_FILE" 2>&1 &
+"$PYTHON_VENV_PATH/bin/uvicorn" engine.main:app --reload --host 0.0.0.0 --port 8000 > "$PYTHON_LOG_FILE" 2>&1 &
 PYTHON_PID=$!
 
 sleep 2 # Give the server a moment to start.
@@ -52,7 +51,14 @@ echo "--- Starting Node.js Frontend Server ---"
 
 # 3. Start the Node.js development server in the foreground.
 cd "$FRONTEND_DIR" || exit
-npm run dev
+
+# Check if node_modules exists, if not install
+if [ ! -d "node_modules" ]; then
+    echo "node_modules not found. Installing dependencies..."
+    npm install
+fi
+
+echo "Starting Vite..."
+npm run dev -- --host
 
 # The script will block here until `npm run dev` is terminated.
-# The trap will then call the cleanup function.

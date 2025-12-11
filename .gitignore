@@ -8,3 +8,7 @@ test_results/
 .venv/
 
 *.log
+
+.env.*
+.env
+db.sqlite3
