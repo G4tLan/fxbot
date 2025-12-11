@@ -11,8 +11,14 @@ A Python-based algorithmic trading engine designed for backtesting, live trading
   - Base Strategy class
   - Indicator library (NumPy-based)
   - Signal generation logic
-- **Phase 3: Data Acquisition** (Pending) 🚧
-- **Phase 4: Simulation Engine** (Pending) 🚧
+- **Phase 3: Data Acquisition** (Completed) ✅
+  - Exchange Adapter Interface
+  - Binance Driver (using `requests`)
+  - Import Mode (Bulk insert to SQLite)
+- **Phase 4: Simulation Engine** (Completed) ✅
+  - Router (Strategy mapping)
+  - Sandbox Exchange (Order simulation)
+  - Backtest Mode (Event loop)
 - **Phase 5: API Layer** (Pending) 🚧
 
 ## Setup
