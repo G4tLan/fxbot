@@ -92,21 +92,15 @@
       <!-- Symbol -->
       <div>
         <label for="symbol" class="mb-1 block text-sm font-medium text-slate-400">Symbol</label>
-        <div class="relative">
-          <input
-            type="text"
-            id="symbol"
-            bind:value={symbol}
-            list="symbol-list"
-            placeholder="e.g. EUR/USD"
-            class="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:outline-none"
-          />
-          <datalist id="symbol-list">
-            {#each symbols as s}
-              <option value={s}></option>
-            {/each}
-          </datalist>
-        </div>
+        <select
+          id="symbol"
+          bind:value={symbol}
+          class="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:outline-none"
+        >
+          {#each symbols as s}
+            <option value={s}>{s}</option>
+          {/each}
+        </select>
       </div>
 
       <!-- Timeframe -->
