@@ -6,6 +6,7 @@ from fastapi.testclient import TestClient
 from engine.main import app
 from engine.models.core import Task, User
 from engine.init_db import init_db
+from engine.schemas import BacktestResult
 
 class TestPhase8(unittest.TestCase):
     def setUp(self):
@@ -57,7 +58,13 @@ class TestPhase8(unittest.TestCase):
 
     @patch("engine.controllers.backtest_controller.run_backtest")
     def test_backtest_task_flow(self, mock_run_backtest):
-        mock_run_backtest.return_value = {"metrics": "good"}
+        mock_run_backtest.return_value = BacktestResult(
+            initial_balance=10000,
+            final_balance=10500,
+            pnl_percent=5.0,
+            trades=[],
+            closed_trades=[]
+        )
         
         # 1. Trigger Backtest (Background)
         payload = {
@@ -75,14 +82,17 @@ class TestPhase8(unittest.TestCase):
         self.assertIn("task_id", data)
         task_id = data["task_id"]
 
-        # 2. Check Task Status
-        response = self.client.get(f"/api/v1/tasks/{task_id}", headers=self.headers)
+        # 2. Check Session Status (Backtest uses sessions now)
+        response = self.client.get(f"/api/v1/sessions/{task_id}", headers=self.headers)
         self.assertEqual(response.status_code, 200)
-        task_data = response.json()
-        self.assertEqual(task_data["status"], "completed")
-        # Result is already parsed by the controller if it was a JSON string
-        result = task_data["result"]
-        self.assertEqual(result["metrics"], "good")
+        session_data = response.json()
+        self.assertEqual(session_data["id"], task_id)
+        # Should be completed because TestClient runs background tasks
+        self.assertEqual(session_data["status"], "completed")
+        
+        # Check metrics
+        metrics = session_data["metrics"]
+        self.assertEqual(metrics["pnl_percent"], 5.0)
 
     def test_list_tasks(self):
         # Create a dummy task manually

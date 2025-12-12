@@ -9,7 +9,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(
 
 from engine.strategies.Strategy import Strategy
 import engine.indicators as ta
-from engine.store import store
+from engine.store import Store
 
 class MockStrategy(Strategy):
     def should_long(self):
@@ -25,8 +25,8 @@ class MockStrategy(Strategy):
 class TestPhase2(unittest.TestCase):
     def setUp(self):
         # Reset store
-        store.reset()
-        store.balance = {'Binance': 10000}
+        self.store = Store()
+        self.store.balance = {'Binance': 10000}
         
         # Create dummy candles (100 candles)
         # timestamp, open, high, low, close, volume
@@ -37,7 +37,7 @@ class TestPhase2(unittest.TestCase):
             self.candles[i] = [i, price, price+1, price-1, price, 100]
 
     def test_strategy_initialization(self):
-        strategy = MockStrategy("BTC-USDT", "Binance", "1h")
+        strategy = MockStrategy("BTC-USDT", "Binance", "1h", self.store)
         self.assertEqual(strategy.symbol, "BTC-USDT")
         self.assertEqual(strategy.balance, 10000)
 
@@ -49,7 +49,7 @@ class TestPhase2(unittest.TestCase):
         self.assertTrue(rsi[-1] < 30)
 
     def test_strategy_logic(self):
-        strategy = MockStrategy("BTC-USDT", "Binance", "1h")
+        strategy = MockStrategy("BTC-USDT", "Binance", "1h", self.store)
         strategy.candles = self.candles
         
         # Check signal

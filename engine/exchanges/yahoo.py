@@ -1,6 +1,7 @@
 import yfinance as yf
 from typing import List, Dict, Any
 from engine.exchanges.exchange import Exchange
+from engine.models.core import Order
 import pandas as pd
 
 class Yahoo(Exchange):
@@ -67,3 +68,21 @@ class Yahoo(Exchange):
         except Exception as e:
             print(f"Error fetching data from Yahoo Finance: {e}")
             return []
+
+    def market_order(self, symbol: str, qty: float, current_price: float, side: str, reduce_only: bool) -> Order:
+        raise NotImplementedError("Live trading not implemented for Yahoo yet.")
+
+    def limit_order(self, symbol: str, qty: float, price: float, side: str, reduce_only: bool) -> Order:
+        raise NotImplementedError("Live trading not implemented for Yahoo yet.")
+
+    def stop_order(self, symbol: str, qty: float, price: float, side: str, reduce_only: bool) -> Order:
+        raise NotImplementedError("Live trading not implemented for Yahoo yet.")
+
+    def cancel_all_orders(self, symbol: str) -> None:
+        raise NotImplementedError("Live trading not implemented for Yahoo yet.")
+
+    def cancel_order(self, symbol: str, order_id: str) -> None:
+        raise NotImplementedError("Live trading not implemented for Yahoo yet.")
+
+    def _fetch_precisions(self) -> None:
+        pass

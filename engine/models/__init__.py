@@ -13,6 +13,7 @@ from engine.models.core import (
     OptimizationSession,
     NotificationApiKeys,
     User,
-    Task
+    Task,
+    BacktestSession
 )
 from engine.models.base import BaseModel

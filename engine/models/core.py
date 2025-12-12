@@ -1,5 +1,6 @@
 from peewee import *
 from engine.models.base import BaseModel
+import json
 
 class Candle(BaseModel):
     timestamp = BigIntegerField()
@@ -38,6 +39,7 @@ class Order(BaseModel):
     executed_at = BigIntegerField(null=True)
     exchange = CharField()
     symbol = CharField()
+    reduce_only = BooleanField(default=False)
 
 class Trade(BaseModel):
     timestamp = BigIntegerField()
@@ -120,4 +122,55 @@ class Task(BaseModel):
     error = TextField(null=True)
     created_at = BigIntegerField()
     updated_at = BigIntegerField()
+
+class BacktestSession(BaseModel):
+    id = CharField(primary_key=True)
+    status = CharField()
+    metrics = TextField(null=True)
+    equity_curve = TextField(null=True)
+    trades = TextField(null=True) # Executions
+    closed_trades = TextField(null=True) # Completed trades
+    hyperparameters = TextField(null=True)
+    chart_data = TextField(null=True)
+    state = TextField(null=True)
+    title = CharField(max_length=255, null=True)
+    description = TextField(null=True)
+    strategy_codes = TextField(null=True)
+    exception = TextField(null=True)
+    traceback = TextField(null=True)
+    execution_duration = FloatField(null=True)
+    created_at = BigIntegerField()
+    updated_at = BigIntegerField()
+
+    @property
+    def metrics_json(self):
+        return json.loads(self.metrics) if self.metrics else None
+
+    @property
+    def equity_curve_json(self):
+        return json.loads(self.equity_curve) if self.equity_curve else None
+
+    @property
+    def trades_json(self):
+        return json.loads(self.trades) if self.trades else None
+
+    @property
+    def closed_trades_json(self):
+        return json.loads(self.closed_trades) if self.closed_trades else None
+
+    @property
+    def hyperparameters_json(self):
+        return json.loads(self.hyperparameters) if self.hyperparameters else None
+
+    @property
+    def chart_data_json(self):
+        return json.loads(self.chart_data) if self.chart_data else None
+
+    @property
+    def state_json(self):
+        return json.loads(self.state) if self.state else None
+
+    @property
+    def strategy_codes_json(self):
+        return json.loads(self.strategy_codes) if self.strategy_codes else None
 

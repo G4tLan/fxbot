@@ -10,7 +10,6 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(
 from engine.models.core import Candle
 from engine.strategies.Strategy import Strategy
 from engine.modes.backtest_mode import run_backtest
-from engine.store import store
 from engine.config import db
 
 # Use in-memory DB for testing
@@ -70,7 +69,7 @@ class TestPhase4(unittest.TestCase):
         # We need to patch the time.mktime calls in backtest_mode or pass timestamps directly.
         # The current implementation parses strings.
         
-        run_backtest(
+        result = run_backtest(
             'Sandbox', 
             'BTC-USDT', 
             '1h', 
@@ -79,13 +78,16 @@ class TestPhase4(unittest.TestCase):
             SimpleStrategy
         )
         
-        # Check results in Store
+        # Check results
         # We expect 1 buy order of 1.0 qty at price ~101 (2nd candle)
         # Initial balance 10000. Cost ~101. Fee ~0.1.
         # Balance should be < 10000
         
-        self.assertLess(store.balance['Sandbox'], 10000)
-        self.assertEqual(store.positions['Sandbox-BTC-USDT']['qty'], 1.0)
+        self.assertLess(result.final_balance, 10000)
+        # We can't check positions directly from result as it only returns trades and balance
+        # But we can check if there is at least one trade
+        self.assertGreater(len(result.trades), 0)
+        self.assertEqual(result.trades[0].qty, 1.0)
 
 if __name__ == '__main__':
     unittest.main()

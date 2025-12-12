@@ -31,6 +31,9 @@ class Strategy:
         self._sell = []
         self._stop_loss = []
         self._take_profit = []
+        
+        # Default logger
+        self.log = print
 
     @property
     def candles(self):
@@ -132,3 +135,12 @@ class Strategy:
     def go_short(self):
         """Define entry order, stop-loss, and take-profit for Short."""
         pass
+
+    def _execute(self):
+        """Internal execution loop called by the engine."""
+        self.update_position()
+        
+        if self.should_long():
+            self.go_long()
+        elif self.should_short():
+            self.go_short()

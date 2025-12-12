@@ -2,6 +2,7 @@ import requests
 import time
 from typing import List, Dict, Any
 from engine.exchanges.exchange import Exchange
+from engine.models.core import Order
 
 class Binance(Exchange):
     def __init__(self):
@@ -65,3 +66,21 @@ class Binance(Exchange):
             time.sleep(0.1)
 
         return candles
+
+    def market_order(self, symbol: str, qty: float, current_price: float, side: str, reduce_only: bool) -> Order:
+        raise NotImplementedError("Live trading not implemented for Binance yet.")
+
+    def limit_order(self, symbol: str, qty: float, price: float, side: str, reduce_only: bool) -> Order:
+        raise NotImplementedError("Live trading not implemented for Binance yet.")
+
+    def stop_order(self, symbol: str, qty: float, price: float, side: str, reduce_only: bool) -> Order:
+        raise NotImplementedError("Live trading not implemented for Binance yet.")
+
+    def cancel_all_orders(self, symbol: str) -> None:
+        raise NotImplementedError("Live trading not implemented for Binance yet.")
+
+    def cancel_order(self, symbol: str, order_id: str) -> None:
+        raise NotImplementedError("Live trading not implemented for Binance yet.")
+
+    def _fetch_precisions(self) -> None:
+        pass
