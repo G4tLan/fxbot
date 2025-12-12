@@ -151,9 +151,9 @@ This plan outlines the development phases to integrate the new Control Plane API
 
 ---
 
-## Phase 4: Backtest Execution
+## Phase 4: Backtest Execution & Visualization
 
-**Goal:** Configure and trigger backtests (synchronous or asynchronous).
+**Goal:** Configure and trigger backtests (synchronous or asynchronous) and visualize the results with rich charts.
 
 ### 1. Domain & API
 
@@ -171,8 +171,12 @@ This plan outlines the development phases to integrate the new Control Plane API
 
 - [x] **Components:**
   - `src/lib/components/backtest/backtest-config-form.svelte`
+  - `src/lib/components/backtest/backtest-result-view.svelte`
+    - [ ] **Candle Chart:** Integrate a candlestick chart (e.g., Lightweight Charts) to visualize price action.
+    - [ ] **Trade Markers:** Plot buy/sell markers on the candle chart to visualize trade execution points.
 - [x] **Pages:**
   - `src/routes/backtest/new/+page.svelte`
+  - `src/routes/backtest/result/+page.svelte`
 
 ---
 

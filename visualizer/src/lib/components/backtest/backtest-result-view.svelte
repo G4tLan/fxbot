@@ -41,7 +41,7 @@
   <!-- Charts & Trades -->
   <div class="grid grid-cols-1 gap-6">
     <div class="lg:col-span-1">
-      <Trades trades={result.trades} />
+      <Trades trades={result.trades ?? []} />
     </div>
   </div>
 

@@ -114,7 +114,25 @@
     *   Update `BacktestController` to optionally run asynchronously and return a `task_id`.
     *   Update background functions (`import_task`, `run_backtest`) to update the `Task` status and result in the database upon completion or failure.
 
-## Phase 9: Advanced Simulation & Optimization (Pending)
+## Phase 9: JSON Strategy Engine (No-Code Strategies) (Pending)
+*Goal: Allow users to define strategies using a JSON configuration stored in the database, enabling dynamic strategy creation without writing Python code.*
+
+1.  **Strategy Model**:
+    *   Create `StrategyConfig` model in `engine/models/core.py`.
+    *   Fields: `id` (UUID), `name` (String), `description` (String), `logic` (JSON/TextField), `created_at` (Int), `updated_at` (Int).
+2.  **JSON Schema Design**:
+    *   **Indicators**: Define list of technical indicators to compute (e.g., `{"id": "rsi_14", "type": "RSI", "period": 14}`).
+    *   **Signals**: Define entry/exit conditions using a logical operator structure (e.g., `{"variable": "rsi_14", "operator": "<", "value": 30}`).
+    *   **Risk Management**: Define Stop Loss and Take Profit percentages.
+3.  **Generic Strategy Interpreter**:
+    *   Create `engine/strategies/JsonStrategy.py` inheriting from `Strategy`.
+    *   Implement dynamic indicator calculation based on the config.
+    *   Implement `should_long()` and `should_short()` to evaluate the JSON logic against the current market state.
+4.  **Integration**:
+    *   Update `StrategyController` to provide CRUD endpoints (`/strategies/custom`) for managing these JSON strategies.
+    *   Update `BacktestController` to accept a `strategy_id` and load the corresponding `JsonStrategy` dynamically.
+
+## Phase 10: Advanced Simulation & Optimization (Pending)
 *Goal: Tools for strategy tuning and stress testing.*
 
 1.  **Optimization Mode**:
@@ -127,7 +145,7 @@
     *   Implement `MonteCarloController` (`/monte-carlo`) to trigger stress tests.
     *   Randomize trade sequences or market data to validate strategy robustness.
 
-## Phase 10: Live Trading Execution (Pending)
+## Phase 11: Live Trading Execution (Pending)
 *Goal: Execute strategies in real-time markets.*
 
 1.  **Live Controller**:
@@ -140,7 +158,7 @@
 3.  **Paper Trading**:
     *   Implement logic to simulate execution using real-time data feeds without placing actual orders on the exchange.
 
-## Phase 11: System Management & Utilities (Pending)
+## Phase 12: System Management & Utilities (Pending)
 *Goal: Operational tools and external integrations.*
 
 1.  **Notification Controller**:

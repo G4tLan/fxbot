@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { TradeResult } from '$lib/api/types-helper';
 
-  let { trades = [] } = $props<{ trades: TradeResult[] }>();
+  let { trades } = $props<{ trades: TradeResult[] }>();
 </script>
 
 <div

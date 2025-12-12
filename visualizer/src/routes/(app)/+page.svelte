@@ -15,7 +15,7 @@
     <section
       class="w-1/4 flex-none overflow-auto rounded-lg border border-slate-800 bg-slate-900 p-4"
     >
-      <Trades />
+      <Trades trades={[]} />
     </section>
   </div>
 </div>

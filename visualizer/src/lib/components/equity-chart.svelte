@@ -45,11 +45,13 @@
     if (!areaSeries || !data.length) return;
 
     const chartData = data
-      .map((entry) => ({
+      .map((entry: EquityHistoryEntry) => ({
         time: (new Date(entry.datetime).getTime() / 1000) as LC.Time,
         value: entry.equity,
       }))
-      .sort((a, b) => (a.time as number) - (b.time as number));
+      .sort(
+        (a: { time: LC.Time }, b: { time: LC.Time }) => (a.time as number) - (b.time as number)
+      );
 
     areaSeries.setData(chartData);
     chart?.timeScale().fitContent();
