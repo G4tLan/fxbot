@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from typing import Optional, Dict, Any, List, Union
 from engine.modes.backtest_mode import run_backtest
 from engine.strategies.simple_strategy import SimpleStrategy
+from engine.strategies.golden_cross_strategy import GoldenCrossStrategy
 from engine.controllers.auth_controller import get_current_user
 from engine.models.core import User, Task, Log, BacktestSession
 from engine.schemas import BacktestResult, TradeResult
@@ -86,7 +87,8 @@ class StrategyCodeResponse(BaseModel):
     strategy_code: Optional[Dict] = None
 
 STRATEGIES = {
-    "SimpleStrategy": SimpleStrategy
+    "SimpleStrategy": SimpleStrategy,
+    "GoldenCrossStrategy": GoldenCrossStrategy
 }
 
 @router.get("/strategies", response_model=StrategiesResponse)
