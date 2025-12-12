@@ -5,12 +5,17 @@ import type {
   ExchangeSupportedSymbolsRequest,
   StatusResponse,
   StoreExchangeApiKeyRequest,
+  SupportedExchangesResponse,
   SupportedSymbolsResponse,
 } from './types-helper';
 
 export const exchangeService = {
   getApiKeys: async () => {
     return api.get<ExchangeApiKeyResponse[]>('/api/v1/exchange/api-keys');
+  },
+
+  getSupportedExchanges: async () => {
+    return api.get<SupportedExchangesResponse>('/api/v1/exchange/supported');
   },
 
   storeApiKey: async (data: StoreExchangeApiKeyRequest) => {

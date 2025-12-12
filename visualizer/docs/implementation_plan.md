@@ -144,7 +144,7 @@ This plan outlines the development phases to integrate the new Control Plane API
 ### 3. UI Components
 
 - [ ] **Components:**
-  - `src/lib/components/import/import-form.svelte` (Select Exchange, Symbol, Date Range).
+  - `src/lib/components/import/import-form.svelte` (Select Exchange, Symbol, Date Range, Timeframe).
   - `src/lib/components/common/task-status.svelte` (Reusable component to show spinner/check/error for a task).
 - [ ] **Pages:**
   - `src/routes/import/+page.svelte`

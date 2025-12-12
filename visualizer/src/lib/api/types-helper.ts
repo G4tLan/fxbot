@@ -28,4 +28,5 @@ export type ExchangeApiKeyResponse = components['schemas']['ExchangeApiKeyRespon
 export type MessageResponse = components['schemas']['MessageResponse'];
 export type StatusResponse = components['schemas']['StatusResponse'];
 export type SupportedSymbolsResponse = components['schemas']['SupportedSymbolsResponse'];
+export type SupportedExchangesResponse = components['schemas']['SupportedExchangesResponse'];
 export type TradeTokenResponse = components['schemas']['TradeTokenResponse'];

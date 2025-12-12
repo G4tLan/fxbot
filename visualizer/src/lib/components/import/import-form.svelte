@@ -8,8 +8,11 @@
   let exchange = $state('');
   let symbol = $state('');
   let startDate = $state('');
+  let timeframe = $state('1h');
   let loading = $state(false);
   let symbols: string[] = $state([]);
+
+  const TIMEFRAMES = ['1m', '5m', '15m', '30m', '1h', '4h', '1d'];
 
   onMount(async () => {
     await exchangeStore.loadApiKeys();
@@ -38,6 +41,7 @@
         exchange,
         symbol,
         start_date: startDate,
+        timeframe,
       });
 
       taskStore.addImportTask(response);
@@ -90,6 +94,19 @@
           No symbols found for this exchange. You can type one manually.
         </p>
       {/if}
+    </div>
+
+    <div>
+      <label for="timeframe" class="mb-1 block text-sm font-medium text-slate-400">Timeframe</label>
+      <select
+        id="timeframe"
+        bind:value={timeframe}
+        class="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:outline-none"
+      >
+        {#each TIMEFRAMES as tf}
+          <option value={tf}>{tf}</option>
+        {/each}
+      </select>
     </div>
 
     <div>

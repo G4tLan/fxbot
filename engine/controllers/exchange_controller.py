@@ -35,6 +35,17 @@ class StatusResponse(BaseModel):
 class SupportedSymbolsResponse(BaseModel):
     symbols: List[str]
 
+class SupportedExchangesResponse(BaseModel):
+    exchanges: List[str]
+
+@router.get("/exchange/supported", response_model=SupportedExchangesResponse)
+async def get_supported_exchanges(current_user: User = Depends(get_current_user)):
+    """
+    Get list of supported exchanges.
+    """
+    # TODO: Dynamically discover these from the exchanges directory or registry
+    return {"exchanges": ["binance", "yahoo", "sandbox"]}
+
 @router.get("/exchange/api-keys", response_model=List[ExchangeApiKeyResponse])
 async def get_api_keys(current_user: User = Depends(get_current_user)):
     keys = []

@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { StoreExchangeApiKeyRequest } from '$lib/api/types-helper';
   import { exchangeStore } from '$lib/stores/exchange.store';
+  import { onMount } from 'svelte';
 
   let { isOpen = $bindable(false) } = $props();
 
@@ -10,7 +11,9 @@
   let api_secret = $state('');
   let loading = $state(false);
 
-  const EXCHANGES = ['binance', 'kraken', 'kucoin', 'bybit'];
+  onMount(() => {
+    exchangeStore.loadSupportedExchanges();
+  });
 
   async function handleSubmit(e: Event) {
     e.preventDefault();
@@ -57,7 +60,7 @@
             bind:value={exchange_name}
             class="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:outline-none"
           >
-            {#each EXCHANGES as ex}
+            {#each $exchangeStore.supportedExchanges as ex}
               <option value={ex}>{ex.charAt(0).toUpperCase() + ex.slice(1)}</option>
             {/each}
           </select>

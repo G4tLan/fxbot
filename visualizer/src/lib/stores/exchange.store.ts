@@ -7,12 +7,14 @@ interface ExchangeState {
   apiKeys: ExchangeApiKeyResponse[];
   loading: boolean;
   supportedSymbols: Record<string, string[]>; // Cache by exchange name
+  supportedExchanges: string[];
 }
 
 const initialState: ExchangeState = {
   apiKeys: [],
   loading: false,
   supportedSymbols: {},
+  supportedExchanges: [],
 };
 
 function createExchangeStore() {
@@ -20,6 +22,15 @@ function createExchangeStore() {
 
   return {
     subscribe,
+
+    loadSupportedExchanges: async () => {
+      try {
+        const response = await exchangeService.getSupportedExchanges();
+        update((s) => ({ ...s, supportedExchanges: response.exchanges }));
+      } catch (error) {
+        console.error('Failed to load supported exchanges', error);
+      }
+    },
 
     loadApiKeys: async () => {
       update((s) => ({ ...s, loading: true }));
