@@ -129,24 +129,24 @@ This plan outlines the development phases to integrate the new Control Plane API
 
 ### 1. Domain & API
 
-- [ ] **Types:** Export `ImportRequest`, `Task` in `types-helper.ts`.
-- [ ] **Service:** Create `src/lib/api/import.service.ts` (or `task.service.ts`).
+- [x] **Types:** Export `ImportRequest`, `Task` in `types-helper.ts`.
+- [x] **Service:** Create `src/lib/api/import.service.ts` (or `task.service.ts`).
   - `triggerImport(data)` -> Returns `{ task_id, status }`.
   - `getTask(taskId)` -> Returns `Task` object with status (queued, processing, completed, failed) and result.
 
 ### 2. State Management
 
-- [ ] **Store:** Create `src/lib/stores/import.store.ts` (or `task.store.ts`).
+- [x] **Store:** Create `src/lib/stores/import.store.ts` (or `task.store.ts`).
   - `activeTasks`: Map of `taskId` to `Task` status.
   - Action `pollTask(taskId)`: Periodically (10s) calls `getTask` until status is completed/failed.
   - Update UI with progress/completion.
 
 ### 3. UI Components
 
-- [ ] **Components:**
+- [x] **Components:**
   - `src/lib/components/import/import-form.svelte` (Select Exchange, Symbol, Date Range, Timeframe).
   - `src/lib/components/common/task-status.svelte` (Reusable component to show spinner/check/error for a task).
-- [ ] **Pages:**
+- [x] **Pages:**
   - `src/routes/import/+page.svelte`
 
 ---

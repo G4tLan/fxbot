@@ -46,6 +46,14 @@
 
       taskStore.addImportTask(response);
       toastStore.success('Import started');
+
+      // Reset form
+      startDate = '';
+      if (symbols.length > 0) {
+        symbol = symbols[0];
+      } else {
+        symbol = '';
+      }
     } catch (error) {
       console.error(error);
     } finally {

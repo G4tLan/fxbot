@@ -119,3 +119,19 @@ engine/.venv/bin/python -m unittest discover engine/tests
 - `services/`: Core services (Cache, etc.).
 - `tests/`: Unit tests for the engine.
 
+## Database Inspection
+
+You can use [Datasette](https://datasette.io/) to explore the SQLite database interactively in your browser.
+
+1. Install Datasette:
+   ```bash
+   pip install datasette
+   ```
+
+2. Run Datasette on your database file:
+   ```bash
+   datasette db.sqlite3
+   ```
+
+3. Open your browser at `http://localhost:8001` to view tables, run SQL queries, and visualize data.
+
