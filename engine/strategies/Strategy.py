@@ -1,4 +1,3 @@
-from engine.store import store
 import numpy as np
 
 class Position:
@@ -20,10 +19,11 @@ class Position:
         return abs(self.qty) * self.current_price
 
 class Strategy:
-    def __init__(self, symbol, exchange, timeframe):
+    def __init__(self, symbol, exchange, timeframe, store_instance):
         self.symbol = symbol
         self.exchange = exchange
         self.timeframe = timeframe
+        self.store = store_instance
         self._candles = np.array([])
         
         # Order intents
@@ -55,14 +55,14 @@ class Strategy:
     @property
     def balance(self):
         # Returns the available balance for the exchange
-        return store.balance.get(self.exchange, 0)
+        return self.store.balance.get(self.exchange, 0)
 
     @property
     def position(self):
         # Get position from store
         # Key format: "Exchange-Symbol"
         key = f"{self.exchange}-{self.symbol}"
-        pos_data = store.positions.get(key, {'qty': 0, 'entry_price': 0})
+        pos_data = self.store.positions.get(key, {'qty': 0, 'entry_price': 0})
         return Position(pos_data['qty'], pos_data['entry_price'], self.price)
     
     @property

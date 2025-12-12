@@ -1,6 +1,9 @@
 from engine.strategies.Strategy import Strategy
 
 class SimpleStrategy(Strategy):
+    def __init__(self, symbol, exchange, timeframe, store_instance):
+        super().__init__(symbol, exchange, timeframe, store_instance)
+
     def should_long(self):
         # Simple logic: Buy if price drops 3 candles in a row
         if len(self.candles) < 3:

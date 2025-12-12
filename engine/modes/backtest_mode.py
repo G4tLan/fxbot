@@ -1,7 +1,8 @@
 from engine.models.core import Candle
-from engine.store import store
+from engine.store import Store
 from engine.exchanges.sandbox import Sandbox
 from engine.strategies.Strategy import Strategy
+from engine.schemas import BacktestResult
 import numpy as np
 import time
 
@@ -14,8 +15,7 @@ def run_backtest(exchange_name: str, symbol: str, timeframe: str, start_date: st
         start_ts = int(time.mktime(time.strptime(start_date, "%Y-%m-%d"))) * 1000
         end_ts = int(time.mktime(time.strptime(end_date, "%Y-%m-%d"))) * 1000
     except ValueError:
-        print("Invalid date format.")
-        return
+        raise ValueError("Invalid date format. Use YYYY-MM-DD.")
 
     candles_query = Candle.select().where(
         (Candle.exchange == exchange_name) &
@@ -31,19 +31,20 @@ def run_backtest(exchange_name: str, symbol: str, timeframe: str, start_date: st
         candles_list.append([c.timestamp, float(c.open), float(c.high), float(c.low), float(c.close), float(c.volume)])
     
     if not candles_list:
-        print("No candles found for backtest.")
-        return
+        raise ValueError(f"No candles found for backtest for {symbol} on {exchange_name} between {start_date} and {end_date}.")
 
     all_candles = np.array(candles_list)
     print(f"Loaded {len(all_candles)} candles.")
 
     # 2. Initialize Components
-    store.reset()
-    store.app_mode = 'backtest'
-    store.balance = {'Sandbox': 10000} # Start with 10k
+    # Create a new Store instance for this backtest run to avoid race conditions
+    local_store = Store()
+    local_store.app_mode = 'backtest'
+    local_store.balance = {'Sandbox': 10000} # Start with 10k
     
-    sandbox = Sandbox()
-    strategy = strategy_class(symbol, 'Sandbox', timeframe)
+    # Pass the local store to Sandbox
+    sandbox = Sandbox(store_instance=local_store)
+    strategy = strategy_class(symbol, 'Sandbox', timeframe, local_store)
     strategy.setUp()
 
     # 3. Simulation Loop
@@ -56,8 +57,8 @@ def run_backtest(exchange_name: str, symbol: str, timeframe: str, start_date: st
         current_candle = all_candles[i]
         
         # Update Store
-        store.price = current_candle[4] # Close price
-        store.current_candle = current_candle
+        local_store.price = current_candle[4] # Close price
+        local_store.current_candle = current_candle
         
         # Update Strategy
         strategy.candles = current_slice
@@ -86,7 +87,7 @@ def run_backtest(exchange_name: str, symbol: str, timeframe: str, start_date: st
         
     # 4. Results
     strategy.terminate()
-    final_balance = store.balance['Sandbox']
+    final_balance = local_store.balance['Sandbox']
     pnl = ((final_balance - 10000) / 10000) * 100
     
     print(f"Backtest Complete.")
@@ -94,10 +95,10 @@ def run_backtest(exchange_name: str, symbol: str, timeframe: str, start_date: st
     print(f"Final Balance: {final_balance:.2f}")
     print(f"PnL: {pnl:.2f}%")
     
-    return {
-        "initial_balance": 10000,
-        "final_balance": float(final_balance),
-        "pnl_percent": float(pnl),
-        "trades": [] # We could populate this from store.trades
-    }
+    return BacktestResult(
+        initial_balance=10000,
+        final_balance=float(final_balance),
+        pnl_percent=float(pnl),
+        trades=local_store.trades
+    )
 

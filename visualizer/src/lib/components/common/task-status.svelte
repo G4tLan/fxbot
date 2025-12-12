@@ -1,8 +1,9 @@
 <script lang="ts">
   let { status } = $props<{ status: string }>();
+  let s = $derived(status.toLowerCase());
 </script>
 
-{#if status === 'queued' || status === 'processing'}
+{#if s === 'queued' || s === 'processing' || s === 'pending' || s === 'running'}
   <span
     class="inline-flex items-center rounded-full bg-blue-900/30 px-2.5 py-0.5 text-xs font-medium text-blue-400"
   >
@@ -22,13 +23,13 @@
     </svg>
     {status}
   </span>
-{:else if status === 'completed'}
+{:else if s === 'completed' || s === 'success' || s === 'finished'}
   <span
     class="inline-flex items-center rounded-full bg-green-900/30 px-2.5 py-0.5 text-xs font-medium text-green-400"
   >
     Completed
   </span>
-{:else if status === 'failed'}
+{:else if s === 'failed' || s === 'failure' || s === 'error'}
   <span
     class="inline-flex items-center rounded-full bg-red-900/30 px-2.5 py-0.5 text-xs font-medium text-red-400"
   >

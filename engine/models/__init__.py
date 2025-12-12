@@ -3,7 +3,6 @@ from engine.models.core import (
     ClosedTrade,
     Order,
     Trade,
-    BacktestSession,
     Log,
     Option,
     ExchangeApiKeys,

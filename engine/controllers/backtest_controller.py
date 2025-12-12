@@ -1,10 +1,11 @@
 from fastapi import APIRouter, HTTPException, Depends, BackgroundTasks
 from pydantic import BaseModel
-from typing import Optional, Dict, Any, List
+from typing import Optional, Dict, Any, List, Union
 from engine.modes.backtest_mode import run_backtest
 from engine.strategies.simple_strategy import SimpleStrategy
 from engine.controllers.auth_controller import get_current_user
 from engine.models.core import User, Task
+from engine.schemas import BacktestResult, TradeResult
 import uuid
 import time
 import json
@@ -22,8 +23,8 @@ class BacktestRequest(BaseModel):
 
 class BacktestResponse(BaseModel):
     status: str
-    results: Optional[Dict[str, Any]] = None
-    message: Optional[str] = None
+    message: str
+    results: Optional[BacktestResult] = None
     task_id: Optional[str] = None
 
 class StrategiesResponse(BaseModel):
@@ -57,7 +58,7 @@ def backtest_task(task_id: str, request: BacktestRequest, strategy_class):
         # Update status to completed
         Task.update(
             status="completed", 
-            result=json.dumps(results),
+            result=results.json(),
             updated_at=int(time.time())
         ).where(Task.id == task_id).execute()
         
@@ -99,7 +100,18 @@ async def trigger_backtest(request: BacktestRequest, background_tasks: Backgroun
             "task_id": task_id
         }
     else:
-        # Synchronous execution (legacy behavior)
+        # Synchronous execution
+        task_id = str(uuid.uuid4())
+        
+        # Create Task record
+        Task.create(
+            id=task_id,
+            type="backtest",
+            status="processing",
+            created_at=int(time.time()),
+            updated_at=int(time.time())
+        )
+        
         try:
             results = run_backtest(
                 request.exchange,
@@ -109,6 +121,24 @@ async def trigger_backtest(request: BacktestRequest, background_tasks: Backgroun
                 request.end_date,
                 strategy_class
             )
-            return {"status": "success", "results": results}
+            
+            # Update Task
+            Task.update(
+                status="completed", 
+                result=results.json(),
+                updated_at=int(time.time())
+            ).where(Task.id == task_id).execute()
+            
+            return {
+                "status": "completed", 
+                "message": "Backtest completed successfully", 
+                "results": results,
+                "task_id": task_id
+            }
         except Exception as e:
+            Task.update(
+                status="failed", 
+                error=str(e),
+                updated_at=int(time.time())
+            ).where(Task.id == task_id).execute()
             raise HTTPException(status_code=500, detail=str(e))

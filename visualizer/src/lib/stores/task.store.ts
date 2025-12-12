@@ -18,10 +18,11 @@ function createTaskStore() {
           tasks: { ...s.tasks, [taskId]: task },
         }));
 
-        if (task.status === 'completed') {
+        const s = task.status.toLowerCase();
+        if (s === 'completed' || s === 'success' || s === 'finished') {
           clearInterval(interval);
           toastStore.success(`Task ${taskId} completed successfully`);
-        } else if (task.status === 'failed') {
+        } else if (s === 'failed' || s === 'failure' || s === 'error') {
           clearInterval(interval);
           toastStore.error(`Task ${taskId} failed: ${task.error}`);
         }

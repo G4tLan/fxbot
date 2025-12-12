@@ -11,4 +11,3 @@ class Store:
         self.positions = {}
         self.app_mode = None # 'backtest', 'live', 'import'
 
-store = Store()

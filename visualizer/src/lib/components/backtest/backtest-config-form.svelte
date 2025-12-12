@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { goto } from '$app/navigation';
   import { strategyService } from '$lib/api/strategy.service';
   import { backtestStore } from '$lib/stores/backtest.store';
   import { exchangeStore } from '$lib/stores/exchange.store';
@@ -50,7 +51,7 @@
   async function handleSubmit(e: Event) {
     e.preventDefault();
 
-    await backtestStore.runBacktest({
+    const response = await backtestStore.runBacktest({
       exchange,
       symbol,
       timeframe,
@@ -59,6 +60,12 @@
       strategy_name: strategyName,
       run_in_background: runInBackground,
     });
+
+    if (response.task_id) {
+      goto(`/backtest/${response.task_id}`);
+    } else if (response.results) {
+      goto('/backtest/result');
+    }
   }
 </script>
 

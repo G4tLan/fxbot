@@ -28,8 +28,9 @@
             .filter((t) => t.type === 'backtest')
             .sort((a, b) => b.created_at - a.created_at)
             .slice(0, 5) as task (task.id)}
-            <div
-              class="flex items-center justify-between rounded-md border border-slate-800 bg-slate-950/50 p-3"
+            <a
+              href="/backtest/{task.id}"
+              class="flex items-center justify-between rounded-md border border-slate-800 bg-slate-950/50 p-3 transition-colors hover:bg-slate-800"
             >
               <div>
                 <div class="text-sm font-medium text-slate-200">Task #{task.id.slice(0, 8)}</div>
@@ -38,7 +39,7 @@
                 </div>
               </div>
               <TaskStatus status={task.status} />
-            </div>
+            </a>
           {/each}
           {#if Object.values($taskStore.tasks).filter((t) => t.type === 'backtest').length === 0}
             <div class="text-center text-sm text-slate-500">No recent backtests</div>

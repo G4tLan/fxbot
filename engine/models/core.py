@@ -49,16 +49,6 @@ class Trade(BaseModel):
     exchange = CharField()
     symbol = CharField()
 
-class BacktestSession(BaseModel):
-    id = CharField(primary_key=True)
-    status = CharField()
-    metrics = TextField() # JSON
-    equity_curve = TextField() # JSON
-    trades = TextField() # JSON
-    hyperparameters = TextField() # JSON
-    strategy_codes = TextField() # JSON
-    created_at = BigIntegerField()
-
 class Log(BaseModel):
     session_id = CharField(null=True)
     timestamp = BigIntegerField()
