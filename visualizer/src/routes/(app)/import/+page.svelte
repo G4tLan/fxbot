@@ -1,4 +1,5 @@
 <script lang="ts">
+  import TaskStatus from '$lib/components/common/task-status.svelte';
   import ImportForm from '$lib/components/import/import-form.svelte';
   import { taskStore } from '$lib/stores/task.store';
   import { onMount } from 'svelte';
@@ -36,25 +37,7 @@
               </div>
             </div>
             <div>
-              {#if task.status === 'completed'}
-                <span
-                  class="inline-flex items-center rounded-full bg-green-900/30 px-2.5 py-0.5 text-xs font-medium text-green-400"
-                >
-                  Completed
-                </span>
-              {:else if task.status === 'failed'}
-                <span
-                  class="inline-flex items-center rounded-full bg-red-900/30 px-2.5 py-0.5 text-xs font-medium text-red-400"
-                >
-                  Failed
-                </span>
-              {:else}
-                <span
-                  class="inline-flex items-center rounded-full bg-blue-900/30 px-2.5 py-0.5 text-xs font-medium text-blue-400"
-                >
-                  {task.status}
-                </span>
-              {/if}
+              <TaskStatus status={task.status} />
             </div>
           </div>
         {/each}

@@ -1,5 +1,5 @@
 import { taskService } from '$lib/api/task.service';
-import type { ImportResponse, Task } from '$lib/api/types-helper';
+import type { BacktestResponse, ImportResponse, Task } from '$lib/api/types-helper';
 import { writable } from 'svelte/store';
 import { toastStore } from './toast.store';
 
@@ -39,6 +39,21 @@ function createTaskStore() {
         id: response.task_id,
         status: response.status,
         type: 'import',
+        created_at: Date.now() / 1000,
+        updated_at: Date.now() / 1000,
+      };
+      update((s) => ({
+        tasks: { ...s.tasks, [task.id]: task },
+      }));
+      pollTask(task.id);
+    },
+    addBacktestTask: (response: BacktestResponse) => {
+      if (!response.task_id) return;
+
+      const task: Task = {
+        id: response.task_id,
+        status: response.status,
+        type: 'backtest',
         created_at: Date.now() / 1000,
         updated_at: Date.now() / 1000,
       };

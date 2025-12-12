@@ -27,6 +27,7 @@ export type ConfigUpdateResponse = components['schemas']['ConfigUpdateResponse']
 export type ExchangeApiKeyResponse = components['schemas']['ExchangeApiKeyResponse'];
 export type MessageResponse = components['schemas']['MessageResponse'];
 export type StatusResponse = components['schemas']['StatusResponse'];
+export type StrategiesResponse = components['schemas']['StrategiesResponse'];
 export type SupportedSymbolsResponse = components['schemas']['SupportedSymbolsResponse'];
 export type SupportedExchangesResponse = components['schemas']['SupportedExchangesResponse'];
 export type TradeTokenResponse = components['schemas']['TradeTokenResponse'];

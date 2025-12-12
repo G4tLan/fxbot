@@ -43,6 +43,12 @@
               Import
             </a>
             <a
+              href="/backtest/new"
+              class={$page.url.pathname.startsWith('/backtest') ? 'text-white' : 'hover:text-white'}
+            >
+              Backtest
+            </a>
+            <a
               href="/settings/exchanges"
               class={$page.url.pathname.startsWith('/settings') ? 'text-white' : 'hover:text-white'}
             >

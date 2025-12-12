@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Depends, BackgroundTasks
 from pydantic import BaseModel
-from typing import Optional, Dict, Any, Union
+from typing import Optional, Dict, Any, List
 from engine.modes.backtest_mode import run_backtest
 from engine.strategies.simple_strategy import SimpleStrategy
 from engine.controllers.auth_controller import get_current_user
@@ -26,9 +26,19 @@ class BacktestResponse(BaseModel):
     message: Optional[str] = None
     task_id: Optional[str] = None
 
+class StrategiesResponse(BaseModel):
+    strategies: List[str]
+
 STRATEGIES = {
     "SimpleStrategy": SimpleStrategy
 }
+
+@router.get("/strategies", response_model=StrategiesResponse)
+def get_strategies():
+    """
+    Get list of available strategies.
+    """
+    return {"strategies": list(STRATEGIES.keys())}
 
 def backtest_task(task_id: str, request: BacktestRequest, strategy_class):
     try:

@@ -157,21 +157,21 @@ This plan outlines the development phases to integrate the new Control Plane API
 
 ### 1. Domain & API
 
-- [ ] **Types:** Export `BacktestRequest` in `types-helper.ts`.
-- [ ] **Service:** Create `src/lib/api/backtest.service.ts`.
+- [x] **Types:** Export `BacktestRequest` in `types-helper.ts`.
+- [x] **Service:** Create `src/lib/api/backtest.service.ts`.
   - `triggerBacktest(data)` -> Returns results (sync) or `{ task_id }` (async).
   - Use `task.service.ts` for polling if running in background.
 
 ### 2. State Management
 
-- [ ] **Store:** Create `src/lib/stores/backtest.store.ts`.
+- [x] **Store:** Create `src/lib/stores/backtest.store.ts`.
   - Form state for backtest configuration.
 
 ### 3. UI Components
 
-- [ ] **Components:**
+- [x] **Components:**
   - `src/lib/components/backtest/backtest-config-form.svelte`
-- [ ] **Pages:**
+- [x] **Pages:**
   - `src/routes/backtest/new/+page.svelte`
 
 ---
